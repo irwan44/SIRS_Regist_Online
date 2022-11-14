@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!--TOOLBAR-->
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/pg_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Registrasi RS"
+                android:textSize="20dp"
+                android:fontFamily="@font/bariol_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            </TextView>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                app:navigationIcon="@drawable/icon_left"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageButton
+                android:id="@+id/imgbtn_home"
+                android:layout_width="39dp"
+                android:layout_height="31dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"
+                android:background="@color/transparan"
+                android:padding="5dp"
+                android:src="@drawable/icon_home"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.158"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+    <!--    END TOOLBAR-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="70dp"
+        app:swipeRefreshLayoutProgressSpinnerBackgroundColor="@color/birufigma"
+        android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="72dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pg1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+
+        </View>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView8"
+                android:layout_width="360dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                app:cardBackgroundColor="@color/birufigma"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right"
+                    android:fontFamily="@font/bariol_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="Buat Janji dengan Dokter"
+                    android:textColor="@color/white">
+
+                </TextView>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/lyr_pilihKlinik"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cardView8">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:onClick="cariDokter"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp">
+                    <TextView
+                        android:id="@+id/txt_caridokter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cari Dokter"
+                        android:textColor="@color/black"
+                        android:translationX="25dp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/bariol_regular"
+                        android:textSize="14sp"/>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_search_blue"
+                        android:padding="5dp"
+                        android:translationX="310dp"
+                        android:background="@color/transparan"
+                        android:layout_gravity="center_vertical"/>
+                </androidx.cardview.widget.CardView>
+
+<!--                <androidx.appcompat.widget.SearchView-->
+<!--                    android:id="@+id/cari_dokter"-->
+<!--                    android:onClick="cariDokter"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:focusableInTouchMode="true"-->
+<!--                    app:defaultQueryHint="Cari Dokter"-->
+<!--                    app:iconifiedByDefault="false"/>-->
+
+
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:src="@drawable/doctor1"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginTop="150dp"-->
+<!--            android:fontFamily="@font/bariol_bold"-->
+<!--            android:text="Cari Sesuai Katagori"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:ignore="MissingConstraints">-->
+
+<!--        </TextView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardView9"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginStart="30dp"-->
+<!--            android:layout_marginTop="175dp"-->
+<!--            android:layout_marginEnd="180dp"-->
+<!--            app:cardCornerRadius="10dp"-->
+<!--            app:cardElevation="5dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:ignore="MissingConstraints">-->
+
+<!--            <androidx.appcompat.widget.AppCompatSpinner-->
+<!--                android:id="@+id/spnPoli"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1" />-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+        <RelativeLayout
+            android:id="@+id/info_null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="270dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/img_null_antrian"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/jadwal_dokter">
+
+            </ImageView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_null_antrian"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="80dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="80dp"
+                app:cardBackgroundColor="#4BABE7"
+                app:cardCornerRadius="6dp">
+
+                <TextView
+                    android:id="@+id/txt_null_antrian"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/bariol_bold"
+                    android:gravity="center"
+                    android:text="Jadwal Dokter Klinik tidak tersedia"
+                    android:textColor="@color/white">
+
+                </TextView>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/DokterPoli_viewCycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="0dp"
+            android:paddingBottom="105dp"
+            android:scrollbars="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="0.981"
+            tools:layout_editor_absoluteX="0dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

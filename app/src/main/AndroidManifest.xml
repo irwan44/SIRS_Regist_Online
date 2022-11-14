@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="averin.sirs.com">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" /> -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_sirs"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon_sirs_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.D_Medis"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name="averin.sirs.com.PrivyInfo"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar"/>
+        <activity
+            android:name="averin.sirs.com.list_doctor_shimmer"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="averin.sirs.com.ChangePassword"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.listcariDokter"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.EditPasienLama"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.DetailKlinik"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="averin.sirs.com.AntrianDetail"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.ScanQRCode"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.DaftarPoli"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.RegistbyProvinsi"
+            android:exported="false"
+            android:label="@string/title_activity_registby_provinsi"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.MRpasienActivity"
+            android:exported="false"
+            android:parentActivityName="averin.sirs.com.MainActivity"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.AntrianActivity"
+            android:exported="false"
+            android:label="AntrianActivity"
+            android:parentActivityName="averin.sirs.com.MainActivity"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.CropImage"
+            android:exported="false"
+            android:parentActivityName="averin.sirs.com.MainActivity"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.RegistrasiActivity"
+            android:exported="false"
+            android:label="RegistrasiActivity"
+            android:parentActivityName="averin.sirs.com.LoginActivity"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.RegistLab"
+            android:exported="false"
+            android:label="@string/title_activity_regist_lab"
+            android:parentActivityName="averin.sirs.com.RegistPasienLama"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.RegistPoli"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.RegistPasienLama"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.SplashScreen"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D_Medis.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="averin.sirs.com.RegistKlinik"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.InfoDmedis"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name="averin.sirs.com.LoginActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D_Medis.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="averin.sirs.com.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+    </application>
+
+</manifest>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".AntrianActivity">
+
+    <!--TOOLBAR-->
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/pg_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Daftar Antrian"
+                android:textSize="20dp"
+                android:fontFamily="@font/bariol_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            </TextView>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                app:navigationIcon="@drawable/icon_left"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+    <!--    END TOOLBAR-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:translationY="60dp"
+        android:id="@+id/pg1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ly_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pg_toolbar"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+<!--        <androidx.appcompat.widget.SearchView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/bg_rectangle_grey"-->
+<!--            android:padding="5dp"-->
+<!--            app:iconifiedByDefault="false"-->
+<!--            app:queryHint="Cari Antrian" />-->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tglAntrian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:fontFamily="@font/bariol_regular"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/border"
+            android:drawableRight="@drawable/ic_calendar_primary"
+            android:drawablePadding="10dp"
+            android:focusable="false"
+            android:text="Pilih Tanggal"
+            android:textSize="14sp" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/cariAntrian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_search_blue"
+            android:background="@color/transparan"
+            android:layout_marginEnd="15sp"
+            android:padding="5dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@+id/ly_search"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="2dp"
+        android:background="@color/backgroundDarkGrey"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_null_antrian"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/noitem4">
+
+            </ImageView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_null_antrian"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="80dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="80dp"
+                app:cardBackgroundColor="#4BABE7"
+                app:cardCornerRadius="6dp">
+
+                <TextView
+                    android:id="@+id/txt_null_antrian"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/bariol_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Tidak ada antrian saat ini">
+
+                </TextView>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_vertical"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listAntrian"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line"
+        android:padding="5dp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

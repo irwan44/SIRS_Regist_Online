@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/pg_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Riwayat Medis"
+                android:textSize="20dp"
+                android:fontFamily="@font/bariol_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            </TextView>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                app:navigationIcon="@drawable/icon_left"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="352dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pg_toolbar"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="89dp"
+                android:layout_height="92dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/fotoPasien"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/profile">
+
+                </ImageView>
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="88dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/logo_dmedis"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.63"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+            </ImageView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="202dp"
+                android:layout_height="133dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <GridLayout
+                    android:id="@+id/GridPasien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3"
+                    android:rowCount="6">
+
+                    <!--        ROW 1 UMUR-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Nama"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="1"
+                        android:paddingStart="9dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="9dp"
+                        android:paddingBottom="5dp"
+                        android:text=":"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_namaPasien"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="2"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:padding="5dp"
+                        android:text="Irwan Setiawan"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <!--        ROW 2 GOL. DARAH-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="0"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="No MR"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="1"
+                        android:paddingStart="9dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="9dp"
+                        android:paddingBottom="5dp"
+                        android:text=":"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_mrPasien"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="2"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:padding="5dp"
+                        android:text="34858349734"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <!--        ROW 3 Jenis Kelamin-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="2"
+                        android:layout_column="0"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Umur"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="2"
+                        android:layout_column="1"
+                        android:paddingStart="9dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="9dp"
+                        android:paddingBottom="5dp"
+                        android:text=":"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_umurPasien"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="2"
+                        android:layout_column="2"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:padding="5dp"
+                        android:text="24 Tahun"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <!--        ROW 4 ALERGI-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="3"
+                        android:layout_column="0"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Golongan Darah"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="3"
+                        android:layout_column="1"
+                        android:paddingStart="9dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="9dp"
+                        android:paddingBottom="5dp"
+                        android:text=":"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_golDarah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="3"
+                        android:layout_column="2"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:padding="5dp"
+                        android:text="A"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <!--        ROW 5 No. HP-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="4"
+                        android:layout_column="0"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Jenis Kelamin"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="4"
+                        android:layout_column="1"
+                        android:paddingStart="9dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="9dp"
+                        android:paddingBottom="5dp"
+                        android:text=":"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_jekelPasien"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="4"
+                        android:layout_column="2"
+                        android:layout_columnWeight="0.5"
+                        android:fontFamily="@font/bariol_bold"
+                        android:padding="5dp"
+                        android:text="Laki - laki"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <!--        ROW 6 ALAMAT-->
+                </GridLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="352dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="39dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:iconifiedByDefault="true"
+            app:iconifiedByDefault="false"
+            app:queryHint="Pencarian"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="30dp">
+
+        </androidx.appcompat.widget.SearchView>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listMR_viewCycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

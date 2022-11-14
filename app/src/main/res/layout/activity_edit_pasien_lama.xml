@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".EditPasienLama">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/pg_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                tools:ignore="MissingConstraints">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/bariol_bold"
+                        android:gravity="center"
+                        android:text="Profile Pasien"
+                        android:textSize="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                    </TextView>
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:navigationIcon="@drawable/icon_left">
+
+                    </androidx.appcompat.widget.Toolbar>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <LinearLayout
+                android:id="@+id/frame"
+                android:layout_width="128dp"
+                android:layout_height="138dp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="140dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pg_toolbar">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/fotoPasien"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:src="@drawable/profile"
+                        app:civ_border_color="@color/black"
+                        app:civ_border_width="2dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pg_toolbar"
+                        tools:ignore="MissingConstraints" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="87dp"
+                        android:layout_marginBottom="5dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        tools:ignore="MissingConstraints" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cb_edit_foto"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="87dp"
+                        android:src="@drawable/cover"
+                        app:civ_border_color="@color/black"
+                        android:layout_marginBottom="5dp"
+                        tools:ignore="MissingConstraints" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/btn_openEditFoto"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="95dp"
+                        android:src="@drawable/ic_camera_black_24dp"
+                        android:layout_marginBottom="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:civ_border_color="@color/black"
+                        android:foreground="?attr/selectableItemBackground"
+                        tools:ignore="MissingConstraints" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="32dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frame"
+                tools:layout_editor_absoluteX="10dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:hintTextColor="@color/birufigma"
+                    app:boxStrokeColor="@color/birufigma"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:startIconContentDescription="NIK Pasien">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_ktpPasien"
+                        android:layout_width="match_parent"
+                        android:focusable="false"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bariol_bold"
+                        android:hint="NIK Pasien"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:hintTextColor="@color/birufigma"
+                    app:boxStrokeColor="@color/birufigma"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:startIconContentDescription="Nama Pasien">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_namapasien"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:fontFamily="@font/bariol_bold"
+                        android:hint="Nama Pasien"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:hintTextColor="@color/birufigma"
+                        app:boxStrokeColor="@color/birufigma"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp"
+                        app:startIconContentDescription="Tempat Lahir">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_tmptLahir"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bariol_bold"
+                            android:hint="Tempat Lahir"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="161dp"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/birufigma"
+                        app:boxStrokeColor="@color/birufigma"
+                        app:startIconDrawable="@drawable/ic_calendar_primary"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp"
+                        app:startIconContentDescription="Tgl Lahir">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_tglLahir"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bariol_bold"
+                            android:hint="Tgl Lahir" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+
+                <!--            SPINNER GENDER-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:focusable="false"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:hintTextColor="@color/birufigma"
+                    app:boxStrokeColor="@color/birufigma"
+                    app:boxStrokeWidth="1.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/act_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dropDownHeight="wrap_content"
+                        android:fontFamily="@font/bariol_bold"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="165dp"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:hintTextColor="@color/birufigma"
+                        app:boxStrokeColor="@color/birufigma"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp"
+                        app:startIconContentDescription="Nama Pasien">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_usia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bariol_bold"
+                            android:hint="Usia"
+                            android:inputType="number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="153dp"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/birufigma"
+                        app:boxStrokeColor="@color/birufigma"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp"
+                        app:startIconContentDescription="Golongan Darah">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_goldarah"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bariol_bold"
+                            android:hint="Golongan Darah"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:hintTextColor="@color/birufigma"
+                    app:boxStrokeColor="@color/birufigma"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:startIconContentDescription="Alergi">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_alergi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bariol_bold"
+                        android:hint="Alergi" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:hintTextColor="@color/birufigma"
+                    app:boxStrokeColor="@color/birufigma"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:startIconContentDescription="Alergi">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_alamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bariol_bold"
+                        android:hint="Alamat" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/fabEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16sp"
+                    android:text="Save Profile"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:theme="@style/FabExtendedMaterialTheme"
+                    app:icon="@drawable/ic_save24"
+                    app:iconTint="@color/white" />
+                <ImageView
+                    android:id="@+id/hsl_foto"
+                    android:visibility="gone"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/logo_dmedis"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <FrameLayout
+            android:id="@+id/bottom_ubah_foto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            tools:ignore="MissingConstraints" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
