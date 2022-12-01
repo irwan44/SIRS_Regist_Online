@@ -50,7 +50,7 @@ import java.util.Date;
 
 public class DaftarPoli extends AppCompatActivity {
 
-    TextView txt_bagian, txt_namaDokter, txt_ktpPasien, txt_namaklinik, txt_info_success, txt_info_failed, txt_askPX_atas, txt_askPX_bawah;
+    TextView txt_bagian, txt_namaDokter, txt_namaklinik, txt_info_success, txt_info_failed, txt_askPX_atas, txt_askPX_bawah;
     EditText edt_tglPeriksa, edt_namaPasien, edt_noAntrian;
     String val_token, ktpPasien, urlFoto, kd_dokter, id_dokter, nm_dokter, kd_bag, bagian, nm_klinik, kd_klinik, durasi, jdwl_periksa, tgl_now;
     ConnectivityManager conMgr;
@@ -102,7 +102,6 @@ public class DaftarPoli extends AppCompatActivity {
         txt_bagian     = findViewById(R.id.txt_bagian);
         txt_namaDokter = findViewById(R.id.txt_namadokter);
         edt_namaPasien = findViewById(R.id.txt_namaPasien);
-        txt_ktpPasien  = findViewById(R.id.txt_ktpPasien);
         txt_namaklinik = findViewById(R.id.txt_namaklinik);
         edt_noAntrian  = findViewById(R.id.txt_noAntrian);
         edt_tglPeriksa = findViewById(R.id.tglPeriksa);
@@ -137,9 +136,6 @@ public class DaftarPoli extends AppCompatActivity {
         dial_failed.setCancelable(false);
         dial_newPX = builder_ask_px.create();
         dial_newPX.setCancelable(false);
-
-        Token tkn = AppController.getInstance(this).isiToken();
-        ktpPasien = String.valueOf(tkn.gettoken());
 
         //Dialog ask login
         dial_builder = new AlertDialog.Builder(DaftarPoli.this,R.style.CustomAlertDialog);
@@ -225,13 +221,13 @@ public class DaftarPoli extends AppCompatActivity {
             }
         }
 
-        Token token = AppController.getInstance(this).isiToken();
-        val_token = (String.valueOf(token.gettoken()));
 
         //getting the current user
+        Token token = AppController.getInstance(this).isiToken();
+        val_token = (String.valueOf(token.gettoken()));
         Login login = AppController.getInstance(this).getPasien();
         edt_namaPasien.setText(String.valueOf(login.getNama_pasien()));
-        txt_ktpPasien.setText(String.valueOf(login.getKTP_pasien()));
+        ktpPasien = String.valueOf(login.getKTP_pasien());
 
         Bundle kiriman = getIntent().getExtras();
         if (kiriman != null) {
@@ -249,8 +245,8 @@ public class DaftarPoli extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
         String currentDateandTime = sdf.format(new Date());
 
-        txt_bagian.setText(bagian);
-        txt_namaDokter.setText(nm_dokter);
+        txt_bagian.setText(kd_klinik);
+        txt_namaDokter.setText(ktpPasien);
         txt_namaklinik.setText(nm_klinik);
         tgl_now = df.format(new Date());
         edt_tglPeriksa.setText(tgl_now);
@@ -325,7 +321,7 @@ public class DaftarPoli extends AppCompatActivity {
                 //creating request parameters
                 params = new HashMap<String, HashMap<String, String>>();
                 params.put("kode_klinik", kdeKlinik);
-                params.put("ktp", noKTP);
+                params.put("no_ktp", noKTP);
 
                 //returing the response
                 return requestHandler.requestData(urlcekPasien, "POST", "application/json; charset=utf-8", "X-Api-Token",
@@ -439,7 +435,7 @@ public class DaftarPoli extends AppCompatActivity {
         final String kdKlinik       = kd_klinik;
         final String nmKlinik       = nm_klinik;
         final String nmPasien       = edt_namaPasien.getText().toString();
-        final String ktpPasien      = txt_ktpPasien.getText().toString();
+        final String noKTP          = ktpPasien;
         final String kdDokter       = kd_dokter;
         final String nmDokter       = nm_dokter;
         final String kdBagian       = kd_bag;
@@ -466,7 +462,7 @@ public class DaftarPoli extends AppCompatActivity {
                 params.put("nama_pasien", nmPasien);
                 params.put("jadwal", jadwal);
                 params.put("no_antrian", no_Antrian);
-                params.put("no_ktp", ktpPasien);
+                params.put("no_ktp", noKTP);
                 params.put("kode_dokter", kdDokter);
                 params.put("kode_bagian", kdBagian);
                 params.put("nama_bagian", nmBagian);
