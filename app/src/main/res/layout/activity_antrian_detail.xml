@@ -266,11 +266,12 @@
                 android:textSize="22sp" />
 
             <TextView
+                android:id="@+id/txt_info_antrian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:fontFamily="@font/bariol_bold"
-                android:text="@string/notice_antrian"
+                android:text=""
                 android:textSize="12sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
@@ -287,6 +288,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cd_btnscan"
             android:layout_width="230dp"
             android:layout_height="70dp"
             app:cardCornerRadius="20dp"

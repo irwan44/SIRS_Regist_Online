@@ -62,7 +62,7 @@ public class RegistPasienLama extends AppCompatActivity {
         img_fotoPasien  = findViewById(R.id.fotoPasien);
         tv_namapasien   = findViewById(R.id.txt_namaPasien);
         tv_nomr         = findViewById(R.id.txt_no_mr);
-        btn_privy       = findViewById(R.id.btn_privy);
+//        btn_privy       = findViewById(R.id.btn_privy);
         btn_editprofile = findViewById(R.id.btn_editprofile);
         btn_changepass  = findViewById(R.id.btn_changepass);
         btnLogout      = findViewById(R.id.btnLogout);
@@ -94,14 +94,6 @@ public class RegistPasienLama extends AppCompatActivity {
             }
 
         });
-        btn_privy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(RegistPasienLama.this, MainActivity.class);
-                startActivity(i);
-            }
-
-        });
 
         btn_editprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,14 +111,14 @@ public class RegistPasienLama extends AppCompatActivity {
             }
 
         });
-        btn_privy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(RegistPasienLama.this, PrivyInfo.class);
-                startActivity(i);
-            }
-
-        });
+//        btn_privy.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(RegistPasienLama.this, PrivyInfo.class);
+//                startActivity(i);
+//            }
+//
+//        });
 
         //Dialog ask login
         dial_builder = new AlertDialog.Builder(RegistPasienLama.this,R.style.CustomAlertDialog);

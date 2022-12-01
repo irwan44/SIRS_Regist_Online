@@ -106,10 +106,10 @@ public class RegistrasiActivity extends AppCompatActivity{
         inputUsername    = findViewById(R.id.inputUsername);
         inputPassword    = findViewById(R.id.inputPassword);
         inputConfirmPass = findViewById(R.id.inputConfirmPassword);
-        inputTgllahir    = findViewById(R.id.inputTglLahir);
-        inputAlergi      = findViewById(R.id.inputAlergi);
-        inputAlamat      = findViewById(R.id.inputAlamat);
-        actGender        = findViewById(R.id.act_gender);
+//        inputTgllahir    = findViewById(R.id.inputTglLahir);
+//        inputAlergi      = findViewById(R.id.inputAlergi);
+//        inputAlamat      = findViewById(R.id.inputAlamat);
+//        actGender        = findViewById(R.id.act_gender);
 
         fabSave          = findViewById(R.id.fabSave);
 //        imageKTP = findViewById(R.id.imageKTP);

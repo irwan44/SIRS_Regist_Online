@@ -79,6 +79,7 @@ public class RegistbyProvinsi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registby_provinsi);
 
+
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
         swipeRefreshLayout.setOnRefreshListener(
 
@@ -224,7 +225,7 @@ public class RegistbyProvinsi extends AppCompatActivity {
                 params.put("no_ktp", ktp);
 
                 //returing the response
-                return requestHandler.requestData(APIurl+"/api/v1/get-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
+                return requestHandler.requestData(APIurl+"/api/v1/cek-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
                         isiToken, "X-Px-Key", "", params);
             }
 

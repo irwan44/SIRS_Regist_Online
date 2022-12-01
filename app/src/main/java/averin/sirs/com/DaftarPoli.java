@@ -63,9 +63,11 @@ public class DaftarPoli extends AppCompatActivity {
     private Calendar mCalendar;
 
     String APIurl = RequestHandler.APIdev;
+    String px_baru = "baru";
+    String px_lama = "lama";
     public String urlDaftar = APIurl+"/api/v1/post-daftar-px.php";
     public String urlAntrian = APIurl+"/api/v1/get-antrian-dokter.php";
-    public String urlcekPasien = APIurl+"/api/v1/cek-pasien-lama.php";
+    public String urlcekPasien = APIurl+"/api/v1/get-data-px.php";
 
     //Dialog Confirm
     AlertDialog.Builder builder_success, builder_failed, dial_builder, builder_ask_px;
@@ -128,10 +130,13 @@ public class DaftarPoli extends AppCompatActivity {
         txt_askPX_bawah = v_ask_newPX.findViewById(R.id.txt_info_bawah);
         builder_success.setView(v_success_regist);
         builder_failed.setView(v_failed_regist);
+        builder_ask_px.setView(v_ask_newPX);
         dial_success = builder_success.create();
         dial_success.setCancelable(false);
         dial_failed = builder_failed.create();
         dial_failed.setCancelable(false);
+        dial_newPX = builder_ask_px.create();
+        dial_newPX.setCancelable(false);
 
         Token tkn = AppController.getInstance(this).isiToken();
         ktpPasien = String.valueOf(tkn.gettoken());
@@ -181,7 +186,7 @@ public class DaftarPoli extends AppCompatActivity {
         btn_yes_px.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nontonSiskae();
+                nontonSiskae(px_baru);
             }
         });
 
@@ -241,6 +246,9 @@ public class DaftarPoli extends AppCompatActivity {
             durasi          = kiriman.get("durasi").toString();
         }
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+        String currentDateandTime = sdf.format(new Date());
+
         txt_bagian.setText(bagian);
         txt_namaDokter.setText(nm_dokter);
         txt_namaklinik.setText(nm_klinik);
@@ -284,8 +292,8 @@ public class DaftarPoli extends AppCompatActivity {
         btn_kirim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                cekPasienlama();
-                nontonSiskae();
+                cekPasienlama();
+//                nontonSiskae();
             }
         });
     }
@@ -339,7 +347,7 @@ public class DaftarPoli extends AppCompatActivity {
                 try {//converting response to json object
                         JSONObject obj = new JSONObject(s);
                     if (obj.getString("code").equals("200")){
-                        nontonSiskae();
+                        nontonSiskae(px_lama);
                     } else if(obj.getString("code").equals("500")){
                         dial_newPX.show();
                         txt_askPX_atas.setText("Anda Belum Terdaftar \n Sebagai Pasien Lama \n Pada Klinik "+nm_klinik);
@@ -426,7 +434,7 @@ public class DaftarPoli extends AppCompatActivity {
         pl.execute();
     }
 
-    public void nontonSiskae() {
+    public void nontonSiskae(final String stat_px) {
         final String isiToken       = val_token;
         final String kdKlinik       = kd_klinik;
         final String nmKlinik       = nm_klinik;
@@ -465,6 +473,7 @@ public class DaftarPoli extends AppCompatActivity {
                 params.put("nama_klinik", nmKlinik);
                 params.put("nama_dokter", nmDokter);
                 params.put("durasi", wkt_periksa);
+                params.put("stat_pasien", stat_px);
                 params.put("kode_klinik", kdKlinik);
                 //returing the response
                 return requestHandler.requestData(urlDaftar, "POST", "application/json; charset=utf-8", "X-Api-Token",

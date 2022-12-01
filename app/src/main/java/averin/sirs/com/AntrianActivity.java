@@ -139,7 +139,7 @@ public class AntrianActivity extends AppCompatActivity {
                 params.put("no_ktp", ktp);
 
                 //returing the response
-                return requestHandler.requestData(APIurl+"/api/v1/get-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
+                return requestHandler.requestData(APIurl+"/api/v1/cek-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
                         isiToken, "X-Px-Key", "", params);
             }
 
@@ -316,8 +316,9 @@ public class AntrianActivity extends AppCompatActivity {
                             String status = jso.getString("status");
                             String nmKlinik = jso.getString("nama_klinik");
                             String nmBagian = jso.getString("nama_bagian");
+                            String ketKlinik = jso.getString("ket_klinik");
 //                            ArrayKlinik.add(new Klinik(idk,np,alamat,logo));
-                            ArrayAntrian.add(new Antrian(idReg,no_antrian,nmDokter,tgl,jamAwal,jamAkhir,status,nmKlinik,nmBagian));
+                            ArrayAntrian.add(new Antrian(idReg,no_antrian,nmDokter,tgl,jamAwal,jamAkhir,status,nmKlinik,nmBagian, ketKlinik));
                         }
                         Aa.notifyDataSetChanged();
                     }

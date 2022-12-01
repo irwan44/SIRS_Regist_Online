@@ -44,25 +44,28 @@ public class AntrianAdapter extends RecyclerView.Adapter<AntrianAdapter.AntrianV
         holder.jamAkhir.setText(list.get(position).getJamAkhir_antrian());
         holder.status.setText(list.get(position).getStatus_antrian());
         holder.nmKlinik.setText(list.get(position).getnmKlinik_antrian());
+//        holder.nmKlinik.setText(list.get(position).getnmDokter_antrian());
         holder.nmBagian.setText(list.get(position).getnmBagian_antrian());
+        holder.ketKlinik.setText(list.get(position).getKet_antrian());
     }
 
 
     public class AntrianViewHolder extends RecyclerView.ViewHolder {
-        private TextView tglAntri, nmKlinik, nmBagian, idReg, no_antri, nm_dokter, jamAwal, jamAkhir, status;
+        private TextView tglAntri, nmKlinik, nmBagian, idReg, no_antri, nm_dokter, jamAwal, jamAkhir, status, ketKlinik;
 //        private ImageView img_fotoPasien;
 
         public AntrianViewHolder(View itemView) {
             super(itemView);
             no_antri = itemView.findViewById(R.id.no_antrian);
             nm_dokter = itemView.findViewById(R.id.nm_Dokter);
-            nmKlinik = itemView.findViewById(R.id.txt_nmKlinik);
+            nmKlinik = itemView.findViewById(R.id.txt_nmDokter);
             nmBagian = itemView.findViewById(R.id.txt_nmPoli);
             tglAntri = itemView.findViewById(R.id.txt_tglAntrian);
             idReg    = itemView.findViewById(R.id.idReg);
             jamAwal  = itemView.findViewById(R.id.jamAwal);
             jamAkhir = itemView.findViewById(R.id.jamAkhir);
             status   = itemView.findViewById(R.id.status);
+            ketKlinik   = itemView.findViewById(R.id.stat_px);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,6 +81,7 @@ public class AntrianAdapter extends RecyclerView.Adapter<AntrianAdapter.AntrianV
                     String status_dtl   = status.getText().toString();
                     String nmKlinik_dtl = nmKlinik.getText().toString();
                     String nmbagian_dtl = nmBagian.getText().toString();
+                    String ketKlinik_dtl = ketKlinik.getText().toString();
 //                    Put to parsing
                     i.putExtra("regId", regId);
                     i.putExtra("noAntrian", no_antrian);
@@ -88,6 +92,7 @@ public class AntrianAdapter extends RecyclerView.Adapter<AntrianAdapter.AntrianV
                     i.putExtra("status_antri", status_dtl);
                     i.putExtra("nm_klinik", nmKlinik_dtl);
                     i.putExtra("nm_bag", nmbagian_dtl);
+                    i.putExtra("stat_px", ketKlinik_dtl);
                     itemView.getContext().startActivity(i);
                 }
             });

@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +31,7 @@ public class SplashScreen extends AppCompatActivity {
     public String linkJanda  = "https://tel.d-medis.id/api/v1/cek-token.php";
 //      public String postUrl = "http://192.168.18.54/api/v1/get-token.php";
     String isiToken;
+    ImageView imgLogo;
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +40,11 @@ public class SplashScreen extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        imgLogo = findViewById(R.id.logo);
         Token token = AppController.getInstance(this).isiToken();
         isiToken = (String.valueOf(token.gettoken()));
         i = new Intent(SplashScreen.this, MainActivity.class);
+        Glide.with(SplashScreen.this).load(R.drawable.logo_sirs_rotate).into(imgLogo);
 
 //        if (!AppController.getInstance(this).isLoggedIn()) {
             new Handler().postDelayed(new Runnable() {

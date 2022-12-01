@@ -1,27 +1,45 @@
 package averin.sirs.com;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -29,16 +47,21 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import averin.sirs.com.Adapter.DokterPoliAdapter;
 import averin.sirs.com.Adapter.RequestHandler;
 import averin.sirs.com.Adapter.SpinnerAdapter;
+import averin.sirs.com.Model.Berita;
 import averin.sirs.com.Model.DokterPoli;
+import averin.sirs.com.Model.Klinik;
 import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.Token;
 import averin.sirs.com.Model.isiSpinner;
@@ -48,7 +71,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RegistPoli extends AppCompatActivity {
 
     String val_token, kd_bagian, spnKodeBagian, kd_klinik, nm_klinik, nm_Dokter, nm_dokter, kd_dokter, idnya_dokter, kd_bag, bag, sFoto,
-            jam_mulai, jam_akhir, wkt_periksa, idk, no_ktp, code_menu="3";
+            jam_mulai, jam_akhir, wkt_periksa, idk, no_ktp, code_menu="1";
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
     View dialogView;
@@ -63,10 +86,10 @@ public class RegistPoli extends AppCompatActivity {
     SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
 
     //ELEMENT FOR SPINNER
-    Spinner spnPoli;
-    SpinnerAdapter spnPoliadapter;
-    ProgressDialog pDialog;
-    ArrayList<isiSpinner> listPoli = new ArrayList<>();
+//    Spinner spnPoli;
+//    SpinnerAdapter spnPoliadapter;
+//    ProgressDialog pDialog;
+//    ArrayList<isiSpinner> listPoli = new ArrayList<>();
 
     private ArrayList<DokterPoli> ArrayDokter = new ArrayList<>();
     private ArrayList<DokterPoli> listDokter;
@@ -154,7 +177,8 @@ public class RegistPoli extends AppCompatActivity {
             nm_klinik   = kiriman.get("nma_Klinik").toString();
             nm_Dokter = kiriman.get("nma_dokter").toString();
             txt_cariDokter.setText(nm_Dokter);
-            viewDokter("",kd_dokter);
+//            GetSpnPoli(kd_klinik);
+//            viewDokter("",kd_dokter);
         }
         if(txt_cariDokter.equals("")){
             txt_cariDokter.setText("Cari dokter");
@@ -233,7 +257,7 @@ public class RegistPoli extends AppCompatActivity {
                 params.put("no_ktp", ktp);
 
                 //returing the response
-                return requestHandler.requestData(APIurl+"/api/v1/get-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
+                return requestHandler.requestData(APIurl+"/api/v1/cek-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
                         isiToken, "X-Px-Key", "", params);
             }
 
@@ -257,7 +281,7 @@ public class RegistPoli extends AppCompatActivity {
                         ambilToken();
                     } else {
 //                        GetSpnPoli(kd_klinik);
-                        viewDokter("","");
+                        viewDokter("",kd_dokter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -329,8 +353,8 @@ public class RegistPoli extends AppCompatActivity {
 
                         //storing the user in shared preferences
                         AppController.getInstance(getApplicationContext()).getToken(token);
-                        viewDokter("","");
 //                        GetSpnPoli(kd_klinik);
+                        viewDokter("",kd_dokter);
 
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
@@ -342,62 +366,6 @@ public class RegistPoli extends AppCompatActivity {
         }
 
         ambilToken pl = new ambilToken();
-        pl.execute();
-    }
-
-    private void viewDetail() {
-        //first getting the values
-        final String iniToken   = val_token;
-        final String id_klinik  = idk;
-
-        //if everything is fine
-        class masukPakEko extends AsyncTask<Void, Void, String> {
-
-            private ProgressBar progressBar;
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
-
-                //creating request parameters
-                HashMap<String, String> params = new HashMap<>();
-                params.put("id", id_klinik);
-
-                //returing the response
-                return requestHandler.requestData(urlKlinikDetail, "POST", "application/json; charset=utf-8", "X-Api-Token",
-                        iniToken, "X-Px-Key", "", params);
-            }
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-//                progressBar = findViewById(R.id.progressBar);
-//                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-//                progressBar.setVisibility(View.GONE);
-
-                try {//converting response to json object
-                    JSONObject obj = new JSONObject(s);
-                    //if no error in response
-//                    if (obj.getString("code").equals("500")) {
-//                        Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
-//                    } else {
-                    kd_klinik = obj.getString("kode_klinik");
-                    nm_klinik = obj.getString("nama_perusahaan");
-//                    GetSpnPoli(kd_klinik);
-                    viewDokter("","");
-//                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        masukPakEko pl = new masukPakEko();
         pl.execute();
     }
 
@@ -424,11 +392,11 @@ public class RegistPoli extends AppCompatActivity {
                 //creating request parameters
                 params = new HashMap<String, HashMap<String, String>>();
                 HashMap<String, String> val = new HashMap<String, String>();
-                    val.put("filter", filter_kdBagian);
-                    val.put("kdeDokter", kde_Dokter);
-                    val.put("order", order);
-                    val.put(offset, offset);
-                    val.put("limit", limit);
+                val.put("filter", filter_kdBagian);
+                val.put("kdeDokter", kde_Dokter);
+                val.put("order", order);
+                val.put(offset, offset);
+                val.put("limit", limit);
                 params.put("kode_klinik", kode_klinik);
                 params.put("src", val);
                 //returing the response
@@ -483,10 +451,10 @@ public class RegistPoli extends AppCompatActivity {
         pl.execute();
     }
 
-    private void GetSpnPoli(String kodeKlinik) {
+    private void GetSpnPoli(final String kodeKlinik) {
         //first getting the values
         final String iniToken     = val_token;
-        listPoli.clear();
+//        listPoli.clear();
 
 //        pDialog = new ProgressDialog(RegistPoli.this);
 //        pDialog.setCancelable(false);
@@ -532,9 +500,9 @@ public class RegistPoli extends AppCompatActivity {
                         item.setId(jr.getString("kode_bagian"));
                         item.setKet(jr.getString("nama_bagian"));
 
-                        listPoli.add(item);
+//                        listPoli.add(item);
                     }
-                    spnPoliadapter.notifyDataSetChanged();
+//                    spnPoliadapter.notifyDataSetChanged();
 //                    hideDialog();
 
                 } catch (JSONException e) {

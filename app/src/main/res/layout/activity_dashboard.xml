@@ -607,6 +607,7 @@
                                         android:paddingStart="20sp"
                                         android:paddingTop="5sp"
                                         android:paddingEnd="20sp"
+                                        android:onClick="MRpasien"
                                         android:paddingBottom="30dp"
                                         android:src="@drawable/daftarantrian"
                                         android:tooltipText="Riwayar Medis" />

@@ -177,113 +177,113 @@
                     </EditText>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txt_tglLahir"
-                    android:layout_width="match_parent"
-                    android:layout_height="67dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/bariol_bold"
-                    app:endIconMode="clear_text"
-                    app:hintTextColor="@color/birufigma"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView">
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:id="@+id/txt_tglLahir"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="67dp"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:fontFamily="@font/bariol_bold"-->
+<!--                    app:endIconMode="clear_text"-->
+<!--                    app:hintTextColor="@color/birufigma"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/imageView">-->
 
-                    <EditText
-                        android:id="@+id/inputTglLahir"
-                        android:layout_width="257dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="45dp"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/bariol_bold"
-                        android:hint="Tgl Lahir"
-                        android:inputType="text">
+<!--                    <EditText-->
+<!--                        android:id="@+id/inputTglLahir"-->
+<!--                        android:layout_width="257dp"-->
+<!--                        android:layout_height="70dp"-->
+<!--                        android:layout_marginLeft="45dp"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:fontFamily="@font/bariol_bold"-->
+<!--                        android:hint="Tgl Lahir"-->
+<!--                        android:inputType="text">-->
 
-                    </EditText>
-                </com.google.android.material.textfield.TextInputLayout>
+<!--                    </EditText>-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:id="@+id/txt_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="67dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/bariol_bold"
-                    app:endIconMode="clear_text"
-                    app:hintTextColor="@color/birufigma"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView">
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+<!--                    android:id="@+id/txt_gender"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="67dp"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:fontFamily="@font/bariol_bold"-->
+<!--                    app:endIconMode="clear_text"-->
+<!--                    app:hintTextColor="@color/birufigma"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/imageView">-->
 
-                    <AutoCompleteTextView
-                        android:id="@+id/act_gender"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Jenis Kelamin"
-                        android:dropDownHeight="wrap_content"
-                        android:fontFamily="@font/bariol_bold"
-                        android:inputType="none" />
-                </com.google.android.material.textfield.TextInputLayout>
+<!--                    <AutoCompleteTextView-->
+<!--                        android:id="@+id/act_gender"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Jenis Kelamin"-->
+<!--                        android:dropDownHeight="wrap_content"-->
+<!--                        android:fontFamily="@font/bariol_bold"-->
+<!--                        android:inputType="none" />-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txt_alergi"
-                    android:layout_width="match_parent"
-                    android:layout_height="67dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/bariol_bold"
-                    android:translationY="-15dp"
-                    app:endIconMode="clear_text"
-                    app:hintTextColor="@color/birufigma"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView">
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:id="@+id/txt_alergi"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="67dp"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:fontFamily="@font/bariol_bold"-->
+<!--                    android:translationY="-15dp"-->
+<!--                    app:endIconMode="clear_text"-->
+<!--                    app:hintTextColor="@color/birufigma"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/imageView">-->
 
-                    <EditText
-                        android:id="@+id/inputAlergi"
-                        android:layout_width="257dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="45dp"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/bariol_bold"
-                        android:hint="Alergi"
-                        android:inputType="textEmailAddress">
+<!--                    <EditText-->
+<!--                        android:id="@+id/inputAlergi"-->
+<!--                        android:layout_width="257dp"-->
+<!--                        android:layout_height="70dp"-->
+<!--                        android:layout_marginLeft="45dp"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:fontFamily="@font/bariol_bold"-->
+<!--                        android:hint="Alergi"-->
+<!--                        android:inputType="textEmailAddress">-->
 
-                    </EditText>
-                </com.google.android.material.textfield.TextInputLayout>
+<!--                    </EditText>-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txt_alamat"
-                    android:layout_width="match_parent"
-                    android:layout_height="67dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/bariol_bold"
-                    android:translationY="-15dp"
-                    app:endIconMode="clear_text"
-                    app:hintTextColor="@color/birufigma"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView">
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:id="@+id/txt_alamat"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="67dp"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:fontFamily="@font/bariol_bold"-->
+<!--                    android:translationY="-15dp"-->
+<!--                    app:endIconMode="clear_text"-->
+<!--                    app:hintTextColor="@color/birufigma"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/imageView">-->
 
-                    <EditText
-                        android:id="@+id/inputAlamat"
-                        android:layout_width="257dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="45dp"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/bariol_bold"
-                        android:hint="Alamat"
-                        android:inputType="textEmailAddress">
+<!--                    <EditText-->
+<!--                        android:id="@+id/inputAlamat"-->
+<!--                        android:layout_width="257dp"-->
+<!--                        android:layout_height="70dp"-->
+<!--                        android:layout_marginLeft="45dp"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:fontFamily="@font/bariol_bold"-->
+<!--                        android:hint="Alamat"-->
+<!--                        android:inputType="textEmailAddress">-->
 
-                    </EditText>
-                </com.google.android.material.textfield.TextInputLayout>
+<!--                    </EditText>-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txt_username1"
