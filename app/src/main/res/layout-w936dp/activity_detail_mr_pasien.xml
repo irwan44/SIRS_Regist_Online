@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="92dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/transparan"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/bariol_bold"
+                                android:gravity="center"
+                                android:textSize="20dp"
+                                android:layout_marginTop="20dp"
+                                android:text="Detail History Medis"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                            <androidx.appcompat.widget.Toolbar
+                                android:id="@+id/toolbar"
+                                android:layout_width="40dp"
+                                android:layout_height="35dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="37dp"
+                                android:onClick="back"
+                                app:navigationIcon="@drawable/arrow_left"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="362dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/LayoutItem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="312dp"
+                            android:background="@drawable/ripple"
+                            android:clickable="true"
+                            android:onClick="medical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/dez"
+                                android:clickable="true"
+                                android:onClick="medical"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="139dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/nomr"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/bariol_bold"
+                                            android:text="Nomor Medical Record :"
+                                            android:textColor="@color/white"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:id="@+id/txnomr"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="8dp"
+                                            android:fontFamily="@font/bariol_bold"
+                                            android:text="00000101"
+                                            android:textColor="@color/white"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:id="@+id/namepasien"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:ellipsize="end"
+                                            android:fontFamily="@font/bariol_bold"
+                                            android:maxLines="1"
+                                            android:text="Nama Pasient :"
+                                            android:textColor="@color/white" />
+
+                                        <TextView
+                                            android:id="@+id/txNamaPasien"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:ellipsize="end"
+                                            android:fontFamily="@font/bariol_bold"
+                                            android:maxLines="1"
+                                            android:text="ARISSA BUDIARTI, NY."
+                                            android:textColor="@color/white" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:ellipsize="end"
+                                            android:fontFamily="@font/bariol_bold"
+                                            android:maxLines="1"
+                                            android:text="Klinik :"
+                                            android:textColor="@color/white" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="8dp"
+                                            android:fontFamily="@font/bariol_bold"
+                                            android:text="Omega Tiga"
+                                            android:textColor="@color/white"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                    <!--<TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="75dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:layout_marginVertical="5dp"
+                                    android:fontFamily="@font/bariol_bold"
+                                    android:gravity="center"
+                                    android:text="Cek MR"
+                                    android:textStyle="bold" />-->
+
+                                    <!-- <ImageView
+                                    android:layout_width="64dp"
+                                    android:layout_height="138dp"
+                                    android:layout_marginHorizontal="10dp"
+                                    android:layout_marginVertical="5dp"
+                                    android:src="@drawable/dez" />-->
+
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/imgPasien"
+                                        android:layout_width="101dp"
+                                        android:layout_height="103dp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginHorizontal="10dp"
+                                        android:layout_marginVertical="5dp"
+                                        android:src="@drawable/profile22"
+                                        app:civ_border_color="@color/white"
+                                        app:civ_border_overlay="true"
+                                        app:civ_border_width="4dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="@font/bariol_bold"
+                                    android:gravity="center"
+                                    android:text="Vital"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginHorizontal="10dp"
+                                    android:layout_marginTop="10dp">
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginHorizontal="10dp"
+                                        android:layout_marginVertical="5dp"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Keadaan Umum"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="2dp"
+                                                android:text=":"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/txKeadaan"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:textSize="13sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Tekanan Darah"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="2dp"
+                                                android:text=":"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/txTekananDarah"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:textSize="13sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Suhu"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="2dp"
+                                                android:text=":"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/txSuhu"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="13sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Tinggi Badan"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="2dp"
+                                                android:text=":"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/txTinggiBadan"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="13sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="5dp"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Kesadaran"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="2dp"
+                                                android:text=":"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/txKesadaran"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:ellipsize="end"
+                                                android:maxLines="1"
+                                                android:textSize="13sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Nadi"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="2dp"
+                                                android:text=":"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/txNadi"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="13sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Pernafasan"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="2dp"
+                                                android:text=":"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/txPernafasan"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="13sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Berat Badan"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="2dp"
+                                                android:text=":"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/txBerat"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="13sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="20dp"
+                app:cardElevation="0dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="@color/backgroundDarkGrey"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawableLeft="@drawable/ic_baseline_circle_24"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/bariol_bold"
+                    android:text="Tindakan"
+                    android:textStyle="bold"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtSubjektif"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/transparent"
+                        android:focusable="true"
+                        android:fontFamily="@font/bariol_bold"
+                        android:gravity="top|left"
+                        android:hint="isi Subjektif di sini"
+                        android:inputType="text|textMultiLine"
+                        android:padding="5dp"
+                        android:textSize="14sp"
+                        android:overScrollMode="always"
+                        android:scrollIndicators="right"
+                        android:scrollbarStyle="insideOverlay"
+                        android:scrollbars="vertical"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/backgroundDarkGrey"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawableLeft="@drawable/ic_baseline_circle_24"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:fontFamily="@font/bariol_bold"
+                    android:text="ICD - 10"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtObyektif"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:focusable="true"
+                        android:gravity="top|left"
+                        android:inputType="text|textMultiLine"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:hint="isi Obyektif di sini"
+                        android:fontFamily="@font/bariol_bold"
+                        android:background="@android:color/transparent"
+                        android:padding="5dp"
+                        android:textSize="14sp"
+                        android:scrollIndicators="right"
+                        android:overScrollMode="always"
+                        android:scrollbarStyle="insideOverlay"
+                        android:textColor="@android:color/black"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/backgroundDarkGrey"
+                app:cardCornerRadius="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="5dp"
+                    android:text="Terapi"
+                    android:drawableLeft="@drawable/ic_baseline_circle_24"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/bariol_bold"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtTerapi"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:focusable="true"
+                        android:gravity="top|left"
+                        android:inputType="text|textMultiLine"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:fontFamily="@font/bariol_bold"
+                        android:background="@android:color/transparent"
+                        android:padding="5dp"
+                        android:hint="isi Terapi di sini"
+                        android:textSize="14sp"
+                        android:scrollIndicators="right"
+                        android:overScrollMode="always"
+                        android:scrollbarStyle="insideOverlay"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSimpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16sp"
+                android:text="Lihat Resep"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:fontFamily="@font/bariol_bold"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:background="@drawable/ic_background_accent_rounded"
+                android:theme="@style/FabExtendedMaterialTheme"
+                app:iconTint="@color/white" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginHorizontal="5dp"
+                android:orientation="horizontal"
+                android:translationY="-50dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>
