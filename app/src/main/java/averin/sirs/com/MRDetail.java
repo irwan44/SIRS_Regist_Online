@@ -24,7 +24,8 @@ public class MRDetail extends AppCompatActivity {
 
     String val_token, no_ktp, namaKlinik, namaDokter, jenisPoli, tglPeriksa, keadaan_umum, tekanan_darah, suhu, tinggi_badan,
             kesadaran, nadi, pernafasan, bb, tindakan, nama_icd10, kd_resep;
-    TextView txt_KeadaanUmum, txt_TekananDarah, txt_suhu, txt_tinggi, txt_kesadaran, txt_nadi, txt_pernafasan, txt_bb;
+    TextView txt_namapasien, txt_nomr, txt_namadokter, txt_namapoli, txt_tglperiksa, txt_KeadaanUmum, txt_TekananDarah, txt_suhu,
+            txt_tinggi, txt_kesadaran, txt_nadi, txt_pernafasan, txt_bb;
     EditText edt_tindakan, edt_icd10;
     ImageView imgKlinik;
     Button btn_scan;
@@ -55,6 +56,11 @@ public class MRDetail extends AppCompatActivity {
             }
         });
 
+        txt_namapasien = findViewById(R.id.txt_namapasien);
+        txt_nomr = findViewById(R.id.txt_nomr);
+        txt_namadokter = findViewById(R.id.txt_namadokter);
+        txt_namapoli = findViewById(R.id.txt_namaPoli);
+        txt_tglperiksa = findViewById(R.id.txt_tglperiksa);
         txt_KeadaanUmum = findViewById(R.id.txt_keadaanumum);
         txt_TekananDarah = findViewById(R.id.txt_TekananDarah);
         txt_suhu = findViewById(R.id.txt_Suhu);
@@ -67,7 +73,7 @@ public class MRDetail extends AppCompatActivity {
         edt_icd10 =  findViewById(R.id.edt_icd10);
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {();
+        if (extras != null) {
             namaDokter          = extras.get("nama_dokter").toString();
             jenisPoli           = extras.get("nama_poli").toString();
             tglPeriksa          = extras.get("tgl_periksa").toString();
@@ -85,61 +91,28 @@ public class MRDetail extends AppCompatActivity {
         }
 
         if(kd_resep.equals("l1")){
-            btn_scan.setVisibility(View.VISIBLE);
-            cd_scan.setVisibility(View.VISIBLE);
-            txt_info_antrian.setText("Datang 30 menit sebelum pemeriksaan dan \n " +
-                    "konfirmasi kehadiran baik melalui FO atau Scan QR pada RS");
+
         }else if(kd_resep.equals("l2")){
-            btn_scan.setVisibility(View.GONE);
-            cd_scan.setVisibility(View.GONE);
-            txt_info_antrian.setText("Silahkan datang ke FO dan membawa KTP anda \n untuk melakukan registrasi ulang");
+
         }else if(kd_resep.equals("l3")){
 
         }else if(kd_resep.equals("l4")){
 
         }
 
-        Date tgl = null;
-        Date wkt = null;
-        try {
-            tgl = inputFormat.parse(tgl_antri);
-            wkt = inputwaktu.parse(jam_awal);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        tglKonvert = outputFormat.format(tgl);
-        jam_konvert = outputwaktu.format(wkt);
-
-        txt_noAntri.setText(no_antri);
-        txt_nmDokter.setText(nm_dokter);
-        txt_nmKlinik.setText(nm_klinik);
-        txt_jnsPoli.setText(nm_bag);
-        txt_wktPeriksa.setText(jam_awal+" - "+jam_akhir);
-        txt_tglPeriksa.setText(tglKonvert);
-        txt_jamPeriksa.setText(jam_konvert);
-        if(stat_px.equals("lama")){
-
-        }
-//        if(flag_px.equals("0")){
-//            lb_antrian.setText("No. Pesanan");
-//        }else{
-//            lb_antrian.setText("No. Antiran Saya");
-//        }
+        txt_namapasien.setText("");
+        txt_namadokter.setText(namaDokter);
+        txt_namapoli.setText(jenisPoli);
+        txt_tglperiksa.setText(tglPeriksa);
+        txt_KeadaanUmum.setText(keadaan_umum);
+        txt_TekananDarah.setText(tekanan_darah);
+        txt_suhu.setText(suhu);
+        txt_tinggi.setText(tinggi_badan);
+        txt_nadi.setText(nadi);
+        txt_kesadaran.setText(kesadaran);
+        txt_pernafasan.setText(pernafasan);
+        txt_bb.setText(bb);
+        edt_tindakan.setText(tindakan);
+        edt_icd10.setText(nama_icd10);
     }
-
-    //    SCANNER FUNCTION
-    public void ScanKlinik(View v){
-        Intent i = new Intent(AntrianDetail.this, ScanQRCode.class);
-        i.putExtra("regId", regId);
-        i.putExtra("tgl_antri", tgl_antri);
-        i.putExtra("jam_awal", jam_awal);
-        i.putExtra("jam_akhir", jam_akhir);
-        i.putExtra("status_antri", status_antri);
-        i.putExtra("nm_klinik", nm_klinik);
-        i.putExtra("nm_bag", nm_bag);
-        startActivity(i);
-    }
-
-
 }

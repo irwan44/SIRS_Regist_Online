@@ -1,7 +1,7 @@
 package averin.sirs.com.Model;
 
 public class MRpasien {
-    private String namaKlinik, namaDokter, jenisPoli, tglPeriksa, keadaan_umum, tekanan_darah, suhu, tinggi_badan,
+    private String namaDokter, jenisPoli, tglPeriksa, keadaan_umum, tekanan_darah, suhu, tinggi_badan,
     kesadaran, nadi, pernafasan, bb, tindakan, nama_icd10, kd_resep;
 
     public MRpasien(String namaDokter, String jenisPoli, String tglPeriksa, String keadaan_umum, String tekanan_darah,

@@ -67,15 +67,21 @@ public class MRpasienActivity extends AppCompatActivity {
         MRpasien_Recyleview.setLayoutManager(layoutManager);
         MRpasien_Recyleview.setAdapter(MRpasienadapter);
     }
-    void addData(){
+    void addData() {
         listMRpasien = new ArrayList<>();
-        listMRpasien.add(new MRpasien("dr. Pongky Andi Saputra", "Dr. Musa Nur Rahman", "Spesialis Kandungan",
-                "2022-01-10 12:30"));
-        listMRpasien.add(new MRpasien("dr. Bahrul Mubarok", "Dr. Bonge", "Spesialis Psikologi", "2022-11-02 10:00"));
-        listMRpasien.add(new MRpasien("M.S Beauty", "Drs. Yusda Yusdi", "Spesialis Kecantikan", "2022-05-24 11:30"));
-        listMRpasien.add(new MRpasien("Gambreng Dental", "Dr. Bambang Gambreng", "Spesialis Gigi", "2022-06-20 12:30"));listMRpasien.add(new MRpasien("Gambreng Dental", "Dr. Bambang Gambreng", "Spesialis Gigi", "2022-06-20 12:30"));
+        listMRpasien.add(new MRpasien("dr. Pongky Andi Saputra", "Poliklinik Umum", "12-11-2022 10:20:20",
+                "baik", "135/80  mmHg", "36 °/Celcius", "170 cm", "Compos Menthis", "80  x/menit ",
+                "60 x/menit ", "55 kg", "PASANG INFUS + OBSERVASI ONE DAY \n INJEKSI OBAT TERTENTU", "Pure hypercholesterolaemia",
+                "l1"));
+        listMRpasien.add(new MRpasien("dr. Pongky Andi Saputra", "Poliklinik Umum", "12-11-2022 10:20:20",
+                "baik", "135/80  mmHg", "36 °/Celcius", "170 cm", "Compos Menthis", "80  x/menit ",
+                "60 x/menit ", "55 kg", "PASANG INFUS + OBSERVASI ONE DAY \n INJEKSI OBAT TERTENTU", "Pure hypercholesterolaemia",
+                "l1"));
+        listMRpasien.add(new MRpasien("dr. Pongky Andi Saputra", "Poliklinik Umum", "12-11-2022 10:20:20",
+                "baik", "135/80  mmHg", "36 °/Celcius", "170 cm", "Compos Menthis", "80  x/menit ",
+                "60 x/menit ", "55 kg", "PASANG INFUS + OBSERVASI ONE DAY \n INJEKSI OBAT TERTENTU", "Pure hypercholesterolaemia",
+                "l1"));
     }
-
 //    public void viewMR() {
 //        //first getting the values
 //        final String iniToken   = val_token;
@@ -143,6 +149,4 @@ public class MRpasienActivity extends AppCompatActivity {
 //        masukPakEko pl = new masukPakEko();
 //        pl.execute();
 //    }
-
-
 }

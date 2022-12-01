@@ -62,9 +62,10 @@
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="37dp"
                                 android:onClick="back"
-                                app:navigationIcon="@drawable/arrow_left"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"/>
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:navigationIcon="@drawable/arrow_left"
+                                tools:ignore="TouchTargetSizeCheck" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
@@ -117,62 +118,81 @@
                                         android:orientation="vertical">
 
                                         <TextView
-                                            android:id="@+id/nomr"
+                                            android:id="@+id/txt_namapasien"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/bariol_bold"
-                                            android:text="Nomor Medical Record :"
+                                            android:text="Bpk. Muawan Asyir"
+                                            android:textSize="20sp"
                                             android:textColor="@color/white"
                                             android:textStyle="bold" />
 
                                         <TextView
-                                            android:id="@+id/txnomr"
+                                            android:id="@+id/txt_nomr"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_marginBottom="8dp"
                                             android:fontFamily="@font/bariol_bold"
                                             android:text="00000101"
+                                            android:textSize="14sp"
                                             android:textColor="@color/white"
                                             android:textStyle="bold" />
 
                                         <TextView
-                                            android:id="@+id/namepasien"
+                                            android:id="@+id/lb_namadokter"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:ellipsize="end"
                                             android:fontFamily="@font/bariol_bold"
                                             android:maxLines="1"
-                                            android:text="Nama Pasient :"
+                                            android:text="Nama Dokter :"
                                             android:textColor="@color/white" />
 
                                         <TextView
-                                            android:id="@+id/txNamaPasien"
+                                            android:id="@+id/txt_namadokter"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:ellipsize="end"
                                             android:fontFamily="@font/bariol_bold"
                                             android:maxLines="1"
-                                            android:text="ARISSA BUDIARTI, NY."
+                                            android:text="Dr. Musa Nur Rahman"
                                             android:textColor="@color/white" />
 
                                         <TextView
+                                            android:id="@+id/txt_namaPoli"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="10dp"
                                             android:ellipsize="end"
                                             android:fontFamily="@font/bariol_bold"
                                             android:maxLines="1"
-                                            android:text="Klinik :"
+                                            android:text="Poliklinik UMum"
                                             android:textColor="@color/white" />
 
-                                        <TextView
-                                            android:layout_width="wrap_content"
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginBottom="8dp"
-                                            android:fontFamily="@font/bariol_bold"
-                                            android:text="Omega Tiga"
-                                            android:textColor="@color/white"
-                                            android:textStyle="bold" />
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginBottom="8dp"
+                                                android:layout_marginTop="10dp"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="Tgl Periksa : "
+                                                android:textColor="@color/white"
+                                                android:textStyle="bold" />
+                                            <TextView
+                                                android:id="@+id/txt_tglperiksa"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginBottom="8dp"
+                                                android:layout_marginTop="10dp"
+                                                android:fontFamily="@font/bariol_bold"
+                                                android:text="10-11-2022 10:20:20"
+                                                android:textColor="@color/white"
+                                                android:textStyle="bold" />
+                                        </LinearLayout>
 
                                     </LinearLayout>
 
@@ -239,7 +259,6 @@
                                             android:orientation="horizontal">
 
                                             <TextView
-                                                android:id="@+id/txt_keadaanumum"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:fontFamily="@font/bariol_bold"
@@ -610,7 +629,7 @@
                 android:gravity="center"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/bariol_bold"
-                android:text="Lihat Resep"/>
+                android:text="Resep Dokter"/>
 
             <HorizontalScrollView
                 android:layout_width="wrap_content"
