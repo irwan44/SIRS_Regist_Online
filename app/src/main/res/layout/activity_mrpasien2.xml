@@ -35,7 +35,7 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
-                app:navigationIcon="@drawable/icon_left"
+                app:navigationIcon="@drawable/arrow_left"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -44,13 +44,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:id="@+id/cardView2"
         android:layout_width="352dp"
         android:layout_height="161dp"
         android:layout_marginTop="32dp"
         app:cardCornerRadius="12dp"
-        app:cardElevation="20dp"
+        app:cardBackgroundColor="@color/birufigma"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pg_toolbar"
@@ -58,14 +58,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:background="@drawable/credit_card"
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
-                android:layout_width="89dp"
-                android:layout_height="92dp"
+                android:layout_width="73dp"
+                android:layout_height="90dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="26dp"
                 app:cardCornerRadius="11dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -80,23 +81,11 @@
                 </ImageView>
             </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:layout_width="88dp"
-                android:layout_height="21dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/logo_dmedis"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.63"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout4"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-            </ImageView>
-
             <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="202dp"
                 android:layout_height="133dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="26dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cardView"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -120,6 +109,7 @@
                         android:fontFamily="@font/bariol_bold"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
+                        android:textColor="@color/white"
                         android:text="Nama"
                         android:textSize="12dp"
                         android:textStyle="bold" />
@@ -132,6 +122,7 @@
                         android:paddingStart="9dp"
                         android:paddingTop="5dp"
                         android:paddingEnd="9dp"
+                        android:textColor="@color/white"
                         android:paddingBottom="5dp"
                         android:text=":"
                         android:textSize="12dp"
@@ -143,6 +134,7 @@
                         android:layout_height="wrap_content"
                         android:layout_row="0"
                         android:layout_column="2"
+                        android:textColor="@color/white"
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
                         android:padding="5dp"
@@ -157,6 +149,7 @@
                         android:layout_row="1"
                         android:layout_column="0"
                         android:layout_columnWeight="0.5"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/bariol_bold"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
@@ -171,6 +164,7 @@
                         android:layout_column="1"
                         android:paddingStart="9dp"
                         android:paddingTop="5dp"
+                        android:textColor="@color/white"
                         android:paddingEnd="9dp"
                         android:paddingBottom="5dp"
                         android:text=":"
@@ -185,6 +179,7 @@
                         android:layout_column="2"
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
+                        android:textColor="@color/white"
                         android:padding="5dp"
                         android:text="34858349734"
                         android:textSize="12dp"
@@ -199,6 +194,7 @@
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
                         android:paddingTop="5dp"
+                        android:textColor="@color/white"
                         android:paddingBottom="5dp"
                         android:text="Umur"
                         android:textSize="12dp"
@@ -213,6 +209,7 @@
                         android:paddingTop="5dp"
                         android:paddingEnd="9dp"
                         android:paddingBottom="5dp"
+                        android:textColor="@color/white"
                         android:text=":"
                         android:textSize="12dp"
                         android:textStyle="bold" />
@@ -225,6 +222,7 @@
                         android:layout_column="2"
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
+                        android:textColor="@color/white"
                         android:padding="5dp"
                         android:text="24 Tahun"
                         android:textSize="12dp"
@@ -238,6 +236,7 @@
                         android:layout_column="0"
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
+                        android:textColor="@color/white"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
                         android:text="Golongan Darah"
@@ -252,6 +251,7 @@
                         android:paddingStart="9dp"
                         android:paddingTop="5dp"
                         android:paddingEnd="9dp"
+                        android:textColor="@color/white"
                         android:paddingBottom="5dp"
                         android:text=":"
                         android:textSize="12dp"
@@ -265,6 +265,7 @@
                         android:layout_column="2"
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
+                        android:textColor="@color/white"
                         android:padding="5dp"
                         android:text="A"
                         android:textSize="12dp"
@@ -279,6 +280,7 @@
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
                         android:paddingTop="5dp"
+                        android:textColor="@color/white"
                         android:paddingBottom="5dp"
                         android:text="Jenis Kelamin"
                         android:textSize="12dp"
@@ -294,6 +296,7 @@
                         android:paddingEnd="9dp"
                         android:paddingBottom="5dp"
                         android:text=":"
+                        android:textColor="@color/white"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
@@ -306,6 +309,7 @@
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
                         android:padding="5dp"
+                        android:textColor="@color/white"
                         android:text="Laki - laki"
                         android:textSize="12dp"
                         android:textStyle="bold" />
@@ -314,15 +318,16 @@
                 </GridLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
         android:layout_width="352dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="39dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
         app:cardCornerRadius="12dp"
-        app:cardElevation="20dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/backgroundDarkGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
@@ -334,6 +339,7 @@
             android:layout_height="match_parent"
             android:iconifiedByDefault="true"
             app:iconifiedByDefault="false"
+            android:translationY="1dp"
             app:queryHint="Pencarian"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="30dp">
@@ -347,6 +353,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:scrollbars="horizontal"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

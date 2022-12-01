@@ -14,6 +14,8 @@
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@color/backgroundDarkGrey"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints">
@@ -44,10 +46,10 @@
             android:translationY="41dp">
 
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="25dp"
                 android:layout_height="42dp"
                 android:gravity="center"
-                android:src="@drawable/ic_doctor">
+                android:src="@drawable/medical_svgrepo_com">
 
             </ImageView>
         </LinearLayout>
@@ -83,7 +85,7 @@
                 android:layout_width="30dp"
                 android:layout_height="42dp"
                 android:gravity="center"
-                android:src="@drawable/ic_noun_corona_3399685_1">
+                android:src="@drawable/psychotherapy_fill_svgrepo_com">
 
             </ImageView>
         </LinearLayout>
@@ -114,9 +116,9 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="153dp"
-                android:layout_height="35dp"
-                android:translationX="195dp"
-                android:translationY="5dp"
+                android:layout_height="30dp"
+                android:translationX="220dp"
+                android:translationY="-3dp"
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="#5AB4FF"
                 app:cardCornerRadius="8dp">
