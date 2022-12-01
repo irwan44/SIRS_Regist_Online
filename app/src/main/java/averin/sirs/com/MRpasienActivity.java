@@ -69,10 +69,11 @@ public class MRpasienActivity extends AppCompatActivity {
     }
     void addData(){
         listMRpasien = new ArrayList<>();
-        listMRpasien.add(new MRpasien("Klinik Averin Ceria", "Dr. Musa Nur Rahman", "Spesialis Kandungan", "2022-01-10 12:30"));
-        listMRpasien.add(new MRpasien("Klinik CFW", "Dr. Bonge", "Spesialis Psikologi", "2022-11-02 10:00"));
+        listMRpasien.add(new MRpasien("dr. Pongky Andi Saputra", "Dr. Musa Nur Rahman", "Spesialis Kandungan",
+                "2022-01-10 12:30"));
+        listMRpasien.add(new MRpasien("dr. Bahrul Mubarok", "Dr. Bonge", "Spesialis Psikologi", "2022-11-02 10:00"));
         listMRpasien.add(new MRpasien("M.S Beauty", "Drs. Yusda Yusdi", "Spesialis Kecantikan", "2022-05-24 11:30"));
-        listMRpasien.add(new MRpasien("Gambreng Dental", "Dr. Bambang Gambreng", "Spesialis Gigi", "2022-06-20 12:30"));
+        listMRpasien.add(new MRpasien("Gambreng Dental", "Dr. Bambang Gambreng", "Spesialis Gigi", "2022-06-20 12:30"));listMRpasien.add(new MRpasien("Gambreng Dental", "Dr. Bambang Gambreng", "Spesialis Gigi", "2022-06-20 12:30"));
     }
 
 //    public void viewMR() {
