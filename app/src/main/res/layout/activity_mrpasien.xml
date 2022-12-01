@@ -97,6 +97,7 @@
             android:background="@drawable/border"
             android:layout_below="@+id/fotobox"
             android:orientation="vertical">
+
             <GridLayout
                 android:id="@+id/GridPasien"
                 android:layout_width="match_parent"
