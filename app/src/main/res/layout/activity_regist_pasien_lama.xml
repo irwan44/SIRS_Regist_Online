@@ -160,53 +160,53 @@
             android:foreground="?attr/selectableItemBackground"
             android:text="Logout" />
 
-        <TextView
-            style="@style/viewParent.headerText.settingsMiniTitle"
-            android:layout_height="31dp"
-            android:fontFamily="@font/bariol_bold"
-            android:text="Aplikasi Terhubung" />
+<!--        <TextView-->
+<!--            style="@style/viewParent.headerText.settingsMiniTitle"-->
+<!--            android:layout_height="31dp"-->
+<!--            android:fontFamily="@font/bariol_bold"-->
+<!--            android:text="Aplikasi Terhubung" />-->
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="horizontal"
-           android:gravity="center"
-           android:layout_height="wrap_content">
+<!--       <LinearLayout-->
+<!--           android:layout_width="match_parent"-->
+<!--           android:orientation="horizontal"-->
+<!--           android:gravity="center"-->
+<!--           android:layout_height="wrap_content">-->
 
-           <androidx.appcompat.widget.AppCompatButton
-               android:id="@+id/Privy"
-               android:layout_width="205dp"
-               android:layout_height="match_parent"
-               android:background="@color/transparan"
-               android:drawableLeft="@drawable/privy3"
-               android:fontFamily="@font/bariol_bold"
-               android:paddingRight="90dp"
-               android:layout_gravity="left"
-               android:text="Privy.id"
-               android:textAllCaps="false" />
+<!--           <androidx.appcompat.widget.AppCompatButton-->
+<!--               android:id="@+id/Privy"-->
+<!--               android:layout_width="205dp"-->
+<!--               android:layout_height="match_parent"-->
+<!--               android:background="@color/transparan"-->
+<!--               android:drawableLeft="@drawable/privy3"-->
+<!--               android:fontFamily="@font/bariol_bold"-->
+<!--               android:paddingRight="90dp"-->
+<!--               android:layout_gravity="left"-->
+<!--               android:text="Privy.id"-->
+<!--               android:textAllCaps="false" />-->
 
-           <androidx.cardview.widget.CardView
-               android:id="@+id/btn_privy"
-               android:layout_width="126dp"
-               android:layout_height="40dp"
-               android:layout_gravity="right"
-               app:cardBackgroundColor="@color/birufigma"
-               app:cardCornerRadius="30dp"
-               android:foreground="?attr/selectableItemBackground"
-               app:cardElevation="0dp">
+<!--           <androidx.cardview.widget.CardView-->
+<!--               android:id="@+id/btn_privy"-->
+<!--               android:layout_width="126dp"-->
+<!--               android:layout_height="40dp"-->
+<!--               android:layout_gravity="right"-->
+<!--               app:cardBackgroundColor="@color/birufigma"-->
+<!--               app:cardCornerRadius="30dp"-->
+<!--               android:foreground="?attr/selectableItemBackground"-->
+<!--               app:cardElevation="0dp">-->
 
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:text="Sambungkan"
-                   android:textStyle="bold"
-                   android:fontFamily="@font/bariol_bold"
-                   android:textColor="@color/white"
-                   android:foreground="?attr/selectableItemBackground"
-                   android:gravity="center">
+<!--               <TextView-->
+<!--                   android:layout_width="match_parent"-->
+<!--                   android:layout_height="match_parent"-->
+<!--                   android:text="Sambungkan"-->
+<!--                   android:textStyle="bold"-->
+<!--                   android:fontFamily="@font/bariol_bold"-->
+<!--                   android:textColor="@color/white"-->
+<!--                   android:foreground="?attr/selectableItemBackground"-->
+<!--                   android:gravity="center">-->
 
-               </TextView>
+<!--               </TextView>-->
 
-           </androidx.cardview.widget.CardView>
-       </LinearLayout>
+<!--           </androidx.cardview.widget.CardView>-->
+<!--       </LinearLayout>-->
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

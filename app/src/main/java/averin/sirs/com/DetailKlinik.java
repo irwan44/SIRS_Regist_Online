@@ -18,12 +18,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
 import averin.sirs.com.Adapter.RequestHandler;
+import averin.sirs.com.Model.DokterPoli;
 import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.Token;
 import averin.sirs.com.Ui.AppController;
@@ -180,28 +182,34 @@ public class DetailKlinik extends AppCompatActivity {
 //                progressBar.setVisibility(View.GONE);
 
                 try {//converting response to json object
-                    JSONObject obj = new JSONObject(s);
+                    JSONObject jr = new JSONObject(s);
                     //if no error in response
-//                    if (obj.getString("code").equals("500")) {
-//                        Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
-//                    } else {
-                    kd_klinik = obj.getString("kode_klinik");
-                    site_klinik = obj.getString("url_site");
-                    nm_klinik = obj.getString("nama_perusahaan");
-                    alamat_klinik = obj.getString("alamat");
-                    String mailKlinik = obj.getString("email");
-                    nmKlinik.setText(nm_klinik);
-                    if(mailKlinik.equals("null")){
+                    if (jr.getString("code").equals("500")) {
+                        nmKlinik.setText(" - ");
                         emailKlinik.setText(" - ");
-                    }else {
-                        emailKlinik.setText(mailKlinik);
+
+                    } else if(jr.getString("code").equals("200")){
+                        JSONArray res = jr.getJSONArray("res");
+                        for(int a = 0; a < jr.length(); a++) {
+                            JSONObject obj = res.getJSONObject(a);
+                            kd_klinik = obj.getString("kode_klinik");
+                            site_klinik = obj.getString("url_site");
+                            nm_klinik = obj.getString("nama_perusahaan");
+                            alamat_klinik = obj.getString("alamat");
+                            String mailKlinik = obj.getString("email");
+                            nmKlinik.setText(nm_klinik);
+                            if (mailKlinik.equals("null")) {
+                                emailKlinik.setText(" - ");
+                            } else {
+                                emailKlinik.setText(mailKlinik);
+                            }
+                            alamatKlinik.setText(alamat_klinik);
+                            i.putExtra("kde_Klinik", kd_klinik);
+                            i.putExtra("kde_dokter", "");
+                            i.putExtra("nma_Klinik", nm_klinik);
+                            i.putExtra("nma_dokter", "");
+                        }
                     }
-                    alamatKlinik.setText(alamat_klinik);
-                    i.putExtra("kde_Klinik", kd_klinik);
-                    i.putExtra("kde_dokter", "");
-                    i.putExtra("nma_Klinik", nm_klinik);
-                    i.putExtra("nma_dokter", "");
-//                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

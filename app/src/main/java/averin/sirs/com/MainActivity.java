@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog dial_login;
     LayoutInflater inflater;
     View dialogView;
+    public boolean doubleTapParam = false;
 
     //Model Array
     private ArrayList<Klinik> ArrayKlinik = new ArrayList<>();
@@ -341,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
                 params.put("no_ktp", ktp);
 
                 //returing the response
-                return requestHandler.requestData(APIurl+"/api/v1/get-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
+                return requestHandler.requestData(APIurl+"/api/v1/cek-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
                         isiToken, "X-Px-Key", "", params);
             }
 
@@ -667,7 +669,8 @@ public class MainActivity extends AppCompatActivity {
                             String status = jso.getString("status");
                             String nmKlinik = jso.getString("nama_klinik");
                             String nmBagian = jso.getString("nama_bagian");
-                            ArrayAntrian.add(new Antrian(idReg,noAntri,nmDokter,tgl,jamAwal,jamAkhir,status,nmKlinik,nmBagian));
+                            String ketKlinik = jso.getString("ket_klinik");
+                            ArrayAntrian.add(new Antrian(idReg,noAntri,nmDokter,tgl,jamAwal,jamAkhir,status,nmKlinik,nmBagian,ketKlinik));
                         }
                         antrianDSBadapt.notifyDataSetChanged();
                     }
@@ -875,6 +878,21 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+        if (doubleTapParam) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleTapParam = true;
+        Toast.makeText(this, "Tap sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleTapParam = false;
+            }
+        }, 3000);
     }
 
     public void actLogin(View v) {

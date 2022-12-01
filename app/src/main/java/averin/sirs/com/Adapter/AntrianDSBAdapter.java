@@ -44,11 +44,12 @@ public class AntrianDSBAdapter extends RecyclerView.Adapter<AntrianDSBAdapter.An
         holder.txt_status.setText(list.get(position).getStatus_antrian());
         holder.txt_nmKlinik.setText(list.get(position).getnmKlinik_antrian());
         holder.txt_nmPoli.setText(list.get(position).getnmBagian_antrian());
+        holder.ketKlinik.setText(list.get(position).getKet_antrian());
     }
 
     public class AntrianDSBViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_idReg, txt_jamAkhir, txt_noantrian, txt_nmKlinik, txt_nmDokter,
-                txt_nmPoli, txt_tglAntrian, txt_jamAwal, txt_status;
+                txt_nmPoli, txt_tglAntrian, txt_jamAwal, txt_status, ketKlinik;
 
         public AntrianDSBViewHolder(View itemView) {
             super(itemView);
@@ -61,6 +62,7 @@ public class AntrianDSBAdapter extends RecyclerView.Adapter<AntrianDSBAdapter.An
             txt_jamAkhir      = itemView.findViewById(R.id.txt_jamAkhir);
             txt_idReg         = itemView.findViewById(R.id.txt_idReg);
             txt_status         = itemView.findViewById(R.id.txt_status);
+            ketKlinik         = itemView.findViewById(R.id.stat_px);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,6 +78,7 @@ public class AntrianDSBAdapter extends RecyclerView.Adapter<AntrianDSBAdapter.An
                     String status_dtl   = txt_status.getText().toString();
                     String nmKlinik_dtl = txt_nmKlinik.getText().toString();
                     String nmbagian_dtl = txt_nmPoli.getText().toString();
+                    String ketKlinik_dtl = ketKlinik.getText().toString();
 //                    Put to parsing
                     i.putExtra("regId", regId);
                     i.putExtra("noAntrian", no_antri);
@@ -86,6 +89,7 @@ public class AntrianDSBAdapter extends RecyclerView.Adapter<AntrianDSBAdapter.An
                     i.putExtra("status_antri", status_dtl);
                     i.putExtra("nm_klinik", nmKlinik_dtl);
                     i.putExtra("nm_bag", nmbagian_dtl);
+                    i.putExtra("stat_px", ketKlinik_dtl);
                     itemView.getContext().startActivity(i);
                 }
             });

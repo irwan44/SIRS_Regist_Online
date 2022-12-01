@@ -1,33 +1,50 @@
 package averin.sirs.com;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraManager;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import averin.sirs.com.Adapter.RequestHandler;
+import averin.sirs.com.Model.Klinik;
 import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.Token;
 import averin.sirs.com.Ui.AppController;
 
 //LIBRARY FOR SCAN QR CODE
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,35 +52,41 @@ import java.util.HashMap;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.ResultHandler {
-    private ZXingScannerView mScannerView;
+public class ScanQRCode extends AppCompatActivity {
+//    private ZXingScannerView mScannerView;
+
+    ImageView bg_qrcode;
+    private CodeScanner mCodeScanner;
+    private CodeScannerView scanview;
+
     private CameraManager cm_flash;
     private String getCameraID, hsl_qrcode;
     private ToggleButton flashOnOff;
 
     ProgressDialog pDialog;
     String val_token, no_ktp, regId, tgl_antri, jam_awal, jam_akhir, status_antri, nm_klinik, nm_bag, jam_konvert;
-    Dialog dialog_confirm;
-    TextView txt_info;
-    Button btn_oke;
+    TextView txt_info_success, txt_info_failed;
+    Button btn_ok_success, btn_ok_failed;
+
+    //Dialog Confirm
+    AlertDialog.Builder builder_success, builder_failed, dial_builder, builder_ask_px;
+    AlertDialog dial_success, dial_failed, dial_login, dial_newPX;
+    LayoutInflater inflater;
+    View v_success_regist, v_failed_regist, v_ask_newPX, dialogView;
 
     //URL GET DATA FROM DB
     String APIurl =RequestHandler.APIdev;
     public String situsPerawan    = APIurl+"/api/v1/get-data-klinik.php";
     public String linkbokep       = APIurl+"/api/v1/get-token.php";
-    public String prosesScan      = APIurl+"/api/v1/get-scan_klinik.php";
+    public String prosesScan      = APIurl+"/api/v1/scan_antrian_klinik.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qrcode);
+//        bg_qrcode = findViewById(R.id.ivBgContent);
+//        bg_qrcode.bringToFront();
 
-        mScannerView = new ZXingScannerView(this);
-        setContentView(mScannerView);
-//        flashOnOff = findViewById(R.id.tgl_senter);
-//        cm_flash = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA},
-                PackageManager.PERMISSION_GRANTED);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             regId        = extras.get("regId").toString();
@@ -75,19 +98,69 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
             nm_bag       = extras.get("nm_bag").toString();
         }
 
-        //Dialog Confirm
-        dialog_confirm = new Dialog(ScanQRCode.this);
-        dialog_confirm.setContentView(R.layout.dialog_success_regist);
-        dialog_confirm.setCancelable(false);
-        txt_info = dialog_confirm.findViewById(R.id.txt_info_success);
-        btn_oke = dialog_confirm.findViewById(R.id.btn_oke);
+        CodeScannerView scannerView = findViewById(R.id.scannerView);
+        mCodeScanner = new CodeScanner(this, scannerView);
+        mCodeScanner.setDecodeCallback(new DecodeCallback() {
+            @Override
+            public void onDecoded(@NonNull final Result result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hsl_qrcode = result.getText();
+                        cekToken(hsl_qrcode);
+                    }
+                });
+            }
+        });
+        checkCameraPerm();
 
-        btn_oke.setOnClickListener(new View.OnClickListener() {
+//Dialog Confirm
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        builder_success = new AlertDialog.Builder(ScanQRCode.this,R.style.CustomAlertDialog);
+        builder_failed = new AlertDialog.Builder(ScanQRCode.this,R.style.CustomAlertDialog);
+        inflater = getLayoutInflater();
+        v_success_regist = inflater.inflate(R.layout.dialog_success_regist, viewGroup, false);
+        v_failed_regist = inflater.inflate(R.layout.dialog_failed_regist, viewGroup, false);
+        btn_ok_success = v_success_regist.findViewById(R.id.btn_oke);
+        btn_ok_failed = v_failed_regist.findViewById(R.id.btn_oke_failed);
+        txt_info_success = v_success_regist.findViewById(R.id.txt_info_success);
+        txt_info_failed = v_failed_regist.findViewById(R.id.txt_info_failed);
+        builder_success.setView(v_success_regist);
+        builder_failed.setView(v_failed_regist);
+        dial_success = builder_success.create();
+        dial_success.setCancelable(false);
+        dial_failed = builder_failed.create();
+        dial_failed.setCancelable(false);
+
+//        mScannerView = new ZXingScannerView(this);
+//        setContentView(mScannerView);
+//        flashOnOff = findViewById(R.id.tgl_senter);
+//        cm_flash = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+//        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA},
+//                PackageManager.PERMISSION_GRANTED);
+
+        btn_ok_success.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog_confirm.dismiss();
+                dial_success.dismiss();
                 Intent i = new Intent(ScanQRCode.this, AntrianDetail.class);
-                i.putExtra("regID", regId);
+                i.putExtra("regId", regId);
+                i.putExtra("tgl_antri", tgl_antri);
+                i.putExtra("jam_awal", jam_awal);
+                i.putExtra("jam_akhir", jam_akhir);
+                i.putExtra("status_antri", status_antri);
+                i.putExtra("nm_klinik", nm_klinik);
+                i.putExtra("nm_bag", nm_bag);
+                startActivity(i);
+            }
+        });
+
+        btn_ok_failed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dial_failed.dismiss();
+                Intent i = new Intent(ScanQRCode.this, AntrianDetail.class);
+                i.putExtra("regId", regId);
                 i.putExtra("tgl_antri", tgl_antri);
                 i.putExtra("jam_awal", jam_awal);
                 i.putExtra("jam_akhir", jam_akhir);
@@ -116,47 +189,52 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
 
     }
 
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
-
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
-
-
-//    FUNGSI SCANNER QR CODE
+    //    FUNGSI SCANNER QR CODE
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
-        mScannerView.setResultHandler(this);
-        mScannerView.startCamera();
+        checkCameraPerm();
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
+        mCodeScanner.releaseResources();
         super.onPause();
-        mScannerView.stopCamera();
     }
 
-    @Override
-    public void handleResult(Result rawResult) {
-        Log.v("TAG", rawResult.getText()); // Prints scan results
-        Log.v("TAG", rawResult.getBarcodeFormat().toString());
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Scan Result");
-//        builder.setMessage(rawResult.getText());
-//        AlertDialog alert1 = builder.create();
-//        alert1.show();
-        hsl_qrcode = rawResult.getText();
-        dialog_confirm.show();
-        txt_info.setText(hsl_qrcode);
-        mScannerView.resumeCameraPreview(this);
+    private void checkCameraPerm(){
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.CAMERA)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        mCodeScanner.startPreview();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest,
+                                                                   PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
     }
 
-    public void cekToken() {
+//    @Override
+//    public void handleResult(Result rawResult) {
+//        Log.v("TAG", rawResult.getText()); // Prints scan results
+//        Log.v("TAG", rawResult.getBarcodeFormat().toString());
+//        hsl_qrcode = rawResult.getText();
+//        cekToken(hsl_qrcode);
+//        mScannerView.resumeCameraPreview(this);
+//    }
+
+    public void cekToken(final String str_qrcode) {
         //first getting the values
         final String isiToken    = val_token;
         final String ktp         = no_ktp;
@@ -177,7 +255,7 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
                 params.put("no_ktp", ktp);
 
                 //returing the response
-                return requestHandler.requestData(APIurl+"/api/v1/get-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
+                return requestHandler.requestData(APIurl+"/api/v1/cek-data-px.php", "POST", "application/json; charset=utf-8", "X-Api-Token",
                         isiToken, "X-Px-Key", "", params);
             }
 
@@ -198,9 +276,9 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
 
                     //if no error in response
                     if (obj.getString("code").equals("500")) {
-                        ambilToken();
-                    } else {
-                        GetAntriPoli();
+                        ambilToken(str_qrcode);
+                    } else if(obj.getString("code").equals("200")){
+                        GetAntriPoli(str_qrcode);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -212,7 +290,7 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
         pl.execute();
     }
 
-    public void ambilToken() {
+    public void ambilToken(final String str_qrcode) {
         //first getting the values
         final String KodeApi    = "MUSA";
         final String KeyApi     = "@@TTWYYW";
@@ -271,7 +349,7 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
                         //storing the user in shared preferences
                         AppController.getInstance(getApplicationContext()).getToken(token);
                         val_token = String.valueOf(obj.getString("token"));
-                        GetAntriPoli();
+                        GetAntriPoli(str_qrcode);
 
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
@@ -286,10 +364,10 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
         pl.execute();
     }
 
-    private void GetAntriPoli() {
+    private void GetAntriPoli(final String str_qrcode) {
         //first getting the values
         final String iniToken   = val_token;
-        final String kdKlinik = hsl_qrcode;
+        final String kdKlinik = str_qrcode;
         final String noKTP = no_ktp;
         final String IDreg = regId;
 
@@ -306,8 +384,8 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("kode_klinik", kdKlinik);
-//                params.put("no_ktp", noKTP);
-                params.put("regID", IDreg);
+                params.put("no_ktp", noKTP);
+                params.put("idRegKlinik", IDreg);
 
                 //returing the response
                 return requestHandler.requestData(prosesScan, "POST", "application/json; charset=utf-8", "X-Api-Token",
@@ -328,16 +406,13 @@ public class ScanQRCode extends AppCompatActivity implements ZXingScannerView.Re
 
                 try {//converting response to json object
                     JSONObject obj = new JSONObject(s);
-                    //if no error in response
                     if (obj.getString("code").equals("200")) {
-                        dialog_confirm.show();
-                        txt_info.setText(obj.getString("msg"));
-                    } else if(obj.getString("code").equals("300")) {
-                        dialog_confirm.show();
-                        txt_info.setText(obj.getString("msg"));
+                        dial_success.show();
+                        txt_info_success.setText(obj.getString("msg"));
+
                     }else if(obj.getString("code").equals("500")) {
-                        dialog_confirm.show();
-                        txt_info.setText(obj.getString("msg"));
+                        dial_failed.show();
+                        txt_info_failed.setText(obj.getString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

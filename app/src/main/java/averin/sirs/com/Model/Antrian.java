@@ -1,9 +1,10 @@
 package averin.sirs.com.Model;
 
 public class Antrian {
-    private String  idReg, tgl, no_antrian, nm_dokter, jamAwal, jamAkhir, status, nmKlinik, nmBagian;
+    private String  idReg, tgl, no_antrian, nm_dokter, jamAwal, jamAkhir, status, nmKlinik, nmBagian, ketKlinik;
 
-    public Antrian(String idReg, String no_antrian, String nm_dokter ,String tgl, String jamAwal, String jamAkhir, String status, String nmKlinik, String nmBagian) {
+    public Antrian(String idReg, String no_antrian, String nm_dokter ,String tgl, String jamAwal, String jamAkhir,
+                   String status, String nmKlinik, String nmBagian, String ketKlinik) {
         this.idReg = idReg;
         this.no_antrian = no_antrian;
         this.nm_dokter = nm_dokter;
@@ -13,6 +14,7 @@ public class Antrian {
         this.status = status;
         this.nmKlinik = nmKlinik;
         this.nmBagian = nmBagian;
+        this.ketKlinik = ketKlinik;
     }
 
     public String getIdReg_antrian() {return idReg; }
@@ -24,4 +26,5 @@ public class Antrian {
     public String getStatus_antrian() {return status; }
     public String getnmKlinik_antrian() {return nmKlinik; }
     public String getnmBagian_antrian() {return nmBagian; }
+    public String getKet_antrian() {return ketKlinik; }
 }

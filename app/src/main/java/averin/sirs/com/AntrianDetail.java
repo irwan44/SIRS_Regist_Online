@@ -2,12 +2,14 @@ package averin.sirs.com;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +22,13 @@ import java.util.Locale;
 
 public class AntrianDetail extends AppCompatActivity{
 
-    String val_token, no_ktp, flag_px, regId, no_antri, nm_dokter, tgl_antri, jam_awal, jam_akhir, status_antri, nm_klinik, nm_bag, tglKonvert, jam_konvert;
-    TextView txt_nmKlinik, txt_jnsPoli, txt_nmDokter, txt_noAntri, txt_tglPeriksa, txt_jamPeriksa, txt_jnsPasien, txt_wktPeriksa, lb_antrian;
+    String val_token, no_ktp, flag_px, regId, no_antri, nm_dokter, tgl_antri, jam_awal, jam_akhir, status_antri,
+            nm_klinik, nm_bag, tglKonvert, jam_konvert, stat_px;
+    TextView txt_nmKlinik, txt_jnsPoli, txt_nmDokter, txt_noAntri, txt_tglPeriksa, txt_jamPeriksa, txt_jnsPasien,
+            txt_wktPeriksa, lb_antrian, txt_info_antrian;
     ImageView imgKlinik;
+    Button btn_scan;
+    CardView cd_scan;
     DateFormat outputFormat = new SimpleDateFormat("EEEE, dd MMM yyyy", Locale.getDefault());
     DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat outputwaktu = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -57,8 +63,10 @@ public class AntrianDetail extends AppCompatActivity{
         txt_jamPeriksa = findViewById(R.id.jamPeriksa);
         txt_jnsPasien = findViewById(R.id.jenisPasien);
         txt_wktPeriksa = findViewById(R.id.wktPeriksa);
+        txt_info_antrian = findViewById(R.id.txt_info_antrian);
         lb_antrian =  findViewById(R.id.lb_antrian);
-//        imgKlinik = findViewById(R.id.imgKlinik);
+        btn_scan = findViewById(R.id.btn_scan);
+        cd_scan = findViewById(R.id.cd_btnscan);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -72,6 +80,18 @@ public class AntrianDetail extends AppCompatActivity{
             status_antri = extras.get("status_antri").toString();
             nm_klinik    = extras.get("nm_klinik").toString();
             nm_bag       = extras.get("nm_bag").toString();
+            stat_px       = extras.get("stat_px").toString();
+        }
+
+        if(stat_px.equals("lama")){
+            btn_scan.setVisibility(View.VISIBLE);
+            cd_scan.setVisibility(View.VISIBLE);
+            txt_info_antrian.setText("Datang 30 menit sebelum pemeriksaan dan \n " +
+                    "konfirmasi kehadiran baik melalui FO atau Scan QR pada RS");
+        }else{
+            btn_scan.setVisibility(View.GONE);
+            cd_scan.setVisibility(View.GONE);
+            txt_info_antrian.setText("Silahkan datang ke FO dan membawa KTP anda \n untuk melakukan registrasi ulang");
         }
 
         Date tgl = null;
@@ -93,6 +113,9 @@ public class AntrianDetail extends AppCompatActivity{
         txt_wktPeriksa.setText(jam_awal+" - "+jam_akhir);
         txt_tglPeriksa.setText(tglKonvert);
         txt_jamPeriksa.setText(jam_konvert);
+        if(stat_px.equals("lama")){
+
+        }
 //        if(flag_px.equals("0")){
 //            lb_antrian.setText("No. Pesanan");
 //        }else{
