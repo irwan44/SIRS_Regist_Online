@@ -64,7 +64,7 @@ public class ScanQRCode extends AppCompatActivity {
     private ToggleButton flashOnOff;
 
     ProgressDialog pDialog;
-    String val_token, no_ktp, regId, tgl_antri, jam_awal, jam_akhir, status_antri, nm_klinik, nm_bag, jam_konvert;
+    String val_token, no_ktp, regId, nm_dokter, no_antrian, tgl_antri, jam_awal, jam_akhir, status_antri, nm_klinik, nm_bag, stat_px, jam_konvert;
     TextView txt_info_success, txt_info_failed;
     Button btn_ok_success, btn_ok_failed;
 
@@ -90,12 +90,15 @@ public class ScanQRCode extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             regId        = extras.get("regId").toString();
+            no_antrian     = extras.get("noAntrian").toString();
+            nm_dokter    = extras.get("nma_dokter").toString();
             tgl_antri    = extras.get("tgl_antri").toString();
             jam_awal     = extras.get("jam_awal").toString();
             jam_akhir    = extras.get("jam_akhir").toString();
             status_antri = extras.get("status_antri").toString();
             nm_klinik    = extras.get("nm_klinik").toString();
             nm_bag       = extras.get("nm_bag").toString();
+            stat_px       = extras.get("stat_px").toString();
         }
 
         CodeScannerView scannerView = findViewById(R.id.scannerView);
@@ -145,12 +148,15 @@ public class ScanQRCode extends AppCompatActivity {
                 dial_success.dismiss();
                 Intent i = new Intent(ScanQRCode.this, AntrianDetail.class);
                 i.putExtra("regId", regId);
+                i.putExtra("noAntrian", no_antrian);
+                i.putExtra("nma_dokter", nm_dokter);
                 i.putExtra("tgl_antri", tgl_antri);
                 i.putExtra("jam_awal", jam_awal);
                 i.putExtra("jam_akhir", jam_akhir);
                 i.putExtra("status_antri", status_antri);
                 i.putExtra("nm_klinik", nm_klinik);
                 i.putExtra("nm_bag", nm_bag);
+                i.putExtra("stat_px", stat_px);
                 startActivity(i);
             }
         });

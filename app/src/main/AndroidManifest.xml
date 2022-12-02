@@ -18,6 +18,14 @@
         android:theme="@style/Theme.D_Medis"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".DetailMR"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainSwepLihatResep"
             android:exported="false">
             <meta-data
@@ -77,6 +85,10 @@
             android:name=".MRpasienActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name=".MRDetail"
+            android:exported="false"
             android:theme="@style/Theme.D_Medis.NoActionBar" />
         <activity
             android:name=".AntrianActivity"

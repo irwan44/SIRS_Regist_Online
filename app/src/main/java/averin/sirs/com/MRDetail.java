@@ -28,17 +28,10 @@ public class MRDetail extends AppCompatActivity {
             txt_tinggi, txt_kesadaran, txt_nadi, txt_pernafasan, txt_bb;
     EditText edt_tindakan, edt_icd10;
     ImageView imgKlinik;
-    Button btn_scan;
-    CardView cd_scan;
-    DateFormat outputFormat = new SimpleDateFormat("EEEE, dd MMM yyyy", Locale.getDefault());
-    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat outputwaktu = new SimpleDateFormat("HH:mm", Locale.getDefault());
-    DateFormat inputwaktu = new SimpleDateFormat("HH:mm:ss");
-    SimpleDateFormat sdf;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_detail_mr_pasien);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);

@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MRDetail"
     tools:ignore="MissingDefaultResource">
-
-
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -63,7 +62,6 @@
                                 android:layout_height="35dp"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="37dp"
-                                android:onClick="back"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:navigationIcon="@drawable/arrow_left"
@@ -135,7 +133,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginBottom="8dp"
                                             android:fontFamily="@font/bariol_bold"
-                                            android:text="00000101"
+                                            android:text="2004-0000003"
                                             android:textColor="@color/white"
                                             android:textSize="14sp"
                                             android:textStyle="bold" />

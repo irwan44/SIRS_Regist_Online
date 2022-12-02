@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/profile">
+                    android:src="@drawable/foto_bos">
 
                 </ImageView>
             </androidx.cardview.widget.CardView>
@@ -138,7 +138,7 @@
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
                         android:padding="5dp"
-                        android:text="Irwan Setiawan"
+                        android:text="Muawan Asyir"
                         android:textColor="@color/white"
                         android:textSize="12dp"
                         android:textStyle="bold" />
@@ -181,7 +181,7 @@
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
                         android:padding="5dp"
-                        android:text="34858349734"
+                        android:text="2004-0000003"
                         android:textColor="@color/white"
                         android:textSize="12dp"
                         android:textStyle="bold" />
@@ -224,7 +224,7 @@
                         android:layout_columnWeight="0.5"
                         android:fontFamily="@font/bariol_bold"
                         android:padding="5dp"
-                        android:text="24 Tahun"
+                        android:text="41 Tahun"
                         android:textColor="@color/white"
                         android:textSize="12dp"
                         android:textStyle="bold" />
@@ -321,32 +321,32 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="352dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/backgroundDarkGrey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        tools:ignore="MissingConstraints">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cardView3"-->
+<!--        android:layout_width="352dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        app:cardCornerRadius="12dp"-->
+<!--        app:cardElevation="0dp"-->
+<!--        app:cardBackgroundColor="@color/backgroundDarkGrey"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.487"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/cardView2"-->
+<!--        tools:ignore="MissingConstraints">-->
 
-        <androidx.appcompat.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:iconifiedByDefault="true"
-            app:iconifiedByDefault="false"
-            android:translationY="1dp"
-            app:queryHint="Pencarian"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="30dp">
+<!--        <androidx.appcompat.widget.SearchView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:iconifiedByDefault="true"-->
+<!--            app:iconifiedByDefault="false"-->
+<!--            android:translationY="1dp"-->
+<!--            app:queryHint="Pencarian"-->
+<!--            tools:ignore="MissingConstraints"-->
+<!--            tools:layout_editor_absoluteX="30dp">-->
 
-        </androidx.appcompat.widget.SearchView>
-    </androidx.cardview.widget.CardView>
+<!--        </androidx.appcompat.widget.SearchView>-->
+<!--    </androidx.cardview.widget.CardView>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listMR_viewCycle"
@@ -359,7 +359,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

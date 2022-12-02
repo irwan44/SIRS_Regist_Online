@@ -80,10 +80,16 @@ public class RegistPasienLama extends AppCompatActivity {
         url_fotoPasien = String.valueOf(lg.getFoto_pasien());
         tv_namapasien.setText(String.valueOf(lg.getNama_pasien()));
         tv_nomr.setText(String.valueOf(lg.getKTP_pasien()));
-        if(url_fotoPasien.equals("null")){
-            img_fotoPasien.setImageResource(R.drawable.profile_img_empty);
+        String noKTP = tv_nomr.getText().toString();
+
+        if(noKTP.equals("3174586231698546")) {
+            img_fotoPasien.setImageResource(R.drawable.foto_bos);
         }else {
-            Glide.with(RegistPasienLama.this).load(url_fotoPasien).into(img_fotoPasien);
+            if (url_fotoPasien.equals("null")) {
+                img_fotoPasien.setImageResource(R.drawable.profile_img_empty);
+            } else {
+                Glide.with(RegistPasienLama.this).load(url_fotoPasien).into(img_fotoPasien);
+            }
         }
 
         btn_back.setOnClickListener(new View.OnClickListener() {

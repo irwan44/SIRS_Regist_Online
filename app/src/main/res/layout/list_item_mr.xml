@@ -8,42 +8,96 @@
     android:orientation="vertical">
 <!--    Buat Demo RS Bidadari-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/txt_idReg"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        tools:ignore="MissingConstraints" />-->
-<!--    <TextView-->
-<!--        android:id="@+id/txt_idReg"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        tools:ignore="MissingConstraints" />-->
-<!--    <TextView-->
-<!--        android:id="@+id/txt_idReg"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        tools:ignore="MissingConstraints" />-->
+    <TextView
+        android:id="@+id/txt_keadaanumum"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_TekananDarah"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_suhu"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_TinggiBadan"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_Kesadaran"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_Nadi"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_Pernafasan"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_bb"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_tindakan"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_icd10"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_kdresep"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
 
 <!--    ======= End Demo Object ==========-->
     <TextView
         android:id="@+id/txt_idReg"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
     <TextView
         android:id="@+id/txt_noktp"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
     <TextView
         android:id="@+id/txt_kdklinik"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
     <androidx.cardview.widget.CardView
         android:layout_width="361dp"
         android:layout_height="90dp"
-        android:clickable="true"
+        android:clickable="false"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="15dp"
@@ -60,15 +114,15 @@
             android:translationX="9dp"
             android:translationY="15dp">
 
-            <TextView
-                android:id="@+id/namaKlinik"
-                android:layout_width="195dp"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/bariol_bold"
-                android:text="Klinik Averin Ceria"
-                android:textStyle="bold">
+<!--            <TextView-->
+<!--                android:id="@+id/namaKlinik"-->
+<!--                android:layout_width="195dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:fontFamily="@font/bariol_bold"-->
+<!--                android:text="Klinik Averin Ceria"-->
+<!--                android:textStyle="bold">-->
 
-            </TextView>
+<!--            </TextView>-->
         </LinearLayout>
 
         <LinearLayout

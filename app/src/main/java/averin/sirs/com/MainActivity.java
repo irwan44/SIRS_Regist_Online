@@ -200,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
         txt_lbl         = findViewById(R.id.lbl_namapasien);
         fotoPasien      = findViewById(R.id.tb_poto);
         btn_notif       = findViewById(R.id.btn_notif);
+
         if (!AppController.getInstance(this).isLoggedIn()) {
             txt_login.setVisibility(View.VISIBLE);
             btn_notif.setVisibility(View.GONE);
@@ -247,10 +248,14 @@ public class MainActivity extends AppCompatActivity {
             txt_noktp.setText(String.valueOf(login.getKTP_pasien()));
             txt_namaPasien.setText(String.valueOf(login.getNama_pasien()));
         }
-        if(url_fotoPasien.equals("null")){
-            fotoPasien.setImageResource(R.drawable.profile_img_empty);
+        if(no_ktp.equals("3174586231698546")){
+            fotoPasien.setImageResource(R.drawable.foto_bos);
         }else {
-            Glide.with(MainActivity.this).load(url_fotoPasien).into(fotoPasien);
+            if (url_fotoPasien.equals("null")) {
+                fotoPasien.setImageResource(R.drawable.profile_img_empty);
+            } else {
+                Glide.with(MainActivity.this).load(url_fotoPasien).into(fotoPasien);
+            }
         }
 
         txt_see_klinikterdekat.setOnClickListener(new View.OnClickListener() {
@@ -878,21 +883,22 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        if (doubleTapParam) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleTapParam = true;
-        Toast.makeText(this, "Tap sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleTapParam = false;
-            }
-        }, 3000);
+//        if (doubleTapParam) {
+//            super.onBackPressed();
+//            MainActivity.this.finish();
+//            System.exit(0);
+//        }
+//
+//        this.doubleTapParam = true;
+//        Toast.makeText(this, "Tap sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+//
+//        new Handler().postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                doubleTapParam = false;
+//            }
+//        }, 3000);
     }
 
     public void actLogin(View v) {

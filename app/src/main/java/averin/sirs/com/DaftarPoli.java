@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,7 +183,7 @@ public class DaftarPoli extends AppCompatActivity {
         btn_yes_px.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nontonSiskae(px_baru);
+                nontonSiskae("baru");
             }
         });
 
@@ -245,8 +246,8 @@ public class DaftarPoli extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
         String currentDateandTime = sdf.format(new Date());
 
-        txt_bagian.setText(kd_klinik);
-        txt_namaDokter.setText(ktpPasien);
+        txt_bagian.setText(bagian);
+        txt_namaDokter.setText(nm_dokter);
         txt_namaklinik.setText(nm_klinik);
         tgl_now = df.format(new Date());
         edt_tglPeriksa.setText(tgl_now);
@@ -343,11 +344,11 @@ public class DaftarPoli extends AppCompatActivity {
                 try {//converting response to json object
                         JSONObject obj = new JSONObject(s);
                     if (obj.getString("code").equals("200")){
-                        nontonSiskae(px_lama);
+                        nontonSiskae("lama");
                     } else if(obj.getString("code").equals("500")){
                         dial_newPX.show();
-                        txt_askPX_atas.setText("Anda Belum Terdaftar \n Sebagai Pasien Lama \n Pada Klinik "+nm_klinik);
-                        txt_askPX_bawah.setText("Apakah anda ingin mendaftar sebagai pasien baru pada klinik "+nm_klinik);
+                        txt_askPX_atas.setText("Anda Belum Terdaftar \n Sebagai Pasien Lama Pada \n "+nm_klinik);
+                        txt_askPX_bawah.setText("Apakah anda ingin mendaftar sebagai pasien baru pada "+nm_klinik);
                     }
 
                 } catch (JSONException e) {
@@ -408,18 +409,27 @@ public class DaftarPoli extends AppCompatActivity {
 
                 try {//converting response to json object
                     JSONObject obj = new JSONObject(s);
-                    JSONArray jso = obj.getJSONArray("list");
-                    for (int a = 0; a < jso.length(); a++) {
+                    if (obj.getString("code").equals("500")) {
                         isiSpinner item = new isiSpinner();
-                        JSONObject jr = jso.getJSONObject(a);
-
-                        item.setId(jr.getString("antrian"));
-                        item.setKet(jr.getString("jam"));
-
+                        item.setId(obj.getString(""));
+                        item.setKet(obj.getString("msg"));
                         listisian.add(item);
+                        adapter.notifyDataSetChanged();
+                        hideDialog();
+                    } else if(obj.getString("code").equals("200")) {
+                        JSONArray jso = obj.getJSONArray("list");
+                        for (int a = 0; a < jso.length(); a++) {
+                            isiSpinner item = new isiSpinner();
+                            JSONObject jr = jso.getJSONObject(a);
+
+                            item.setId(jr.getString("antrian"));
+                            item.setKet(jr.getString("jam"));
+
+                            listisian.add(item);
+                        }
+                        adapter.notifyDataSetChanged();
+                        hideDialog();
                     }
-                    adapter.notifyDataSetChanged();
-                    hideDialog();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -443,6 +453,12 @@ public class DaftarPoli extends AppCompatActivity {
         final String wkt_periksa    = durasi;
         final String no_Antrian     = edt_noAntrian.getText().toString();
         final String jadwal         = jdwl_periksa;
+
+        if (TextUtils.isEmpty(no_Antrian)) {
+            edt_noAntrian.setError("No Antrian tidak tersedia");
+            edt_noAntrian.requestFocus();
+            return;
+        }
 
         pDialog = new ProgressDialog(DaftarPoli.this);
         pDialog.setCancelable(false);

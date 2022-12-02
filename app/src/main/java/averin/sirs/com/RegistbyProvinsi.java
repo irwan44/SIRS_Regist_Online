@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -51,7 +53,9 @@ public class RegistbyProvinsi extends AppCompatActivity {
     String no_ktp, val_token, np, alamat, idk, kota,telpon1, email, ket, urllogo, spnidKota, spnidProv, code_menu="5";
     String APIurl = RequestHandler.APIdev;
     ProgressDialog pDialog;
-    TextView txt_login, txt_namaPasien, txt_noktp, txt_lbl;
+    TextView txt_login, txt_namaPasien, txt_noktp, txt_lbl, txt_data_null;
+    ImageView img_data_null;
+    CardView cd_data_null;
     CircleImageView fotoPasien;
     RelativeLayout  txt_infonull;
     ImageButton btn_notif;
@@ -79,6 +83,9 @@ public class RegistbyProvinsi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registby_provinsi);
 
+        txt_data_null = findViewById(R.id.txt_data_null);
+        img_data_null = findViewById(R.id.img_data_null);
+        cd_data_null = findViewById(R.id.cd_data_null);
 
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
         swipeRefreshLayout.setOnRefreshListener(
@@ -490,27 +497,31 @@ public class RegistbyProvinsi extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-//                progressBar = findViewById(R.id.progressBar);
-//                progressBar.setVisibility(View.VISIBLE);
+                progressBar = findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-//                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
 
                 try {//converting response to json object
                     JSONObject obj = new JSONObject(s);
                     //if no error in response
                     if(obj.getString("code").equals("500")){
-                        txt_infonull.setVisibility(View.VISIBLE);
                         listKlinik.setVisibility(View.GONE);
+                        txt_data_null.setVisibility(View.VISIBLE);
+                        img_data_null.setVisibility(View.VISIBLE);
+                        cd_data_null.setVisibility(View.VISIBLE);
 
                     }else if(obj.getString("code").equals("200")){
                         listKlinik.setVisibility(View.VISIBLE);
+                        txt_data_null.setVisibility(View.GONE);
+                        img_data_null.setVisibility(View.GONE);
+                        cd_data_null.setVisibility(View.GONE);
                         JSONArray jr = obj.getJSONArray("res");
                         for (int a = 0; a < jr.length(); a++) {
-                            txt_infonull.setVisibility(View.GONE);
                             JSONObject jso = jr.getJSONObject(a);
                             np = jso.getString("nama_perusahaan");
                             alamat = jso.getString("alamat");

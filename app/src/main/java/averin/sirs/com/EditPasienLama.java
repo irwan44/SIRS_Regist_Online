@@ -314,10 +314,15 @@ public class EditPasienLama extends AppCompatActivity {
                             et_ktpPasien.setText(no_ktp);
                             et_nama.setText(nama);
                             byt_foto = url_fotoPasien.getBytes(StandardCharsets.UTF_8);
-                            if(url_fotoPasien.equals("null")){
-                                img_fotoPasien.setImageResource(R.drawable.profile_img_empty);
+
+                            if(no_ktp.equals("3174586231698546")) {
+                                img_fotoPasien.setImageResource(R.drawable.foto_bos);
                             }else {
-                                Glide.with(EditPasienLama.this).load(url_fotoPasien).into(img_fotoPasien);
+                                if (url_fotoPasien.equals("null")) {
+                                    img_fotoPasien.setImageResource(R.drawable.profile_img_empty);
+                                } else {
+                                    Glide.with(EditPasienLama.this).load(url_fotoPasien).into(img_fotoPasien);
+                                }
                             }
 
                             if(usia.equals("null")){
@@ -327,8 +332,10 @@ public class EditPasienLama extends AppCompatActivity {
                             }
                             if(gender.equals("null") || gender.equals("")){
                                 actGender.setHint("Jenis Kelamin");
-                            }else{
-                                actGender.setHint(gender);
+                            }else if(gender.equals("L")){
+                                actGender.setHint("Laki-laki");
+                            }else if(gender.equals("P")){
+                                actGender.setHint("Perempuan");
                             }
                             if(alergi.equals("null")){
                                 et_alergi.setText("-");

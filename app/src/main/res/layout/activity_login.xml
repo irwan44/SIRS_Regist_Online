@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="92dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="58dp"
                         android:layout_marginStart="9dp"
                         android:drawableRight="@drawable/icon_right2"
@@ -47,9 +47,9 @@
                         android:gravity="center"
                         android:onClick="SkipLogin"
                         android:padding="10sp"
-                        android:text="Lewati"
+                        android:text="Lewati untuk saat ini"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue_500"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -59,20 +59,19 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/textView"-->
-<!--                android:layout_width="172dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:fontFamily="@font/bariol_bold"-->
-<!--                android:src="@drawable/sirs"-->
-<!--                android:text="D-MEDIS"-->
-<!--                android:textSize="96px"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/pg_toolbar" />-->
+            <ImageView
+                android:id="@+id/textView"
+                android:layout_width="172dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/bariol_bold"
+                android:src="@drawable/sirs"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pg_toolbar" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -228,7 +227,7 @@
                 android:fontFamily="@font/bariol_bold"
                 android:onClick="RegistrasiAkun"
                 android:text=" Buat Akun Baru"
-                android:textColor="@color/birufigma"
+                android:textColor="@color/blue_500"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.70"

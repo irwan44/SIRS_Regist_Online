@@ -178,12 +178,12 @@ public class RegistPoli extends AppCompatActivity {
             nm_Dokter = kiriman.get("nma_dokter").toString();
             txt_cariDokter.setText(nm_Dokter);
 //            GetSpnPoli(kd_klinik);
-//            viewDokter("",kd_dokter);
+            viewDokter("",kd_dokter);
         }
         if(txt_cariDokter.equals("")){
             txt_cariDokter.setText("Cari dokter");
+            cekToken();
         }
-        cekToken();
 
         //CEK SESSION LOGIN
 //        txt_login       = findViewById(R.id.txt_login);
@@ -281,7 +281,7 @@ public class RegistPoli extends AppCompatActivity {
                         ambilToken();
                     } else {
 //                        GetSpnPoli(kd_klinik);
-                        viewDokter("",kd_dokter);
+                        viewDokter("","");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -354,7 +354,7 @@ public class RegistPoli extends AppCompatActivity {
                         //storing the user in shared preferences
                         AppController.getInstance(getApplicationContext()).getToken(token);
 //                        GetSpnPoli(kd_klinik);
-                        viewDokter("",kd_dokter);
+                        viewDokter("","");
 
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
@@ -407,14 +407,14 @@ public class RegistPoli extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-//                progressBar = findViewById(R.id.progressBar);
-//                progressBar.setVisibility(View.VISIBLE);
+                progressBar = findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-//                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
 
                 try {//converting response to json object
                     JSONObject obj = new JSONObject(s);

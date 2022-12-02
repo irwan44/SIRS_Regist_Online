@@ -29,7 +29,7 @@ public class MRpasienActivity extends AppCompatActivity {
 
     String val_token, no_ktp;
     RecyclerView MRpasien_Recyleview;
-    private ArrayList<MRpasien> listMRpasien;
+    private ArrayList<MRpasien> listMRpasien = new ArrayList<>();
     private MRpasienAdapter MRpasienadapter;
 
     public String APIurl = RequestHandler.APIdev;
@@ -69,18 +69,21 @@ public class MRpasienActivity extends AppCompatActivity {
     }
     void addData() {
         listMRpasien = new ArrayList<>();
-        listMRpasien.add(new MRpasien("dr. Pongky Andi Saputra", "Poliklinik Umum", "12-11-2022 10:20:20",
-                "baik", "135/80  mmHg", "36 °/Celcius", "170 cm", "Compos Menthis", "80  x/menit ",
-                "60 x/menit ", "55 kg", "PASANG INFUS + OBSERVASI ONE DAY \n INJEKSI OBAT TERTENTU", "Pure hypercholesterolaemia",
-                "l1"));
-        listMRpasien.add(new MRpasien("dr. Pongky Andi Saputra", "Poliklinik Umum", "12-11-2022 10:20:20",
-                "baik", "135/80  mmHg", "36 °/Celcius", "170 cm", "Compos Menthis", "80  x/menit ",
-                "60 x/menit ", "55 kg", "PASANG INFUS + OBSERVASI ONE DAY \n INJEKSI OBAT TERTENTU", "Pure hypercholesterolaemia",
-                "l1"));
-        listMRpasien.add(new MRpasien("dr. Pongky Andi Saputra", "Poliklinik Umum", "12-11-2022 10:20:20",
-                "baik", "135/80  mmHg", "36 °/Celcius", "170 cm", "Compos Menthis", "80  x/menit ",
-                "60 x/menit ", "55 kg", "PASANG INFUS + OBSERVASI ONE DAY \n INJEKSI OBAT TERTENTU", "Pure hypercholesterolaemia",
-                "l1"));
+
+        listMRpasien.add(new MRpasien("dr. Bagaskara Arif", "Poliklinik Umum", "2022-10-03 08:10:51",
+                "baik", "128/70  mmHg", "37 °/Celcius", "158 cm", "Compos Menthis", "60  x/menit ",
+                "60 x/menit ", "58 kg", "1. Konsultasi Dokter Umum \n2. Pemberian Obat IM,SC/Kali Dulcolax 10 mg",
+                "Cholera", "l1"));
+
+        listMRpasien.add(new MRpasien("dr. Fanny Santosa, Sp.PD", "Poliklinik Penyakit Dalam", "2022-11-30 10:24:18",
+                "baik", "120/80  mmHg", "37 °/Celcius", "165 cm", "Compos Menthis", "40  x/menit ",
+                "56 x/menit ", "55 kg", "1. HSG", "Varicella [chickenpox]", "l2"));
+
+        listMRpasien.add(new MRpasien("dr. Fanny Santosa, Sp.PD", "Poliklinik Penyakit Dalam", "2021-10-18 10:03:36",
+                "Sedang", "90/60  mmHg", "38 °/Celcius", "165 cm", "Sopor", "15  x/menit ",
+                "10 x/menit ", "50 kg", "1. Konsultasi Dokter Umum \n2. Injeksi Obat Tertentu", "Cholera due to Vibrio cholerae 01,biovar cholerae",
+                "l3"));
+
     }
 //    public void viewMR() {
 //        //first getting the values

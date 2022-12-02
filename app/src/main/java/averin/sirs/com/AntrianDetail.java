@@ -25,7 +25,7 @@ public class AntrianDetail extends AppCompatActivity{
     String val_token, no_ktp, flag_px, regId, no_antri, nm_dokter, tgl_antri, jam_awal, jam_akhir, status_antri,
             nm_klinik, nm_bag, tglKonvert, jam_konvert, stat_px;
     TextView txt_nmKlinik, txt_jnsPoli, txt_nmDokter, txt_noAntri, txt_tglPeriksa, txt_jamPeriksa, txt_jnsPasien,
-            txt_wktPeriksa, lb_antrian, txt_info_antrian;
+            txt_wktPeriksa, lb_antrian, txt_info_antrian, txt_stat_antri;
     ImageView imgKlinik;
     Button btn_scan;
     CardView cd_scan;
@@ -65,6 +65,7 @@ public class AntrianDetail extends AppCompatActivity{
         txt_wktPeriksa = findViewById(R.id.wktPeriksa);
         txt_info_antrian = findViewById(R.id.txt_info_antrian);
         lb_antrian =  findViewById(R.id.lb_antrian);
+        txt_stat_antri = findViewById(R.id.txt_stat_hadir);
         btn_scan = findViewById(R.id.btn_scan);
         cd_scan = findViewById(R.id.cd_btnscan);
 
@@ -83,15 +84,22 @@ public class AntrianDetail extends AppCompatActivity{
             stat_px       = extras.get("stat_px").toString();
         }
 
-        if(stat_px.equals("lama")){
-            btn_scan.setVisibility(View.VISIBLE);
-            cd_scan.setVisibility(View.VISIBLE);
-            txt_info_antrian.setText("Datang 30 menit sebelum pemeriksaan dan \n " +
-                    "konfirmasi kehadiran baik melalui FO atau Scan QR pada RS");
-        }else{
+        if(status_antri.equals("1")){
             btn_scan.setVisibility(View.GONE);
-            cd_scan.setVisibility(View.GONE);
-            txt_info_antrian.setText("Silahkan datang ke FO dan membawa KTP anda \n untuk melakukan registrasi ulang");
+            txt_stat_antri.setVisibility(View.VISIBLE);
+            txt_info_antrian.setText("Silahkan menuju FO untuk menanyakan status antrian Poli anda");
+        }else {
+//            btn_scan.setVisibility(View.VISIBLE);
+//            txt_stat_antri.setVisibility(View.GONE);
+            if (stat_px.equals("lama") || stat_px.equals("null")) {
+                btn_scan.setVisibility(View.VISIBLE);
+                cd_scan.setVisibility(View.VISIBLE);
+                txt_info_antrian.setText("Datang 30 menit sebelum pemeriksaan dan \n konfirmasi kehadiran baik melalui FO atau \n Scan QR pada RS");
+            } else {
+                btn_scan.setVisibility(View.GONE);
+                cd_scan.setVisibility(View.GONE);
+                txt_info_antrian.setText("Silahkan datang ke FO dan membawa KTP anda \n untuk melakukan registrasi ulang");
+            }
         }
 
         Date tgl = null;
@@ -127,12 +135,15 @@ public class AntrianDetail extends AppCompatActivity{
     public void ScanKlinik(View v){
         Intent i = new Intent(AntrianDetail.this, ScanQRCode.class);
         i.putExtra("regId", regId);
+        i.putExtra("noAntrian", no_antri);
+        i.putExtra("nma_dokter", nm_dokter);
         i.putExtra("tgl_antri", tgl_antri);
         i.putExtra("jam_awal", jam_awal);
         i.putExtra("jam_akhir", jam_akhir);
         i.putExtra("status_antri", status_antri);
         i.putExtra("nm_klinik", nm_klinik);
         i.putExtra("nm_bag", nm_bag);
+        i.putExtra("stat_px", stat_px);
         startActivity(i);
     }
 }

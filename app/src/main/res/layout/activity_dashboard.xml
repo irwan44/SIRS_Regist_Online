@@ -55,7 +55,7 @@
                             android:focusable="true"
                             android:onClick="profilePasien2"
                             android:padding="10dp"
-                            android:src="@drawable/profile"
+                            android:src="@drawable/profile22"
                             app:civ_border_color="@color/imageBorderColor"
                             app:civ_border_width="2dp" />
                     </LinearLayout>
@@ -693,11 +693,11 @@
                                         android:clickable="true"
                                         android:focusable="true"
                                         android:foreground="?attr/selectableItemBackground"
-                                        android:paddingStart="20sp"
+                                        android:paddingStart="13sp"
                                         android:paddingTop="5sp"
-                                        android:paddingEnd="20sp"
-                                        android:paddingBottom="30sp"
-                                        android:src="@drawable/infodmedis"
+                                        android:paddingEnd="13sp"
+                                        android:paddingBottom="28sp"
+                                        android:src="@drawable/infosirs"
                                         android:tooltipText="Info SIR-s"
                                         app:cardCornerRadius="10dp" />
 

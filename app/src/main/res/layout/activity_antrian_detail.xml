@@ -238,7 +238,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="348dp"
-        android:layout_height="101dp"
+        android:layout_height="120dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -270,9 +270,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textAlignment="center"
                 android:fontFamily="@font/bariol_bold"
                 android:text=""
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
 
@@ -307,6 +308,16 @@
                 android:paddingEnd="50sp"
                 android:text="Scan RS"
                 android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/txt_stat_hadir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sudah Hadir"
+                android:layout_gravity="center"
+                android:textSize="22sp"
+                android:drawablePadding="7dp"
+                android:fontFamily="@font/bariol_bold"
+                android:drawableLeft="@drawable/ic_info_rectangle"/>
         </androidx.cardview.widget.CardView>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
