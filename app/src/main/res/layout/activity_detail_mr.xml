@@ -827,6 +827,7 @@
                                 android:padding="5dp">
 
                                 <TextView
+                                    android:id="@+id/txt_no"
                                     android:layout_width="40dp"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/bariol_bold"
