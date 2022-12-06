@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
-
+<!--=================== End Code =======================-->
     <TextView
         android:id="@+id/txt_idReg"
         android:visibility="gone"
@@ -81,13 +81,19 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
     <TextView
-        android:id="@+id/txt_noktp"
+        android:id="@+id/txt_kodeklinik"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
     <TextView
-        android:id="@+id/txt_kdklinik"
+        android:id="@+id/txt_tgl_daftar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_wkt_daftar"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,7 +139,7 @@
                 android:padding="40dp">
 
                 <TextView
-                    android:id="@+id/namaDokter"
+                    android:id="@+id/txt_namaDokter"
                     android:layout_width="210dp"
                     android:layout_height="42dp"
                     android:fontFamily="@font/bariol_bold"
@@ -142,7 +148,7 @@
                     tools:ignore="MissingConstraints"/>
 
                 <TextView
-                    android:id="@+id/jenisPoli"
+                    android:id="@+id/txt_namabagian"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:fontFamily="@font/bariol_bold"
@@ -165,7 +171,7 @@
                     android:background="@drawable/reflex_3"/>
 
                 <TextView
-                    android:id="@+id/tglPeriksa"
+                    android:id="@+id/txt_tglPeriksa"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/bariol_bold"

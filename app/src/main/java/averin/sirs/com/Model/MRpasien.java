@@ -1,73 +1,31 @@
 package averin.sirs.com.Model;
 
 public class MRpasien {
-    private String namaDokter, jenisPoli, tglPeriksa, keadaan_umum, tekanan_darah, suhu, tinggi_badan,
-    kesadaran, nadi, pernafasan, bb, tindakan, nama_icd10, kd_resep;
+    private String idReg, kd_klinik, nama_klinik, nama_dokter, nama_bagian, tgl_periksa, jam_periksa;
 
-    public MRpasien(String namaDokter, String jenisPoli, String tglPeriksa, String keadaan_umum, String tekanan_darah,
-                    String suhu, String tinggi_badan, String kesadaran, String nadi, String pernafasan, String bb, String tindakan, String nama_icd10,
-                    String kd_resep) {
-        this.namaDokter = namaDokter;
-        this.jenisPoli = jenisPoli;
-//        this.namaKlinik = namaKlinik;
-        this.tglPeriksa = tglPeriksa;
-        this.keadaan_umum = keadaan_umum;
-        this.tekanan_darah = tekanan_darah;
-        this.suhu = suhu;
-        this.tinggi_badan = tinggi_badan;
-        this.kesadaran = kesadaran;
-        this.nadi = nadi;
-        this.pernafasan = pernafasan;
-        this.bb = bb;
-        this.tindakan = tindakan;
-        this.nama_icd10 = nama_icd10;
-        this.kd_resep = kd_resep;
+    public MRpasien(String idReg, String kd_klinik, String nama_klinik, String nama_dokter, String nama_bagian, String tgl_periksa, String jam_periksa) {
+        this.idReg = idReg;
+        this.kd_klinik = kd_klinik;
+        this.nama_klinik = nama_klinik;
+        this.nama_dokter = nama_dokter;
+        this.nama_bagian = nama_bagian;
+        this.tgl_periksa = tgl_periksa;
+        this.jam_periksa = jam_periksa;
     }
-
+    public String getId_regist() { return  idReg;}
+    public String getKode_klinik() { return kd_klinik;}
+    public String getNama_klinik() { return nama_klinik;}
     public String getNama_dokter() {
-        return namaDokter;
+        return nama_dokter;
     }
-    public String getJenis_poli() {
-        return jenisPoli;
+    public String getNama_bagian() {
+        return nama_bagian;
     }
     public String getTgl_periksa() {
-        return tglPeriksa;
+        return tgl_periksa;
     }
-//    public String getNama_klinik() {
-//        return namaKlinik;
-//    }
-    public String getKeadaan_umum() {
-        return keadaan_umum;
-    }
-    public String getTekanan_darah() {
-        return tekanan_darah;
-    }
-    public String getSuhu() {
-        return suhu;
-    }
-    public String getTinggi_badan() {
-        return tinggi_badan;
-    }
-    public String getKesadaran() {
-        return kesadaran;
-    }
-    public String getNadi() {
-        return nadi;
-    }
-    public String getPernafasan() {
-        return pernafasan;
-    }
-    public String getBb() {
-        return bb;
-    }
-    public String getTindakan() {
-        return tindakan;
-    }
-    public String getNama_icd10() {
-        return nama_icd10;
-    }
-    public String getKd_resep() {
-        return kd_resep;
+    public String getJam_periksa() {
+        return jam_periksa;
     }
 
 

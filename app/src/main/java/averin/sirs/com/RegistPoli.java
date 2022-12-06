@@ -111,14 +111,6 @@ public class RegistPoli extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-
-                        // Your code goes here
-                        // In this code, we are just
-                        // changing the text in the textbox
-
-                        // This line is important as it explicitly
-                        // refreshes only once
-                        // If "true" it implicitly refreshes forever
                         swipeRefreshLayout.setRefreshing(false);
                         swipeRefreshLayout.setColorSchemeResources(R.color.birufigma, R.color.birufigma, R.color.birufigma);
                     }

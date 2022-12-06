@@ -8,7 +8,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import averin.sirs.com.AntrianDetail;
 import averin.sirs.com.DetailMR;
@@ -18,6 +23,10 @@ import averin.sirs.com.R;
 
 public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasienViewHolder> {
     private ArrayList<MRpasien> list;
+    DateFormat outputFormat = new SimpleDateFormat("EEEE, dd MMM yyyy", Locale.getDefault());
+    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    DateFormat outputwaktu = new SimpleDateFormat("HH:mm", Locale.getDefault());
+    DateFormat inputwaktu = new SimpleDateFormat("HH:mm:ss");
     public MRpasienAdapter(ArrayList<MRpasien> list) {
         this.list = list;
     }
@@ -36,90 +45,58 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
 
     @Override
     public void onBindViewHolder(MRpasienViewHolder holder, int position) {
-//        holder.txt_idreg.setText((list.get(position).getIdreg()));
-//        holder.txt_noktp.setText((list.get(position).getnoKTP()));
-//        holder.txt_kdKlinik.setText((list.get(position).getKode_Klinik()));
-        holder.txt_tglPeriksa.setText(list.get(position).getTgl_periksa());
-        holder.txt_tglPeriksa.setText(list.get(position).getTgl_periksa());
-        holder.txt_namaDokter.setText(list.get(position).getNama_dokter());
-        holder.txt_JenisPoli.setText(list.get(position).getJenis_poli());
+        Date tgl = null;
+        Date wkt = null;
+        String tgl_daft, wkt_daft;
+
+        holder.txt_idreg.setText((list.get(position).getId_regist()));
+        holder.txt_kodeklinik.setText(list.get(position).getKode_klinik());
+        holder.txt_tgldaftar.setText(list.get(position).getTgl_periksa());
+        holder.txt_wktdaftar.setText(list.get(position).getJam_periksa());
+        tgl_daft = holder.txt_tgldaftar.getText().toString();
+        wkt_daft = holder.txt_wktdaftar.getText().toString();
+
+        try {
+            tgl = inputFormat.parse(tgl_daft);
+            wkt = inputwaktu.parse(wkt_daft);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String tglKonvert = outputFormat.format(tgl);
+        String jam_konvert = outputwaktu.format(wkt);
+
+        holder.tv_namadokter.setText(list.get(position).getNama_dokter());
+        holder.tv_namabagian.setText(list.get(position).getNama_bagian());
+        holder.tv_tglperiksa.setText(tglKonvert+" "+jam_konvert);
 //        holder.txt_namaKlinik.setText(list.get(position).getNama_klinik());
-        holder.txt_tglPeriksa.setText(list.get(position).getTgl_periksa());
-        holder.keadaan_umum.setText(list.get(position).getKeadaan_umum());
-        holder.tekanan_darah.setText(list.get(position).getTekanan_darah());
-        holder.suhu.setText(list.get(position).getSuhu());
-        holder.tinggi_badan.setText(list.get(position).getTinggi_badan());
-        holder.kesadaran.setText(list.get(position).getKesadaran());
-        holder.nadi.setText(list.get(position).getNadi());
-        holder.pernafasan.setText(list.get(position).getPernafasan());
-        holder.bb.setText(list.get(position).getBb());
-        holder.tindakan.setText(list.get(position).getTindakan());
-        holder.nama_icd10.setText(list.get(position).getNama_icd10());
-        holder.kd_resep.setText(list.get(position).getKd_resep());
 
     }
 
     public class MRpasienViewHolder extends RecyclerView.ViewHolder {
-        private TextView txt_idreg, txt_noktp, txt_kdKlinik, txt_namaDokter,
-                txt_JenisPoli, txt_namaKlinik, txt_tglPeriksa, keadaan_umum, tekanan_darah, suhu, tinggi_badan,
-                kesadaran, nadi, pernafasan, bb, tindakan, nama_icd10, kd_resep;
+        private TextView txt_tgldaftar, txt_kodeklinik, txt_wktdaftar, txt_idreg,
+                tv_namaklinik,tv_namadokter, tv_namabagian, tv_tglperiksa;
 
         public MRpasienViewHolder(View itemView) {
             super(itemView);
+            txt_kodeklinik = (TextView) itemView.findViewById(R.id.txt_kodeklinik);
             txt_idreg = (TextView) itemView.findViewById(R.id.txt_idReg);
-            txt_noktp = (TextView) itemView.findViewById(R.id.txt_noktp);
-            txt_kdKlinik = (TextView) itemView.findViewById(R.id.txt_kdklinik);
-            txt_namaDokter = (TextView) itemView.findViewById(R.id.namaDokter);
-            txt_JenisPoli = (TextView) itemView.findViewById(R.id.jenisPoli);
-            txt_tglPeriksa = (TextView) itemView.findViewById(R.id.tglPeriksa);
-            txt_namaKlinik = (TextView) itemView.findViewById(R.id.namaKlinik);
+            txt_tgldaftar = (TextView) itemView.findViewById(R.id.txt_tgl_daftar);
+            txt_wktdaftar = (TextView) itemView.findViewById(R.id.txt_wkt_daftar);
 
-            keadaan_umum = (TextView) itemView.findViewById(R.id.txt_keadaanumum);
-            tekanan_darah = (TextView) itemView.findViewById(R.id.txt_TekananDarah);
-            suhu = (TextView) itemView.findViewById(R.id.txt_suhu);
-            tinggi_badan = (TextView) itemView.findViewById(R.id.txt_TinggiBadan);
-            kesadaran = (TextView) itemView.findViewById(R.id.txt_Kesadaran);
-            nadi = (TextView) itemView.findViewById(R.id.txt_Nadi);
-            pernafasan = (TextView) itemView.findViewById(R.id.txt_Pernafasan);
-            bb = (TextView) itemView.findViewById(R.id.txt_bb);
-            tindakan = (TextView) itemView.findViewById(R.id.txt_tindakan);
-            nama_icd10 = (TextView) itemView.findViewById(R.id.txt_icd10);
-            kd_resep = (TextView) itemView.findViewById(R.id.txt_kdresep);
+            tv_namadokter = (TextView) itemView.findViewById(R.id.txt_namaDokter);
+            tv_namabagian = (TextView) itemView.findViewById(R.id.txt_namabagian);
+            tv_tglperiksa = (TextView) itemView.findViewById(R.id.txt_tglPeriksa);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(itemView.getContext(), DetailMR.class);
-                    String namaDokter = txt_namaDokter.getText().toString();
-                    String tglPeriksa = txt_tglPeriksa.getText().toString();
-                    String nmPoli = txt_JenisPoli.getText().toString();
-
-                    String dtl_keadaanumum = keadaan_umum.getText().toString();
-                    String dtl_tekanan_darah = tekanan_darah.getText().toString();
-                    String dtl_suhu = suhu.getText().toString();
-                    String dtl_tinggi = tinggi_badan.getText().toString();
-                    String dtl_kesadaran = kesadaran.getText().toString();
-                    String dtl_nadi = nadi.getText().toString();
-                    String dtl_pernafasan = pernafasan.getText().toString();
-                    String dtl_bb = bb.getText().toString();
-                    String dtl_tindakan = tindakan.getText().toString();
-                    String dtl_nama_icd10 = nama_icd10.getText().toString();
-                    String dtl_kdresep = kd_resep.getText().toString();
+                    String kde_klinik= txt_kodeklinik.getText().toString();
+                    String idreg = txt_idreg.getText().toString();
 //                    Put to parsing
-                    i.putExtra("nama_dokter", namaDokter);
-                    i.putExtra("tgl_periksa", tglPeriksa);
-                    i.putExtra("nama_poli", nmPoli);
-                    i.putExtra("keadaan_umum", dtl_keadaanumum);
-                    i.putExtra("tekanan_darah", dtl_tekanan_darah);
-                    i.putExtra("suhu", dtl_suhu);
-                    i.putExtra("tinggi_badan", dtl_tinggi);
-                    i.putExtra("kesadaran", dtl_kesadaran);
-                    i.putExtra("nadi", dtl_nadi);
-                    i.putExtra("pernafasan", dtl_pernafasan);
-                    i.putExtra("bb", dtl_bb);
-                    i.putExtra("tindakan", dtl_tindakan);
-                    i.putExtra("nama_icd10", dtl_nama_icd10);
-                    i.putExtra("kd_resep", dtl_kdresep);
+                    i.putExtra("idRegKlinik", idreg);
+                    i.putExtra("kd_klinik", kde_klinik);
                     itemView.getContext().startActivity(i);
                 }
             });

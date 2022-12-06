@@ -24,6 +24,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import averin.sirs.com.Adapter.RequestHandler;
+import averin.sirs.com.Model.Login;
+import averin.sirs.com.Model.Token;
+import averin.sirs.com.Ui.AppController;
 
 public class DetailMR extends AppCompatActivity {
 
@@ -42,7 +45,7 @@ public class DetailMR extends AppCompatActivity {
     View view_null_data;
 
     String APIurl = RequestHandler.APIdev;
-    public String urlDetailMR = APIurl+"/api/vi/get-detail-riwayat.php";
+    public String urlDetailMR = APIurl+"/api/v1/get-detail-riwayat.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +68,28 @@ public class DetailMR extends AppCompatActivity {
             }
         });
 
+        //GET DATA FROM CONTROLLER
+        Login login = AppController.getInstance(this).getPasien();
+        Token token = AppController.getInstance(this).isiToken();
+        val_token = String.valueOf(token.gettoken());
+        no_ktp    = String.valueOf(login.getKTP_pasien());
+
+
+        Bundle kiriman = getIntent().getExtras();
+        if(kiriman != null){
+            kodeklinik = kiriman.get("kd_klinik").toString();
+            idRegist = kiriman.get("idRegKlinik").toString();
+            getDetailMR();
+        }
+
+//        Card Pasien MR Info
         txt_namapasien = findViewById(R.id.txt_namapasien);
         txt_nomr = findViewById(R.id.txt_nomr);
         txt_namadokter = findViewById(R.id.txt_namadokter);
         txt_namapoli = findViewById(R.id.txt_namaPoli);
         txt_tglperiksa = findViewById(R.id.txt_tglperiksa);
+
+//        Vital Sign
         txt_KeadaanUmum = findViewById(R.id.txt_keadaanumum);
         txt_TekananDarah = findViewById(R.id.txt_TekananDarah);
         txt_suhu = findViewById(R.id.txt_Suhu);
@@ -78,143 +98,41 @@ public class DetailMR extends AppCompatActivity {
         txt_kesadaran = findViewById(R.id.txt_Kesadaran);
         txt_bb = findViewById(R.id.txt_Berat);
         txt_pernafasan = findViewById(R.id.txt_Pernafasan);
+
+//        Tindakan & ICD10
         edt_tindakan = findViewById(R.id.edt_tindakan);
         edt_icd10 =  findViewById(R.id.edt_icd10);
 
-        txt_nmobat1 = findViewById(R.id.nmobat1);
-        txt_nmobat2 = findViewById(R.id.nmobat2);
-        txt_nmobat3 = findViewById(R.id.nmobat3);
-
-        txt_jmlobat1 = findViewById(R.id.jmlobat1);
-        txt_jmlobat2 = findViewById(R.id.jmlobat2);
-        txt_jmlobat3 = findViewById(R.id.jmlobat3);
-
-        txt_aturan1 = findViewById(R.id.aturan1);
-        txt_aturan2 = findViewById(R.id.aturan2);
-        txt_aturan3 = findViewById(R.id.aturan3);
-
-        txt_noteobat1 = findViewById(R.id.noteobat1);
-        txt_noteobat2 = findViewById(R.id.noteobat2);
-        txt_noteobat3 = findViewById(R.id.noteobat3);
-
-        txt_ketobat1 = findViewById(R.id.ketobat1);
-        txt_ketobat2 = findViewById(R.id.ketobat2);
-        txt_ketobat3 = findViewById(R.id.ketobat3);
+//        Resep Obat
+        txt_no = findViewById(R.id.txt_no);
+        txt_nmobat = findViewById(R.id.nmobat1);
+        txt_jmlobat = findViewById(R.id.jmlobat1);
+        txt_aturan = findViewById(R.id.aturan1);
+        txt_noteobat = findViewById(R.id.noteobat1);
+        txt_ketobat = findViewById(R.id.ketobat1);
 
         //Dialog Empty Data
         ViewGroup vg = findViewById(android.R.id.content);
         dial_builder = new AlertDialog.Builder(DetailMR.this,R.style.CustomAlertDialog);
         inflater = getLayoutInflater();
-        txt_info_null = view_null_data.findViewById(R.id.txt_info_failed);
-        view_null_data = inflater.inflate(R.layout.dialog_failed_regist, vg, false);
-        Button btn_ok = view_null_data.findViewById(R.id.btn_oke_failed);
-        dial_builder.setView(view_null_data);
-        dial_info_null = dial_builder.create();
-        dial_info_null.setCancelable(false);
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dial_info_null.dismiss();
-                Intent i = new Intent(DetailMR.this, MRpasienActivity.class);
-                startActivity(i);
-            }
-        });
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            namaDokter          = extras.get("nama_dokter").toString();
-            jenisPoli           = extras.get("nama_poli").toString();
-            tglPeriksa          = extras.get("tgl_periksa").toString();
-            keadaan_umum        = extras.get("keadaan_umum").toString();
-            tekanan_darah       = extras.get("tekanan_darah").toString();
-            suhu                = extras.get("suhu").toString();
-            tinggi_badan        = extras.get("tinggi_badan").toString();
-            kesadaran           = extras.get("kesadaran").toString();
-            nadi                = extras.get("nadi").toString();
-            pernafasan          = extras.get("pernafasan").toString();
-            bb                  = extras.get("bb").toString();
-            tindakan            = extras.get("tindakan").toString();
-            nama_icd10          = extras.get("nama_icd10").toString();
-            kd_resep            = extras.get("kd_resep").toString();
-        }
-
-        if(kd_resep.equals("l1")){
-
-            txt_nmobat1.setText("acetyl sistein / n asetil sistein tab");
-            txt_jmlobat1.setText("12");
-            txt_aturan1.setText("3 x 1");
-            txt_noteobat1.setText("dihabiskan");
-            txt_ketobat1.setText("Sesudah Makan");
-
-            txt_nmobat2.setText("Acid Folic PROFOLAT");
-            txt_jmlobat2.setText("23");
-            txt_aturan2.setText("3 x 1");
-            txt_noteobat2.setText("sampai sembuh");
-            txt_ketobat2.setText("Sesudah Makan");
-
-            txt_nmobat3.setText("Adalat oros 20mg");
-            txt_jmlobat3.setText("25");
-            txt_aturan3.setText("3 x 1");
-            txt_noteobat3.setText("sampai kondisi mulai stabil");
-            txt_ketobat3.setText("Sebelum Makan");
-        }else if(kd_resep.equals("l2")){
-
-            txt_nmobat1.setText("AMIODARON INJ 50 MG/ML IV");
-            txt_jmlobat1.setText("16");
-            txt_aturan1.setText("2 x 1");
-            txt_noteobat1.setText("dihabiskan");
-            txt_ketobat1.setText("Sesudah Makan");
-
-            txt_nmobat2.setText("Acid Folic PROFOLAT");
-            txt_jmlobat2.setText("10");
-            txt_aturan2.setText("3 x 1");
-            txt_noteobat2.setText("dihabiskan");
-            txt_ketobat2.setText("Sesudah Makan");
-
-            txt_nmobat3.setText("Amoxicillin 250ml");
-            txt_jmlobat3.setText("12");
-            txt_aturan3.setText("2 x 1");
-            txt_noteobat3.setText("dhabiskan");
-            txt_ketobat3.setText("\tSesudah Makan");
-        }else if(kd_resep.equals("l3")) {
-
-            txt_nmobat1.setText("Acid Folic PROFOLAT");
-            txt_jmlobat1.setText("5");
-            txt_aturan1.setText("3 x 1");
-            txt_noteobat1.setText("dihabiskan");
-            txt_ketobat1.setText("Sesudah Makan");
-
-            txt_nmobat2.setText("Adalat oros 20mg");
-            txt_jmlobat2.setText("24");
-            txt_aturan2.setText("3 x 1");
-            txt_noteobat2.setText("sampai jantung tidak berdetar");
-            txt_ketobat2.setText("Sesudah Makan");
-
-            txt_nmobat3.setText("Dulcolax 5 mg");
-            txt_jmlobat3.setText("1");
-            txt_aturan3.setText("2 x 1");
-            txt_noteobat3.setText("bila perlu");
-            txt_ketobat3.setText("Sesudah Makan\n");
-        }
-
-        txt_namadokter.setText(namaDokter);
-        txt_namapoli.setText(jenisPoli);
-        txt_tglperiksa.setText(tglPeriksa);
-        txt_KeadaanUmum.setText(keadaan_umum);
-        txt_TekananDarah.setText(tekanan_darah);
-        txt_suhu.setText(suhu);
-        txt_tinggi.setText(tinggi_badan);
-        txt_nadi.setText(nadi);
-        txt_kesadaran.setText(kesadaran);
-        txt_pernafasan.setText(pernafasan);
-        txt_bb.setText(bb);
-        edt_tindakan.setText(tindakan);
-        edt_icd10.setText(nama_icd10);
-
+//        txt_info_null = view_null_data.findViewById(R.id.txt_info_failed);
+//        view_null_data = inflater.inflate(R.layout.dialog_failed_regist, vg, false);
+//        Button btn_ok = view_null_data.findViewById(R.id.btn_oke_failed);
+//        dial_builder.setView(view_null_data);
+//        dial_info_null = dial_builder.create();
+//        dial_info_null.setCancelable(false);
+//        btn_ok.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dial_info_null.dismiss();
+//                Intent i = new Intent(DetailMR.this, MRpasienActivity.class);
+//                startActivity(i);
+//            }
+//        });
     }
     private void getDetailMR() {
         final String iniToken = val_token;
-        final String kd_klinik = kodeklinik;
+        final String kdklinik = kodeklinik;
         final String Regid = idRegist;
 
         class ambilDataMR extends AsyncTask<Void, Void, String> {
@@ -228,7 +146,7 @@ public class DetailMR extends AppCompatActivity {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("kode_klinik", kodeklinik);
+                params.put("kode_klinik", kdklinik);
                 params.put("idReg", Regid);
 
                 //returing the response
@@ -252,8 +170,8 @@ public class DetailMR extends AppCompatActivity {
                     JSONObject jr = new JSONObject(s);
                     //if no error in response
                     if (jr.getString("code").equals("500")) {
-                        txt_info_null.setText(jr.getString("msg"));
-                        dial_info_null.show();
+//                        txt_info_null.setText(jr.getString("msg"));
+//                        dial_info_null.show();
                     } else if(jr.getString("code").equals("200")){
                         JSONArray res_vital_sign = jr.getJSONArray("vital_sign");
                         JSONArray res_tindakan = jr.getJSONArray("tindakan");
@@ -301,13 +219,19 @@ public class DetailMR extends AppCompatActivity {
 //                        Resep Obat
                         for(int ro = 0; ro < res_resep.length(); ro++) {
                             JSONObject obj_ro = res_resep.getJSONObject(ro);
-//                            no++;
+                            String nom = obj_ro.getString("no");
                             nama_obat = obj_ro.getString("nama_brg");
                             note_obat = obj_ro.getString("note");
                             jml_obat = obj_ro.getString("jumlah_pesan");
                             aturan_pakai = obj_ro.getString("nama_dosis");
                             ket_obat = obj_ro.getString("ket");
-                            txt_nmobat.setText(no++ + ". "+ nama_icd10);
+
+                            txt_no.setText(nom);
+                            txt_nmobat.setText(nama_obat);
+                            txt_noteobat.setText(note_obat);
+                            txt_jmlobat.setText(jml_obat);
+                            txt_aturan.setText(aturan_pakai);
+                            txt_ketobat.setText(ket_obat);
                         }
                     }
                 } catch (JSONException e) {

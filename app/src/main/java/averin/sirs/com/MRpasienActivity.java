@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,11 +28,14 @@ import averin.sirs.com.Ui.AppController;
 
 public class MRpasienActivity extends AppCompatActivity {
 
-    String val_token, no_ktp;
+    String val_token, no_ktp, iniktp, nama_px, umur_px, gender_px, goldarah_px,
+            kode_klinik, nama_klinik, idReg, tgl_daftar, jam_awal, nama_bagian, nama_dokter, wkt_periksa;
+    TextView tv_namapasien, tv_noktp, tv_goldarah, tv_gender, tv_umur;
+    //    List MR
     RecyclerView MRpasien_Recyleview;
     private ArrayList<MRpasien> listMRpasien = new ArrayList<>();
     private MRpasienAdapter MRpasienadapter;
-
+//    URL API
     public String APIurl = RequestHandler.APIdev;
     public String urlListMR = APIurl+"/api/v1/get-list-mr.php";
 
@@ -51,6 +55,13 @@ public class MRpasienActivity extends AppCompatActivity {
         val_token = String.valueOf(token.gettoken());
         no_ktp    = String.valueOf(login.getKTP_pasien());
 
+//        Declarate Object
+        tv_namapasien  = findViewById(R.id.txt_namaPasien);
+        tv_noktp       = findViewById(R.id.txt_ktp);
+        tv_umur        = findViewById(R.id.txt_umurPasien);
+        tv_goldarah    = findViewById(R.id.txt_golDarah);
+        tv_gender      = findViewById(R.id.txt_jekelPasien);
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         LabToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -60,96 +71,121 @@ public class MRpasienActivity extends AppCompatActivity {
             }
         });
 
-        addData();
+//        addData();
+        viewMR();
         MRpasien_Recyleview = (RecyclerView) findViewById(R.id.listMR_viewCycle);
         MRpasienadapter = new MRpasienAdapter(listMRpasien);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MRpasienActivity.this);
         MRpasien_Recyleview.setLayoutManager(layoutManager);
         MRpasien_Recyleview.setAdapter(MRpasienadapter);
     }
-    void addData() {
-        listMRpasien = new ArrayList<>();
-
-        listMRpasien.add(new MRpasien("dr. Bagaskara Arif", "Poliklinik Umum", "2022-10-03 08:10:51",
-                "baik", "128/70  mmHg", "37 °/Celcius", "158 cm", "Compos Menthis", "60  x/menit ",
-                "60 x/menit ", "58 kg", "1. Konsultasi Dokter Umum \n2. Pemberian Obat IM,SC/Kali Dulcolax 10 mg",
-                "Cholera", "l1"));
-
-        listMRpasien.add(new MRpasien("dr. Fanny Santosa, Sp.PD", "Poliklinik Penyakit Dalam", "2022-11-30 10:24:18",
-                "baik", "120/80  mmHg", "37 °/Celcius", "165 cm", "Compos Menthis", "40  x/menit ",
-                "56 x/menit ", "55 kg", "1. HSG", "Varicella [chickenpox]", "l2"));
-
-        listMRpasien.add(new MRpasien("dr. Fanny Santosa, Sp.PD", "Poliklinik Penyakit Dalam", "2021-10-18 10:03:36",
-                "Sedang", "90/60  mmHg", "38 °/Celcius", "165 cm", "Sopor", "15  x/menit ",
-                "10 x/menit ", "50 kg", "1. Konsultasi Dokter Umum \n2. Injeksi Obat Tertentu", "Cholera due to Vibrio cholerae 01,biovar cholerae",
-                "l3"));
-
-    }
-//    public void viewMR() {
-//        //first getting the values
-//        final String iniToken   = val_token;
-//        listMRpasien.clear();
+//    void addData() {
+//        listMRpasien = new ArrayList<>();
 //
-//        //if everything is fine
-//        class masukPakEko extends AsyncTask<Void, Void, String> {
+//        listMRpasien.add(new MRpasien("dr. Bagaskara Arif", "Poliklinik Umum", "2022-10-03 08:10:51",
+//                "baik", "128/70  mmHg", "37 °/Celcius", "158 cm", "Compos Menthis", "60  x/menit ",
+//                "60 x/menit ", "58 kg", "1. Konsultasi Dokter Umum \n2. Pemberian Obat IM,SC/Kali Dulcolax 10 mg",
+//                "Cholera", "l1"));
 //
-//            private ProgressBar progressBar;
+//        listMRpasien.add(new MRpasien("dr. Fanny Santosa, Sp.PD", "Poliklinik Penyakit Dalam", "2022-11-30 10:24:18",
+//                "baik", "120/80  mmHg", "37 °/Celcius", "165 cm", "Compos Menthis", "40  x/menit ",
+//                "56 x/menit ", "55 kg", "1. HSG", "Varicella [chickenpox]", "l2"));
 //
-//            @Override
-//            protected String doInBackground(Void... voids) {
-//                //creating request handler object
-//                RequestHandler requestHandler = new RequestHandler();
+//        listMRpasien.add(new MRpasien("dr. Fanny Santosa, Sp.PD", "Poliklinik Penyakit Dalam", "2021-10-18 10:03:36",
+//                "Sedang", "90/60  mmHg", "38 °/Celcius", "165 cm", "Sopor", "15  x/menit ",
+//                "10 x/menit ", "50 kg", "1. Konsultasi Dokter Umum \n2. Injeksi Obat Tertentu", "Cholera due to Vibrio cholerae 01,biovar cholerae",
+//                "l3"));
 //
-//                //creating request parameters
-//                HashMap<String, String> params = new HashMap<>();
-//                params.put("idKota", idKota);
-////                params.put("User", user);
-////                params.put("Pass", pass);
-//
-//                //returing the response
-//                return requestHandler.requestData(urlListMR, "POST", "application/json; charset=utf-8", "X-Api-Token",
-//                        iniToken, "X-Px-Key", "", params);
-//            }
-//
-//            @Override
-//            protected void onPreExecute() {
-//                super.onPreExecute();
-////                progressBar = findViewById(R.id.progressBar);
-////                progressBar.setVisibility(View.VISIBLE);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String s) {
-//                super.onPostExecute(s);
-////                progressBar.setVisibility(View.GONE);
-//
-//                try {//converting response to json object
-//                    JSONObject obj = new JSONObject(s);
-//                    //if no error in response
-//                    if(obj.getString("code").equals("500")){
-//                        txt_infonull.setVisibility(View.VISIBLE);
-//                        listKlinik.setVisibility(View.GONE);
-//
-//                    }else if(obj.getString("code").equals("200")){
-//                        listKlinik.setVisibility(View.VISIBLE);
-//                        JSONArray jr = obj.getJSONArray("res");
-//                        for (int a = 0; a < jr.length(); a++) {
-//                            txt_infonull.setVisibility(View.GONE);
-//                            JSONObject jso = jr.getJSONObject(a);
-//                            np = jso.getString("nama_perusahaan");
-//                            alamat = jso.getString("alamat");
-//                            idk = jso.getString("id");
-//                            urllogo = jso.getString("logo_yankes");
-//                            ArrayKlinik.add(new Klinik(idk,np,alamat,urllogo));
-//                        }
-//                        Klinikadapter.notifyDataSetChanged();
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        masukPakEko pl = new masukPakEko();
-//        pl.execute();
 //    }
+    public void viewMR() {
+        //first getting the values
+        final String iniToken   = val_token;
+        final String ktpPX      = no_ktp;
+        listMRpasien.clear();
+
+        //if everything is fine
+        class masukPakEko extends AsyncTask<Void, Void, String> {
+
+            private ProgressBar progressBar;
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("no_ktp", ktpPX);
+
+                //returing the response
+                return requestHandler.requestData(urlListMR, "POST", "application/json; charset=utf-8", "X-Api-Token",
+                        iniToken, "X-Px-Key", "", params);
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+//                progressBar = findViewById(R.id.progressBar);
+//                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+//                progressBar.setVisibility(View.GONE);
+
+                try {//converting response to json object
+                    JSONObject obj = new JSONObject(s);
+                    //if no error in response
+                    if(obj.getString("code").equals("500")){
+//                        txt_infonull.setVisibility(View.VISIBLE);
+                        MRpasien_Recyleview.setVisibility(View.GONE);
+
+                    }else if(obj.getString("code").equals("200")){
+                        MRpasien_Recyleview.setVisibility(View.VISIBLE);
+                        JSONArray px = obj.getJSONArray("px");
+                        JSONArray mr = obj.getJSONArray("res");
+
+//                        Data Pasien
+                        for(int p = 0; p < px.length(); p++) {
+                            JSONObject jne = px.getJSONObject(p);
+                            iniktp      = jne.getString("ktp_px");
+                            nama_px     = jne.getString("nama_px");
+                            gender_px   = jne.getString("gender");
+                            goldarah_px = jne.getString("gol_darah");
+                            umur_px     = jne.getString("umur");
+
+                        }
+                        for (int a = 0; a < mr.length(); a++) {
+//                            txt_infonull.setVisibility(View.GONE);
+                            JSONObject jso = mr.getJSONObject(a);
+                            kode_klinik = jso.getString("kode_klinik");
+                            nama_klinik = jso.getString("nama_klinik");
+                            idReg = jso.getString("idReg");
+                            tgl_daftar = jso.getString("tgl_daftar");
+                            jam_awal = jso.getString("jam_awal");
+                            nama_bagian = jso.getString("nama_bagian");
+                            wkt_periksa = jso.getString("wkt_periksa");
+                            nama_dokter = jso.getString("nama_dokter");
+                            listMRpasien.add(new MRpasien(idReg,kode_klinik,nama_klinik,nama_dokter,nama_bagian,tgl_daftar,jam_awal ));
+                        }
+                        MRpasienadapter.notifyDataSetChanged();
+                        tv_namapasien.setText(nama_px);
+//                        tv_noktp.setText(nama_px);
+                        tv_umur.setText(umur_px);
+                        tv_goldarah.setText(goldarah_px);
+                        if(gender_px.equals("l")){
+                            tv_gender.setText("Laki-laki");
+                        }else if (gender_px.equals("P")){
+                            tv_gender.setText("Perempuan");
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        masukPakEko pl = new masukPakEko();
+        pl.execute();
+    }
 }

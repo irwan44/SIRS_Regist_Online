@@ -153,7 +153,7 @@
                         android:fontFamily="@font/bariol_bold"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="No MR"
+                        android:text="No KTP"
                         android:textColor="@color/white"
                         android:textSize="12dp"
                         android:textStyle="bold" />
@@ -173,7 +173,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txt_mrPasien"
+                        android:id="@+id/txt_ktp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_row="1"
