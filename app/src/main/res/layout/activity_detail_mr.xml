@@ -646,6 +646,7 @@
                     android:gravity="center"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/bariol_bold"
+                    android:visibility="gone"
                     android:text="Resep Dokter"/>
 
                 <HorizontalScrollView
@@ -657,6 +658,7 @@
                     android:fadeScrollbars="false"
                     android:layout_gravity="center"
                     android:scrollbars="none"
+                    android:visibility="gone"
                     android:scrollbarTrackVertical="@color/birufigma"
                     android:scrollbarThumbVertical="@color/birufigma">
 
@@ -840,6 +842,7 @@
                     android:scrollbarStyle="outsideInset"
                     android:fadeScrollbars="false"
                     android:scrollbars="none"
+                    android:visibility="gone"
                     android:layout_gravity="center"
                     android:scrollbarTrackVertical="@color/birufigma"
                     android:scrollbarThumbVertical="@color/birufigma">
