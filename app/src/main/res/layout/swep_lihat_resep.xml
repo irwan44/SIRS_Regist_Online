@@ -1,203 +1,240 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    android:background="@drawable/border7"
+    android:paddingBottom="32dp"
+    android:id="@+id/bottomSheet"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="66dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:orientation="vertical">
 
-
-    <HorizontalScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:layout_height="wrap_content">
-
-    <TableLayout
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tablelayoutid">
+        android:orientation="vertical"
+        app:behavior_hideable="true"
+        app:circularflow_defaultRadius="10dp"
+        app:behavior_peekHeight="45dp"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
-        <TableRow
-            android:id="@+id/rowlay"
-            android:background="@android:color/holo_blue_light"
-            android:padding="5dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:textColor="@color/white"
-                android:text="No" />
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:textColor="@color/white"
-                android:layout_weight="1"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:orientation="horizontal">
 
-                android:text="Nama Obat" />
-            <TextView
-                android:layout_width="90dp"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/bariol_bold"
-                android:textColor="@color/white"
-                android:text="Jumlah" />
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bariol_bold"
-                android:textColor="@color/white"
-                android:text="Aturan Pemakaian" />
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/bariol_bold"
-                android:textColor="@color/white"
-                android:text="Note" />
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/bariol_bold"
-                android:textColor="@color/white"
-                android:text="Keterangan" />
+        </LinearLayout>
 
-        </TableRow>
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="6dp"
+            app:cardBackgroundColor="@color/birufigma"
+            android:layout_gravity="center"
+            app:cardCornerRadius="20dp">
 
-        <TableRow
-            android:background="#ECEFF1"
-            android:padding="5dp">
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="1" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bariol_bold"
-                android:text="SIMVASTATIN 10 MG" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="10" />
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="1x1" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="Jika perlukan atau diminum pada malah hari" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:fontFamily="@font/bariol_bold"
-                android:text="Sesudah Makan" />
-        </TableRow>
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:orientation="horizontal">
 
-
-        <TableRow
-            android:background="#ECEFF1"
-            android:padding="5dp">
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="2" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bariol_bold"
-                android:text="SIMVASTATIN 10 MG" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="10" />
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="1x1" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bariol_bold"
-                android:text="Jika perlukan atau diminum pada malah hari" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:fontFamily="@font/bariol_bold"
-                android:text="Sesudah Makan" />
-        </TableRow>
-        <TableRow
-            android:background="#ECEFF1"
-            android:padding="5dp">
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="3" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bariol_bold"
-                android:text="SIMVASTATIN 10 MG" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/bariol_bold"
-                android:gravity="center"
-                android:text="10" />
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/bariol_bold"
-                android:text="1x1" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bariol_bold"
-                android:text="Jika perlukan atau diminum pada malah hari" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/bariol_bold"
-                android:text="Sesudah Makan" />
-        </TableRow>
-    </TableLayout>
-    </androidx.cardview.widget.CardView>
-</HorizontalScrollView>
+                android:gravity="center"
+                android:textSize="20dp"
+                android:text="Lihat resep">
 
-</RelativeLayout>
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="11"
+                android:rowCount="7"
+                tools:ignore="MissingConstraints">
+
+                <!--        ROW 1 UMUR-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:fontFamily="@font/bariol_bold"
+                    android:gravity="right"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="Nama Obat"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="3"
+                    android:paddingStart="9dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="9dp"
+                    android:paddingBottom="5dp"
+                    android:text=""
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="5"
+                    android:fontFamily="@font/bariol_bold"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:text="Jumlah"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="7"
+                    android:fontFamily="@font/bariol_bold"
+                    android:padding="5dp"
+                    android:text="Aturan Pemakaian"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="9"
+                    android:fontFamily="@font/bariol_bold"
+                    android:padding="5dp"
+                    android:text="Note"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="10"
+                    android:fontFamily="@font/bariol_bold"
+                    android:padding="5dp"
+                    android:text="Keterangan"
+                    android:textStyle="bold" />
+
+
+            </GridLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="11"
+                android:rowCount="7"
+                tools:ignore="MissingConstraints">
+
+                <!--        ROW 1 UMUR-->
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:fontFamily="@font/bariol_bold"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="SIMVASTATIN 10 MG"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="3"
+                    android:paddingStart="9dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="9dp"
+                    android:paddingBottom="5dp"
+                    android:text=""
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="5"
+                    android:fontFamily="@font/bariol_bold"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:text="10"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="112dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="7"
+                    android:gravity="center"
+                    android:fontFamily="@font/bariol_bold"
+                    android:padding="5dp"
+                    android:text="1x1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="9"
+                    android:fontFamily="@font/bariol_bold"
+                    android:padding="5dp"
+                    android:text="Jika perlukan atau diminum pada malah hari"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="73dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="10"
+                    android:fontFamily="@font/bariol_bold"
+                    android:padding="5dp"
+                    android:text="Sesudah Makan"
+                    android:textStyle="bold" />
+
+
+            </GridLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
