@@ -56,11 +56,10 @@ public class MRpasienActivity extends AppCompatActivity {
         no_ktp    = String.valueOf(login.getKTP_pasien());
 
 //        Declarate Object
-        tv_namapasien  = findViewById(R.id.txt_namaPasien);
-        tv_noktp       = findViewById(R.id.txt_ktp);
-        tv_umur        = findViewById(R.id.txt_umurPasien);
-        tv_goldarah    = findViewById(R.id.txt_golDarah);
-        tv_gender      = findViewById(R.id.txt_jekelPasien);
+//        tv_namapasien  = findViewById(R.id.txt_namaPasien);
+//        tv_umur        = findViewById(R.id.txt_umurPasien);
+//        tv_goldarah    = findViewById(R.id.txt_golDarah);
+//        tv_gender      = findViewById(R.id.txt_jekelPasien);
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,24 +78,7 @@ public class MRpasienActivity extends AppCompatActivity {
         MRpasien_Recyleview.setLayoutManager(layoutManager);
         MRpasien_Recyleview.setAdapter(MRpasienadapter);
     }
-//    void addData() {
-//        listMRpasien = new ArrayList<>();
-//
-//        listMRpasien.add(new MRpasien("dr. Bagaskara Arif", "Poliklinik Umum", "2022-10-03 08:10:51",
-//                "baik", "128/70  mmHg", "37 °/Celcius", "158 cm", "Compos Menthis", "60  x/menit ",
-//                "60 x/menit ", "58 kg", "1. Konsultasi Dokter Umum \n2. Pemberian Obat IM,SC/Kali Dulcolax 10 mg",
-//                "Cholera", "l1"));
-//
-//        listMRpasien.add(new MRpasien("dr. Fanny Santosa, Sp.PD", "Poliklinik Penyakit Dalam", "2022-11-30 10:24:18",
-//                "baik", "120/80  mmHg", "37 °/Celcius", "165 cm", "Compos Menthis", "40  x/menit ",
-//                "56 x/menit ", "55 kg", "1. HSG", "Varicella [chickenpox]", "l2"));
-//
-//        listMRpasien.add(new MRpasien("dr. Fanny Santosa, Sp.PD", "Poliklinik Penyakit Dalam", "2021-10-18 10:03:36",
-//                "Sedang", "90/60  mmHg", "38 °/Celcius", "165 cm", "Sopor", "15  x/menit ",
-//                "10 x/menit ", "50 kg", "1. Konsultasi Dokter Umum \n2. Injeksi Obat Tertentu", "Cholera due to Vibrio cholerae 01,biovar cholerae",
-//                "l3"));
-//
-//    }
+
     public void viewMR() {
         //first getting the values
         final String iniToken   = val_token;
@@ -167,18 +149,19 @@ public class MRpasienActivity extends AppCompatActivity {
                             nama_bagian = jso.getString("nama_bagian");
                             wkt_periksa = jso.getString("wkt_periksa");
                             nama_dokter = jso.getString("nama_dokter");
-                            listMRpasien.add(new MRpasien(idReg,kode_klinik,nama_klinik,nama_dokter,nama_bagian,tgl_daftar,jam_awal ));
+                            listMRpasien.add(new MRpasien(idReg,kode_klinik,nama_klinik,nama_dokter,nama_bagian,tgl_daftar,jam_awal, umur_px,
+                                    gender_px, goldarah_px));
                         }
                         MRpasienadapter.notifyDataSetChanged();
-                        tv_namapasien.setText(nama_px);
-//                        tv_noktp.setText(nama_px);
-                        tv_umur.setText(umur_px);
-                        tv_goldarah.setText(goldarah_px);
-                        if(gender_px.equals("l")){
-                            tv_gender.setText("Laki-laki");
-                        }else if (gender_px.equals("P")){
-                            tv_gender.setText("Perempuan");
-                        }
+//                        tv_namapasien.setText(nama_px);
+////                        tv_noktp.setText(nama_px);
+//                        tv_umur.setText(umur_px);
+//                        tv_goldarah.setText(goldarah_px);
+//                        if(gender_px.equals("l")){
+//                            tv_gender.setText("Laki-laki");
+//                        }else if (gender_px.equals("P")){
+//                            tv_gender.setText("Perempuan");
+//                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

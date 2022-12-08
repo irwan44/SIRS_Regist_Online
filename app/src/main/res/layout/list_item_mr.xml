@@ -5,74 +5,26 @@
     android:layout_height="139dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <!--    Buat Demo RS Bidadari-->
+    <!--   Data parsing  -->
+    <TextView
+        android:id="@+id/txt_gender"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_goldarah"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/txt_umur"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/txt_keadaanumum"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_TekananDarah"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_suhu"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_TinggiBadan"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_Kesadaran"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_Nadi"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_Pernafasan"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_bb"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_tindakan"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_icd10"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/txt_kdresep"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
 <!--=================== End Code =======================-->
     <TextView
         android:id="@+id/txt_idReg"
@@ -185,5 +137,7 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

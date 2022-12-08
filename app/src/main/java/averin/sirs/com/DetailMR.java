@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,37 +11,51 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
+import averin.sirs.com.Adapter.DetailMRAdapter;
 import averin.sirs.com.Adapter.RequestHandler;
+import averin.sirs.com.Adapter.SpinnerAdapter;
 import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.Token;
+import averin.sirs.com.Model.isiSpinner;
 import averin.sirs.com.Ui.AppController;
 
 public class DetailMR extends AppCompatActivity {
 
-    String val_token, kodeklinik, idRegist, no_ktp, namaKlinik, namaDokter, jenisPoli, tglPeriksa, keadaan_umum, tekanan_darah, suhu, tinggi_badan,
-            kesadaran, nadi, pernafasan, bb, tindakan, nama_icd10, kd_resep, nama_obat, note_obat, jml_obat, aturan_pakai, ket_obat;
+    String val_token, no_ktp, kodeklinik, idRegist,
+            nama_px, nomr_px, umur_px, goldarah_px, gender_px,
+            namaKlinik, namaDokter, namaBagian, tglPeriksa, wktPeriksa,
+            keadaan_umum, tekanan_darah, suhu, tinggi_badan, kesadaran, nadi, pernafasan, bb,
+            nama_obat,jml_obat,note_obat,ket_obat,aturan_pakai;
     TextView txt_namapasien, txt_nomr, txt_namadokter, txt_namapoli, txt_tglperiksa, txt_KeadaanUmum, txt_TekananDarah, txt_suhu,
             txt_tinggi, txt_kesadaran, txt_nadi, txt_pernafasan, txt_bb, txt_nmobat,
-            txt_jmlobat, txt_aturan, txt_noteobat, txt_ketobat, txt_no,
-            txt_info_null;
+            txt_jmlobat, txt_aturan,txt_noteobat,txt_ketobat,txt_no;
     EditText edt_tindakan, edt_icd10;
-
     //Dialog Confirm
     AlertDialog.Builder dial_builder;
     AlertDialog dial_info_null;
     LayoutInflater inflater;
     View view_null_data;
+
+    //Tindakan & ICD10
+    DetailMRAdapter adapt_tindakan, adapt_icd10;
+    ListView lsTindakan, lsICD10;
+    List<isiSpinner> listtindakan = new ArrayList<isiSpinner>();
+    List<isiSpinner> listicd10 = new ArrayList<isiSpinner>();
 
     String APIurl = RequestHandler.APIdev;
     public String urlDetailMR = APIurl+"/api/v1/get-detail-riwayat.php";
@@ -73,12 +86,24 @@ public class DetailMR extends AppCompatActivity {
         Token token = AppController.getInstance(this).isiToken();
         val_token = String.valueOf(token.gettoken());
         no_ktp    = String.valueOf(login.getKTP_pasien());
+        nama_px   = String.valueOf(login.getNama_pasien());
 
 
         Bundle kiriman = getIntent().getExtras();
         if(kiriman != null){
             kodeklinik = kiriman.get("kd_klinik").toString();
             idRegist = kiriman.get("idRegKlinik").toString();
+
+            namaKlinik = kiriman.get("nama_klinik").toString();
+            namaBagian = kiriman.get("nama_bagian").toString();
+            namaDokter = kiriman.get("nama_dokter").toString();
+            tglPeriksa = kiriman.get("tgl_daftar").toString();
+            wktPeriksa = kiriman.get("wkt_daftar").toString();
+
+            umur_px = kiriman.get("umur_px").toString();
+            gender_px = kiriman.get("gender_px").toString();
+            goldarah_px = kiriman.get("goldarah_px").toString();
+
             getDetailMR();
         }
 
@@ -99,17 +124,24 @@ public class DetailMR extends AppCompatActivity {
         txt_bb = findViewById(R.id.txt_Berat);
         txt_pernafasan = findViewById(R.id.txt_Pernafasan);
 
-//        Tindakan & ICD10
-        edt_tindakan = findViewById(R.id.edt_tindakan);
-        edt_icd10 =  findViewById(R.id.edt_icd10);
+//        Tindakan
+        lsTindakan = findViewById(R.id.ls_tindakan);
+        adapt_tindakan = new DetailMRAdapter(DetailMR.this, listtindakan);
+        lsTindakan.setAdapter(adapt_tindakan);
+
+//        ICD10
+        lsICD10 = findViewById(R.id.ls_icd10);
+        adapt_icd10 = new DetailMRAdapter(DetailMR.this, listicd10);
+        lsICD10.setAdapter(adapt_icd10);
 
 //        Resep Obat
-        txt_no = findViewById(R.id.txt_no);
-        txt_nmobat = findViewById(R.id.nmobat1);
-        txt_jmlobat = findViewById(R.id.jmlobat1);
-        txt_aturan = findViewById(R.id.aturan1);
-        txt_noteobat = findViewById(R.id.noteobat1);
-        txt_ketobat = findViewById(R.id.ketobat1);
+//        txt_no = findViewById(R.id.txt_no);
+//        txt_nmobat = findViewById(R.id.nmobat1);
+//        txt_jmlobat = findViewById(R.id.jmlobat1);
+//        txt_aturan = findViewById(R.id.aturan1);
+//        txt_noteobat = findViewById(R.id.noteobat1);
+//        txt_ketobat = findViewById(R.id.ketobat1);
+
 
         //Dialog Empty Data
         ViewGroup vg = findViewById(android.R.id.content);
@@ -194,6 +226,7 @@ public class DetailMR extends AppCompatActivity {
                             txt_KeadaanUmum.setText(keadaan_umum);
                             txt_TekananDarah.setText(tekanan_darah);
                             txt_suhu.setText(suhu);
+                            txt_pernafasan.setText(pernafasan);
                             txt_tinggi.setText(tinggi_badan);
                             txt_kesadaran.setText(kesadaran);
                             txt_nadi.setText(nadi);
@@ -202,19 +235,26 @@ public class DetailMR extends AppCompatActivity {
 
 //                        Tindakan
                         for(int td = 0; td < res_tindakan.length(); td++) {
+                            isiSpinner item_tdk = new isiSpinner();
                             JSONObject obj_tdk = res_tindakan.getJSONObject(td);
-//                            no++;
-                            tindakan = obj_tdk.getString("nama_tindakan");
-                            edt_tindakan.setText(no++ + ". "+tindakan);
+                            item_tdk.setId(obj_tdk.getString("no_tdk"));
+                            item_tdk.setKet(obj_tdk.getString("nama_tindakan"));
+
+                            // adding contact to contact list
+                            listtindakan.add(item_tdk);
                         }
+                        adapt_tindakan.notifyDataSetChanged();
 
 //                        ICD-10
                         for(int icd = 0; icd < res_icd10.length(); icd++) {
+                            isiSpinner item_icd = new isiSpinner();
                             JSONObject obj_icd = res_icd10.getJSONObject(icd);
-//                            no++;
-                            nama_icd10 = obj_icd.getString("nama_icd");
-                            edt_icd10.setText(no++ + ". "+ nama_icd10);
+                            item_icd.setId(obj_icd.getString("no_icd"));
+                            item_icd.setKet(obj_icd.getString("icd10"));
+
+                            listicd10.add(item_icd);
                         }
+                        adapt_icd10.notifyDataSetChanged();
 
 //                        Resep Obat
                         for(int ro = 0; ro < res_resep.length(); ro++) {
@@ -226,12 +266,12 @@ public class DetailMR extends AppCompatActivity {
                             aturan_pakai = obj_ro.getString("nama_dosis");
                             ket_obat = obj_ro.getString("ket");
 
-                            txt_no.setText(nom);
-                            txt_nmobat.setText(nama_obat);
-                            txt_noteobat.setText(note_obat);
-                            txt_jmlobat.setText(jml_obat);
-                            txt_aturan.setText(aturan_pakai);
-                            txt_ketobat.setText(ket_obat);
+//                            txt_no.setText(nom);
+//                            txt_nmobat.setText(nama_obat);
+//                            txt_noteobat.setText(note_obat);
+//                            txt_jmlobat.setText(jml_obat);
+//                            txt_aturan.setText(aturan_pakai);
+//                            txt_ketobat.setText(ket_obat);
                         }
                     }
                 } catch (JSONException e) {
@@ -242,4 +282,5 @@ public class DetailMR extends AppCompatActivity {
         ambilDataMR pl = new ambilDataMR();
         pl.execute();
     }
+
 }

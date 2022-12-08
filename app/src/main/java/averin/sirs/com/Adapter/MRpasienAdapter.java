@@ -49,6 +49,10 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
         Date wkt = null;
         String tgl_daft, wkt_daft;
 
+        holder.txt_umur.setText(list.get(position).getUmur_px());
+        holder.txt_gender.setText(list.get(position).getGender_px());
+        holder.txt_goldarah.setText(list.get(position).getGoldarah_px());
+
         holder.txt_idreg.setText((list.get(position).getId_regist()));
         holder.txt_kodeklinik.setText(list.get(position).getKode_klinik());
         holder.txt_tgldaftar.setText(list.get(position).getTgl_periksa());
@@ -75,6 +79,7 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
 
     public class MRpasienViewHolder extends RecyclerView.ViewHolder {
         private TextView txt_tgldaftar, txt_kodeklinik, txt_wktdaftar, txt_idreg,
+                txt_gender, txt_umur, txt_goldarah,
                 tv_namaklinik,tv_namadokter, tv_namabagian, tv_tglperiksa;
 
         public MRpasienViewHolder(View itemView) {
@@ -83,6 +88,10 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
             txt_idreg = (TextView) itemView.findViewById(R.id.txt_idReg);
             txt_tgldaftar = (TextView) itemView.findViewById(R.id.txt_tgl_daftar);
             txt_wktdaftar = (TextView) itemView.findViewById(R.id.txt_wkt_daftar);
+
+            txt_gender =  (TextView) itemView.findViewById(R.id.txt_gender);
+            txt_umur =  (TextView) itemView.findViewById(R.id.txt_umur);
+            txt_goldarah =  (TextView) itemView.findViewById(R.id.txt_golDarah);
 
             tv_namadokter = (TextView) itemView.findViewById(R.id.txt_namaDokter);
             tv_namabagian = (TextView) itemView.findViewById(R.id.txt_namabagian);
@@ -93,10 +102,29 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
                 public void onClick(View view) {
                     Intent i = new Intent(itemView.getContext(), DetailMR.class);
                     String kde_klinik= txt_kodeklinik.getText().toString();
+                    String nama_klinik= tv_namaklinik.getText().toString();
+                    String nama_bagian = tv_namabagian.getText().toString();
+                    String nama_dokter= tv_namadokter.getText().toString();
+                    String tgl_daftar= txt_tgldaftar.getText().toString();
+                    String wkt_daftar= txt_wktdaftar.getText().toString();
+
                     String idreg = txt_idreg.getText().toString();
+                    String umurPx = txt_umur.getText().toString();
+                    String genderPx = txt_gender.getText().toString();
+                    String goldarahPx = txt_goldarah.getText().toString();
 //                    Put to parsing
                     i.putExtra("idRegKlinik", idreg);
                     i.putExtra("kd_klinik", kde_klinik);
+
+                    i.putExtra("nama_klinik", nama_klinik);
+                    i.putExtra("nama_bagian", nama_bagian);
+                    i.putExtra("nama_dokter", nama_dokter);
+                    i.putExtra("tgl_daftar", tgl_daftar);
+                    i.putExtra("wkt_daftar", wkt_daftar);
+
+                    i.putExtra("umur_px", umurPx);
+                    i.putExtra("gender_px", genderPx);
+                    i.putExtra("goldarah_px", goldarahPx);
                     itemView.getContext().startActivity(i);
                 }
             });
