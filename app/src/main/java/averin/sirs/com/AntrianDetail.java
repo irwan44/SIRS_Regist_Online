@@ -5,24 +5,37 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+
+import averin.sirs.com.Adapter.RequestHandler;
+import averin.sirs.com.Model.Antrian;
+import averin.sirs.com.Model.Token;
+import averin.sirs.com.Ui.AppController;
 //Scanner Funct
 
 public class AntrianDetail extends AppCompatActivity{
 
-    String val_token, no_ktp, flag_px, regId, no_antri, nm_dokter, tgl_antri, jam_awal, jam_akhir, status_antri,
+    String val_token, regId, no_antri, nm_dokter, tgl_antri, jam_awal, jam_akhir, status_antri,
             nm_klinik, nm_bag, tglKonvert, jam_konvert, stat_px;
     TextView txt_nmKlinik, txt_jnsPoli, txt_nmDokter, txt_noAntri, txt_tglPeriksa, txt_jamPeriksa, txt_jnsPasien,
             txt_wktPeriksa, lb_antrian, txt_info_antrian, txt_stat_antri;
@@ -33,7 +46,9 @@ public class AntrianDetail extends AppCompatActivity{
     DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat outputwaktu = new SimpleDateFormat("HH:mm", Locale.getDefault());
     DateFormat inputwaktu = new SimpleDateFormat("HH:mm:ss");
-    SimpleDateFormat sdf;
+
+    String APIurl = RequestHandler.APIdev;
+    public String urlDetailAntrian = APIurl+"/api/v1/get-jadwal-px-detail.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +70,9 @@ public class AntrianDetail extends AppCompatActivity{
             }
         });
 
+        Token tkn = AppController.getInstance(this).isiToken();
+        val_token = String.valueOf(tkn.gettoken());
+
         txt_nmKlinik = findViewById(R.id.nmKlinik);
         txt_jnsPoli = findViewById(R.id.jenisPoli);
         txt_nmDokter = findViewById(R.id.nma_Dokter);
@@ -71,64 +89,110 @@ public class AntrianDetail extends AppCompatActivity{
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-//            flag_px      = extras.get("px_flag").toString();
-            regId        = extras.get("regId").toString();
-            no_antri     = extras.get("noAntrian").toString();
-            nm_dokter    = extras.get("nma_dokter").toString();
-            tgl_antri    = extras.get("tgl_antri").toString();
-            jam_awal     = extras.get("jam_awal").toString();
-            jam_akhir    = extras.get("jam_akhir").toString();
-            status_antri = extras.get("status_antri").toString();
-            nm_klinik    = extras.get("nm_klinik").toString();
-            nm_bag       = extras.get("nm_bag").toString();
-            stat_px       = extras.get("stat_px").toString();
+            regId = extras.get("regId").toString();
+            viewDetailAntrian();
         }
 
-        if(status_antri.equals("1")){
-            btn_scan.setVisibility(View.GONE);
-            txt_stat_antri.setVisibility(View.VISIBLE);
-            txt_info_antrian.setText("Silahkan menuju FO untuk menanyakan status antrian Poli anda");
-        }else {
-//            btn_scan.setVisibility(View.VISIBLE);
-//            txt_stat_antri.setVisibility(View.GONE);
-            if (stat_px.equals("lama") || stat_px.equals("null")) {
-                btn_scan.setVisibility(View.VISIBLE);
-                cd_scan.setVisibility(View.VISIBLE);
-                txt_info_antrian.setText("Datang 30 menit sebelum pemeriksaan dan \n konfirmasi kehadiran baik melalui FO atau \n Scan QR pada RS");
-            } else {
-                btn_scan.setVisibility(View.GONE);
-                cd_scan.setVisibility(View.GONE);
-                txt_info_antrian.setText("Silahkan datang ke FO dan membawa KTP anda \n untuk melakukan registrasi ulang");
+    }
+
+    private void viewDetailAntrian() {
+        //first getting the values
+        final String iniToken   = val_token;
+        final String no_regist = regId;
+
+        //if everything is fine
+        class masukPakEko extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("idReg", no_regist);
+
+                //returing the response
+                return requestHandler.requestData(urlDetailAntrian, "POST", "application/json; charset=utf-8", "X-Api-Token",
+                        iniToken, "X-Px-Key", "", params);
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+//                progressBar = findViewById(R.id.progressBar);
+//                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                try {//converting response to json object
+                    JSONObject obj = new JSONObject(s);
+                    //if no error in response
+
+                    JSONArray jr = obj.getJSONArray("list");
+                    if (jr.equals("null")) {
+                        Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        for (int a = 0; a < jr.length(); a++) {
+                            JSONObject jso = jr.getJSONObject(a);
+                            regId = jso.getString("idReg");
+                            no_antri = jso.getString("no_antrian");
+                            nm_dokter = jso.getString("nama_dokter");
+                            nm_klinik = jso.getString("nama_klinik");
+                            nm_bag = jso.getString("nama_bagian");
+                            tgl_antri = jso.getString("tgl");
+                            jam_awal = jso.getString("jam_awal");
+                            jam_akhir = jso.getString("jam_akhir");
+                            status_antri = jso.getString("status");
+                            stat_px = jso.getString("ket_klinik");
+
+                            if(status_antri.equals("1")){
+                                btn_scan.setVisibility(View.GONE);
+                                txt_stat_antri.setVisibility(View.VISIBLE);
+                                txt_info_antrian.setText("Silahkan menuju FO untuk menanyakan status antrian Poli anda");
+                            }else {
+                                if (stat_px.equals("lama") || stat_px.equals("null")) {
+                                    btn_scan.setVisibility(View.VISIBLE);
+                                    cd_scan.setVisibility(View.VISIBLE);
+                                    txt_info_antrian.setText("Datang 30 menit sebelum pemeriksaan dan \n konfirmasi kehadiran baik melalui FO atau \n Scan QR pada RS");
+                                } else {
+                                    btn_scan.setVisibility(View.GONE);
+                                    cd_scan.setVisibility(View.GONE);
+                                    txt_info_antrian.setText("Silahkan datang ke FO dan membawa KTP anda \n untuk melakukan registrasi ulang");
+                                }
+                            }
+
+                            Date tgl = null;
+                            Date wkt = null;
+                            try {
+                                tgl = inputFormat.parse(tgl_antri);
+                                wkt = inputwaktu.parse(jam_awal);
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            tglKonvert = outputFormat.format(tgl);
+                            jam_konvert = outputwaktu.format(wkt);
+
+                            txt_noAntri.setText(no_antri);
+                            txt_nmDokter.setText(nm_dokter);
+                            txt_nmKlinik.setText(nm_klinik);
+                            txt_jnsPoli.setText(nm_bag);
+                            txt_wktPeriksa.setText(jam_awal+" - "+jam_akhir);
+                            txt_tglPeriksa.setText(tglKonvert);
+                            txt_jamPeriksa.setText(jam_konvert);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
-        Date tgl = null;
-        Date wkt = null;
-        try {
-            tgl = inputFormat.parse(tgl_antri);
-            wkt = inputwaktu.parse(jam_awal);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        tglKonvert = outputFormat.format(tgl);
-        jam_konvert = outputwaktu.format(wkt);
-
-        txt_noAntri.setText(no_antri);
-        txt_nmDokter.setText(nm_dokter);
-        txt_nmKlinik.setText(nm_klinik);
-        txt_jnsPoli.setText(nm_bag);
-        txt_wktPeriksa.setText(jam_awal+" - "+jam_akhir);
-        txt_tglPeriksa.setText(tglKonvert);
-        txt_jamPeriksa.setText(jam_konvert);
-        if(stat_px.equals("lama")){
-
-        }
-//        if(flag_px.equals("0")){
-//            lb_antrian.setText("No. Pesanan");
-//        }else{
-//            lb_antrian.setText("No. Antiran Saya");
-//        }
+        masukPakEko pl = new masukPakEko();
+        pl.execute();
     }
 
 //    SCANNER FUNCTION

@@ -70,26 +70,8 @@ public class AntrianDSBAdapter extends RecyclerView.Adapter<AntrianDSBAdapter.An
                     Intent i = new Intent(itemView.getContext(), AntrianDetail.class);
 //                    Declarate String
                     String regId        = txt_idReg.getText().toString();
-                    String no_antri     = txt_noantrian.getText().toString();
-                    String nmaDokter    = txt_nmDokter.getText().toString();
-                    String tgl_dtl      = txt_tglAntrian.getText().toString();
-                    String jawal_dtl    = txt_jamAwal.getText().toString();
-                    String jakhir_dtl   = txt_jamAkhir.getText().toString();
-                    String status_dtl   = txt_status.getText().toString();
-                    String nmKlinik_dtl = txt_nmKlinik.getText().toString();
-                    String nmbagian_dtl = txt_nmPoli.getText().toString();
-                    String ketKlinik_dtl = ketKlinik.getText().toString();
 //                    Put to parsing
                     i.putExtra("regId", regId);
-                    i.putExtra("noAntrian", no_antri);
-                    i.putExtra("nma_dokter", nmaDokter);
-                    i.putExtra("tgl_antri", tgl_dtl);
-                    i.putExtra("jam_awal", jawal_dtl);
-                    i.putExtra("jam_akhir", jakhir_dtl);
-                    i.putExtra("status_antri", status_dtl);
-                    i.putExtra("nm_klinik", nmKlinik_dtl);
-                    i.putExtra("nm_bag", nmbagian_dtl);
-                    i.putExtra("stat_px", ketKlinik_dtl);
                     itemView.getContext().startActivity(i);
                 }
             });
