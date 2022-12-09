@@ -803,8 +803,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="110dp">
 
-                        <androidx.core.widget.NestedScrollView
+                        <ScrollView
                             android:layout_width="match_parent"
+                            android:scrollIndicators="right"
+                            android:scrollbarStyle="insideOverlay"
+                            android:scrollbars="vertical"
                             android:layout_height="match_parent">
 
                             <LinearLayout
@@ -820,13 +823,11 @@
                                     android:layout_marginRight="15dp"
                                     android:layout_marginBottom="10dp"
                                     android:background="@android:color/transparent"
-                                    android:scrollIndicators="right"
-                                    android:scrollbarStyle="insideOverlay"
-                                    android:scrollbars="vertical" />
+                                     />
 
                             </LinearLayout>
 
-                        </androidx.core.widget.NestedScrollView>
+                        </ScrollView>
 
 <!--                        <androidx.appcompat.widget.AppCompatEditText-->
 <!--                            android:id="@+id/edt_tindakan"-->
@@ -877,8 +878,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="110dp">
 
-                        <androidx.core.widget.NestedScrollView
+                        <ScrollView
                             android:layout_width="match_parent"
+                            android:scrollIndicators="right"
+                            android:scrollbarStyle="insideOverlay"
+                            android:scrollbars="vertical"
                             android:layout_height="match_parent">
 
                             <LinearLayout
@@ -893,14 +897,11 @@
                                     android:layout_marginTop="40dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_marginBottom="10dp"
-                                    android:background="@android:color/transparent"
-                                    android:scrollIndicators="right"
-                                    android:scrollbarStyle="insideOverlay"
-                                    android:scrollbars="vertical" />
+                                    android:background="@android:color/transparent" />
 
                             </LinearLayout>
 
-                        </androidx.core.widget.NestedScrollView>
+                        </ScrollView>
 
                         <!--                        <androidx.appcompat.widget.AppCompatEditText-->
                         <!--                            android:id="@+id/edt_tindakan"-->
