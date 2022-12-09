@@ -454,7 +454,7 @@
                                         android:layout_gravity="center"
                                         android:layout_marginHorizontal="10dp"
                                         android:layout_marginVertical="5dp"
-                                        android:src="@drawable/foto_bos"
+                                        android:src="@drawable/profile22"
                                         app:civ_border_color="@color/white"
                                         app:civ_border_overlay="true"
                                         app:civ_border_width="4dp" />
@@ -799,22 +799,20 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="110dp">
 
                         <ListView
                             android:id="@+id/ls_tindakan"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="40dp"
                             android:layout_marginBottom="10dp"
                             android:scrollbarStyle="insideOverlay"
                             android:scrollbars="vertical"
-                            android:overScrollMode="always"
                             android:scrollIndicators="right"
-                            android:background="@android:color/transparent"
-                            android:focusable="true"/>
+                            android:background="@android:color/transparent"/>
 
 <!--                        <androidx.appcompat.widget.AppCompatEditText-->
 <!--                            android:id="@+id/edt_tindakan"-->
@@ -863,22 +861,21 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="110dp">
 
                         <ListView
                             android:id="@+id/ls_icd10"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="40dp"
                             android:layout_marginBottom="10dp"
                             android:scrollbarStyle="insideOverlay"
-                            android:scrollbars="vertical"
                             android:overScrollMode="always"
                             android:scrollIndicators="right"
-                            android:background="@android:color/transparent"
-                            android:focusable="true"/>
+                            android:scrollbars="vertical"
+                            android:background="@android:color/transparent"/>
 
 <!--                        <EditText-->
 <!--                            android:id="@+id/edt_icd10"-->
@@ -903,10 +900,10 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
-                    android:layout_width="340dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginHorizontal="20dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="0dp">
 
@@ -927,7 +924,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rc_resepobat"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="40dp"
@@ -935,8 +932,6 @@
                         android:scrollbarStyle="insideOverlay"
                         android:overScrollMode="always"
                         android:scrollIndicators="bottom"
-                        android:background="@android:color/transparent"
-                        android:focusable="true"
                         android:scrollbars="horizontal" />
 
                 </androidx.cardview.widget.CardView>

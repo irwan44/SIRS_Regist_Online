@@ -51,6 +51,7 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
         holder.tv_idreg.setText((list.get(position).getId_regist()));
         holder.tv_tgldaftar.setText(list.get(position).getTgl_periksa());
         holder.tv_wktdaftar.setText(list.get(position).getJam_periksa());
+        holder.tv_namaklinik.setText(list.get(position).getNama_klinik());
 
         holder.txt_gender.setText(list.get(position).getGender_px());
         holder.txt_goldarah.setText(list.get(position).getGoldarah_px());
@@ -103,8 +104,7 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
                     String nama_klinik= tv_namaklinik.getText().toString();
                     String nama_dokter= tv_namadokter.getText().toString();
                     String nama_bagian = tv_namabagian.getText().toString();
-                    String tgl_daftar= tv_tgldaftar.getText().toString();
-                    String wkt_daftar= tv_wktdaftar.getText().toString();
+                    String tgl_daftar= txt_tglPeriksa.getText().toString();
 
                     String genderPx = txt_gender.getText().toString();
                     String goldarahPx = txt_goldarah.getText().toString();
@@ -116,7 +116,6 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
                     i.putExtra("nama_bagian", nama_bagian);
                     i.putExtra("nama_dokter", nama_dokter);
                     i.putExtra("tgl_daftar", tgl_daftar);
-                    i.putExtra("wkt_daftar", wkt_daftar);
 
                     i.putExtra("gender_px", genderPx);
                     i.putExtra("goldarah_px", goldarahPx);

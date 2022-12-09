@@ -2,6 +2,7 @@ package averin.sirs.com;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -19,6 +20,8 @@ import android.widget.ListView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,10 +39,11 @@ import averin.sirs.com.Model.ResepObat;
 import averin.sirs.com.Model.Token;
 import averin.sirs.com.Model.isiSpinner;
 import averin.sirs.com.Ui.AppController;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailMR extends AppCompatActivity {
 
-    String val_token, no_ktp, kodeklinik, idRegist,
+    String val_token, no_ktp, foto_px, kodeklinik, idRegist,
             nama_px, nomr_px, umur_px, goldarah_px, gender_px,
             namaKlinik, namaDokter, namaBagian, tglPeriksa, wktPeriksa,
             keadaan_umum, tekanan_darah, suhu, tinggi_badan, kesadaran, nadi, pernafasan, bb,
@@ -53,6 +57,7 @@ public class DetailMR extends AppCompatActivity {
     AlertDialog dial_info_null;
     LayoutInflater inflater;
     View view_null_data;
+    CircleImageView imgPasien;
 
     //Tindakan & ICD10
     DetailMRAdapter adapt_tindakan, adapt_icd10;
@@ -64,6 +69,8 @@ public class DetailMR extends AppCompatActivity {
     RecyclerView rc_resepdokter;
     ResepDokterAdapter adaptResepDokter;
     List<ResepObat> listresep = new ArrayList<ResepObat>();
+    RecyclerView.LayoutManager RecyclerViewLayoutManager;
+    LinearLayoutManager HorizontalLayout;
 
 
     String APIurl = RequestHandler.APIdev;
@@ -109,7 +116,7 @@ public class DetailMR extends AppCompatActivity {
         val_token = String.valueOf(token.gettoken());
         no_ktp    = String.valueOf(login.getKTP_pasien());
         nama_px   = String.valueOf(login.getNama_pasien());
-
+        foto_px   = String.valueOf(login.getFoto_pasien());
 
         Bundle kiriman = getIntent().getExtras();
         if(kiriman != null){
@@ -121,7 +128,6 @@ public class DetailMR extends AppCompatActivity {
             namaBagian = kiriman.get("nama_bagian").toString();
             namaDokter = kiriman.get("nama_dokter").toString();
             tglPeriksa = kiriman.get("tgl_daftar").toString();
-            wktPeriksa = kiriman.get("wkt_daftar").toString();
 
             gender_px = kiriman.get("gender_px").toString();
             goldarah_px = kiriman.get("goldarah_px").toString();
@@ -130,15 +136,31 @@ public class DetailMR extends AppCompatActivity {
         }
 
 //        Card Pasien MR Info & Dokter Periksa
+        imgPasien = findViewById(R.id.imgPasien);
         txt_namaklinik = findViewById(R.id.txt_namaklinik);
         txt_namadokter = findViewById(R.id.txt_namadokter);
         txt_namapoli = findViewById(R.id.txt_namaPoli);
         txt_tglperiksa = findViewById(R.id.txt_tgl_periksa);
 
-        txt_namapasien = findViewById(R.id.txt_namapasien);
+        if(no_ktp.equals("3174586231698546")) {
+            imgPasien.setImageResource(R.drawable.foto_bos);
+        }else {
+            if (foto_px.equals("null")) {
+                imgPasien.setImageResource(R.drawable.profile22);
+            } else {
+                Glide.with(DetailMR.this).load(foto_px).into(imgPasien);
+            }
+        }
+
+        txt_namaklinik.setText(namaKlinik);
+        txt_namadokter.setText(namaDokter);
+        txt_namapoli.setText(namaBagian);
+        txt_tglperiksa.setText(tglPeriksa);
+
+        txt_namapasien = findViewById(R.id.txt_namaPasien);
         txt_nomr = findViewById(R.id.txt_mrPasien);
         txt_umur = findViewById(R.id.txt_umurPasien);
-        txt_goldarah = findViewById(R.id.txt_goldarah);
+        txt_goldarah = findViewById(R.id.txt_golDarah);
         txt_jekel = findViewById(R.id.txt_jekelPasien);
 
 //        Vital Sign
@@ -163,7 +185,11 @@ public class DetailMR extends AppCompatActivity {
 
 //        Resep Obat
         rc_resepdokter = findViewById(R.id.rc_resepobat);
-        adaptResepDokter = new ResepDokterAdapter(DetailMR.this, listresep);
+        RecyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
+        rc_resepdokter.setLayoutManager(RecyclerViewLayoutManager);
+        HorizontalLayout = new LinearLayoutManager(DetailMR.this, LinearLayoutManager.HORIZONTAL,false);
+        rc_resepdokter.setLayoutManager(HorizontalLayout);
+        adaptResepDokter = new ResepDokterAdapter(listresep);
         rc_resepdokter.setAdapter(adaptResepDokter);
 
         //Dialog Empty Data
@@ -232,7 +258,14 @@ public class DetailMR extends AppCompatActivity {
                         JSONArray res_tindakan = jr.getJSONArray("tindakan");
                         JSONArray res_icd10 = jr.getJSONArray("icd10");
                         JSONArray res_resep = jr.getJSONArray("resep");
-                        int no = 1;
+//                        JSONObject res_nomr = jr.getJSONObject("no_mr");
+//                        JSONObject res_umur = jr.getJSONObject("umur");
+
+                        txt_namapasien.setText(nama_px);
+                        txt_nomr.setText(jr.getString("no_mr"));
+                        txt_umur.setText(jr.getString("umur"));
+                        txt_goldarah.setText(goldarah_px);
+                        txt_jekel.setText(gender_px);
 
 //                        Vital Sign
                         for(int vs = 0; vs < res_vital_sign.length(); vs++) {
