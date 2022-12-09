@@ -129,7 +129,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:ellipsize="end"
-                                                android:drawableLeft="@drawable/ic_dokter"
+                                                android:drawableLeft="@drawable/medical_svgrepo_com"
                                                 android:drawablePadding="7dp"
                                                 android:gravity="center_vertical"
                                                 android:fontFamily="@font/bariol_bold"
@@ -208,6 +208,8 @@
                                             android:layout_height="wrap_content"
                                             android:text="Data Pasien"
                                             android:gravity="center"
+                                            android:textColor="@color/white"
+                                            android:textStyle="bold"
                                             android:padding="2dp"
                                             android:fontFamily="@font/bariol_bold"
                                             android:textSize="16sp"/>
@@ -801,18 +803,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="110dp">
 
-                        <ListView
-                            android:id="@+id/ls_tindakan"
+                        <androidx.core.widget.NestedScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginBottom="10dp"
-                            android:scrollbarStyle="insideOverlay"
-                            android:scrollbars="vertical"
-                            android:scrollIndicators="right"
-                            android:background="@android:color/transparent"/>
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ListView
+                                    android:id="@+id/ls_tindakan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="40dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:background="@android:color/transparent"
+                                    android:scrollIndicators="right"
+                                    android:scrollbarStyle="insideOverlay"
+                                    android:scrollbars="vertical" />
+
+                            </LinearLayout>
+
+                        </androidx.core.widget.NestedScrollView>
 
 <!--                        <androidx.appcompat.widget.AppCompatEditText-->
 <!--                            android:id="@+id/edt_tindakan"-->
@@ -863,40 +877,52 @@
                         android:layout_width="match_parent"
                         android:layout_height="110dp">
 
-                        <ListView
-                            android:id="@+id/ls_icd10"
+                        <androidx.core.widget.NestedScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginBottom="10dp"
-                            android:scrollbarStyle="insideOverlay"
-                            android:overScrollMode="always"
-                            android:scrollIndicators="right"
-                            android:scrollbars="vertical"
-                            android:background="@android:color/transparent"/>
+                            android:layout_height="match_parent">
 
-<!--                        <EditText-->
-<!--                            android:id="@+id/edt_icd10"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="100dp"-->
-<!--                            android:focusable="true"-->
-<!--                            android:enabled="false"-->
-<!--                            android:gravity="top|left"-->
-<!--                            android:inputType="text|textMultiLine"-->
-<!--                            android:layout_marginTop="40dp"-->
-<!--                            android:layout_marginBottom="10dp"-->
-<!--                            android:layout_marginLeft="15dp"-->
-<!--                            android:hint="isi Nama ICD-10 di sini"-->
-<!--                            android:fontFamily="@font/bariol_bold"-->
-<!--                            android:background="@android:color/transparent"-->
-<!--                            android:padding="5dp"-->
-<!--                            android:textSize="14sp"-->
-<!--                            android:textColor="@color/primaryDisabled"-->
-<!--                            android:scrollIndicators="right"-->
-<!--                            android:overScrollMode="always"-->
-<!--                            android:scrollbarStyle="insideOverlay"/>-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ListView
+                                    android:id="@+id/ls_icd10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="40dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:background="@android:color/transparent"
+                                    android:scrollIndicators="right"
+                                    android:scrollbarStyle="insideOverlay"
+                                    android:scrollbars="vertical" />
+
+                            </LinearLayout>
+
+                        </androidx.core.widget.NestedScrollView>
+
+                        <!--                        <androidx.appcompat.widget.AppCompatEditText-->
+                        <!--                            android:id="@+id/edt_tindakan"-->
+                        <!--                            android:enabled="false"-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="100dp"-->
+                        <!--                            android:layout_marginLeft="15dp"-->
+                        <!--                            android:layout_marginTop="40dp"-->
+                        <!--                            android:layout_marginBottom="10dp"-->
+                        <!--                            android:background="@android:color/transparent"-->
+                        <!--                            android:focusable="true"-->
+                        <!--                            android:fontFamily="@font/bariol_bold"-->
+                        <!--                            android:gravity="top|left"-->
+                        <!--                            android:textColor="@color/primaryDisabled"-->
+                        <!--                            android:hint="isi Tindakan di sini"-->
+                        <!--                            android:inputType="text|textMultiLine"-->
+                        <!--                            android:padding="5dp"-->
+                        <!--                            android:textSize="14sp"-->
+                        <!--                            android:overScrollMode="always"-->
+                        <!--                            android:scrollIndicators="right"-->
+                        <!--                            android:scrollbarStyle="insideOverlay"-->
+                        <!--                            android:scrollbars="vertical"/>-->
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
