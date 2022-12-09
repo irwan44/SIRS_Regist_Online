@@ -133,14 +133,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listMR_viewCycle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:scrollbars="vertical"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="150dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lyr_pilihKlinik"
-            app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints,NotSibling" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

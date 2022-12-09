@@ -2,6 +2,7 @@ package averin.sirs.com;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -29,7 +30,9 @@ import java.util.List;
 
 import averin.sirs.com.Adapter.DetailMRAdapter;
 import averin.sirs.com.Adapter.RequestHandler;
+import averin.sirs.com.Adapter.ResepDokterAdapter;
 import averin.sirs.com.Model.Login;
+import averin.sirs.com.Model.ResepObat;
 import averin.sirs.com.Model.Token;
 import averin.sirs.com.Model.isiSpinner;
 import averin.sirs.com.Ui.AppController;
@@ -41,10 +44,10 @@ public class DetailMR extends AppCompatActivity {
             namaKlinik, namaDokter, namaBagian, tglPeriksa, wktPeriksa,
             keadaan_umum, tekanan_darah, suhu, tinggi_badan, kesadaran, nadi, pernafasan, bb,
             nama_obat,jml_obat,note_obat,ket_obat,aturan_pakai;
-    TextView txt_namapasien, txt_nomr, txt_namadokter, txt_namapoli, txt_tglperiksa, txt_KeadaanUmum, txt_TekananDarah, txt_suhu,
-            txt_tinggi, txt_kesadaran, txt_nadi, txt_pernafasan, txt_bb, txt_nmobat,
-            txt_jmlobat, txt_aturan,txt_noteobat,txt_ketobat,txt_no;
-    EditText edt_tindakan, edt_icd10;
+    TextView txt_namaklinik, txt_namadokter, txt_namapoli, txt_tglperiksa,
+            txt_namapasien, txt_nomr, txt_umur, txt_goldarah, txt_jekel,
+            txt_KeadaanUmum, txt_TekananDarah, txt_suhu, txt_tinggi, txt_kesadaran, txt_nadi, txt_pernafasan, txt_bb;
+
     //Dialog Confirm
     AlertDialog.Builder dial_builder;
     AlertDialog dial_info_null;
@@ -56,6 +59,12 @@ public class DetailMR extends AppCompatActivity {
     ListView lsTindakan, lsICD10;
     List<isiSpinner> listtindakan = new ArrayList<isiSpinner>();
     List<isiSpinner> listicd10 = new ArrayList<isiSpinner>();
+
+    //Resep Dokter
+    RecyclerView rc_resepdokter;
+    ResepDokterAdapter adaptResepDokter;
+    List<ResepObat> listresep = new ArrayList<ResepObat>();
+
 
     String APIurl = RequestHandler.APIdev;
     public String urlDetailMR = APIurl+"/api/v1/get-detail-riwayat.php";
@@ -104,6 +113,7 @@ public class DetailMR extends AppCompatActivity {
 
         Bundle kiriman = getIntent().getExtras();
         if(kiriman != null){
+
             kodeklinik = kiriman.get("kd_klinik").toString();
             idRegist = kiriman.get("idRegKlinik").toString();
 
@@ -113,19 +123,23 @@ public class DetailMR extends AppCompatActivity {
             tglPeriksa = kiriman.get("tgl_daftar").toString();
             wktPeriksa = kiriman.get("wkt_daftar").toString();
 
-            umur_px = kiriman.get("umur_px").toString();
             gender_px = kiriman.get("gender_px").toString();
             goldarah_px = kiriman.get("goldarah_px").toString();
 
             getDetailMR();
         }
 
-//        Card Pasien MR Info
-        txt_namapasien = findViewById(R.id.txt_namapasien);
-        txt_nomr = findViewById(R.id.txt_nomr);
+//        Card Pasien MR Info & Dokter Periksa
+        txt_namaklinik = findViewById(R.id.txt_namaklinik);
         txt_namadokter = findViewById(R.id.txt_namadokter);
         txt_namapoli = findViewById(R.id.txt_namaPoli);
-        txt_tglperiksa = findViewById(R.id.txt_tglperiksa);
+        txt_tglperiksa = findViewById(R.id.txt_tgl_periksa);
+
+        txt_namapasien = findViewById(R.id.txt_namapasien);
+        txt_nomr = findViewById(R.id.txt_mrPasien);
+        txt_umur = findViewById(R.id.txt_umurPasien);
+        txt_goldarah = findViewById(R.id.txt_goldarah);
+        txt_jekel = findViewById(R.id.txt_jekelPasien);
 
 //        Vital Sign
         txt_KeadaanUmum = findViewById(R.id.txt_keadaanumum);
@@ -148,13 +162,9 @@ public class DetailMR extends AppCompatActivity {
         lsICD10.setAdapter(adapt_icd10);
 
 //        Resep Obat
-//        txt_no = findViewById(R.id.txt_no);
-//        txt_nmobat = findViewById(R.id.nmobat1);
-//        txt_jmlobat = findViewById(R.id.jmlobat1);
-//        txt_aturan = findViewById(R.id.aturan1);
-//        txt_noteobat = findViewById(R.id.noteobat1);
-//        txt_ketobat = findViewById(R.id.ketobat1);
-
+        rc_resepdokter = findViewById(R.id.rc_resepobat);
+        adaptResepDokter = new ResepDokterAdapter(DetailMR.this, listresep);
+        rc_resepdokter.setAdapter(adaptResepDokter);
 
         //Dialog Empty Data
         ViewGroup vg = findViewById(android.R.id.content);
@@ -279,13 +289,9 @@ public class DetailMR extends AppCompatActivity {
                             aturan_pakai = obj_ro.getString("nama_dosis");
                             ket_obat = obj_ro.getString("ket");
 
-//                            txt_no.setText(nom);
-//                            txt_nmobat.setText(nama_obat);
-//                            txt_noteobat.setText(note_obat);
-//                            txt_jmlobat.setText(jml_obat);
-//                            txt_aturan.setText(aturan_pakai);
-//                            txt_ketobat.setText(ket_obat);
+                            listresep.add(new ResepObat(nama_obat,note_obat,aturan_pakai,jml_obat,ket_obat));
                         }
+                        adaptResepDokter.notifyDataSetChanged();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -87,10 +87,6 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.D_Medis.NoActionBar" />
         <activity
-            android:name=".MRDetail"
-            android:exported="false"
-            android:theme="@style/Theme.D_Medis.NoActionBar" />
-        <activity
             android:name=".AntrianActivity"
             android:exported="false"
             android:label="AntrianActivity"

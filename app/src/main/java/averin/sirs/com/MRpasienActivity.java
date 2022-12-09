@@ -149,8 +149,8 @@ public class MRpasienActivity extends AppCompatActivity {
                             nama_bagian = jso.getString("nama_bagian");
                             wkt_periksa = jso.getString("wkt_periksa");
                             nama_dokter = jso.getString("nama_dokter");
-                            listMRpasien.add(new MRpasien(idReg,kode_klinik,nama_klinik,nama_dokter,nama_bagian,tgl_daftar,jam_awal, umur_px,
-                                    gender_px, goldarah_px));
+                            listMRpasien.add(new MRpasien(idReg,kode_klinik,nama_klinik,nama_dokter,nama_bagian,tgl_daftar,
+                                    jam_awal, gender_px, umur_px, goldarah_px));
                         }
                         MRpasienadapter.notifyDataSetChanged();
 //                        tv_namapasien.setText(nama_px);

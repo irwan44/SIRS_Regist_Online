@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="139dp"
+    android:layout_height="160dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <!--   Data parsing  -->
@@ -39,6 +39,12 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
     <TextView
+        android:id="@+id/txt_namaklinik"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
         android:id="@+id/txt_tgl_daftar"
         android:visibility="gone"
         android:layout_width="wrap_content"
@@ -53,7 +59,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/group_13"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp">
@@ -108,11 +114,11 @@
                     android:text="Spesialis Kandungan"/>
             </LinearLayout>
             <androidx.cardview.widget.CardView
-                android:layout_width="133dp"
+                android:layout_width="155dp"
                 android:layout_height="30dp"
                 app:cardBackgroundColor="@color/transparan"
                 app:cardCornerRadius="4dp"
-                android:translationX="-148dp"
+                android:translationX="-165dp"
                 android:translationY="16dp"
                 app:cardElevation="0dp"
                 tools:ignore="MissingConstraints">
