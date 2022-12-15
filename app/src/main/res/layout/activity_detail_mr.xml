@@ -798,58 +798,23 @@
                         android:text="Tindakan"
                         android:textStyle="bold"/>
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="110dp">
 
-                        <ScrollView
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rc_tindakan"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginBottom="10dp"
                             android:scrollIndicators="right"
-                            android:scrollbarStyle="insideOverlay"
                             android:scrollbars="vertical"
-                            android:layout_height="match_parent">
+                            android:scrollbarStyle="insideOverlay"
+                            android:overScrollMode="always"/>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <ListView
-                                    android:id="@+id/ls_tindakan"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginTop="40dp"
-                                    android:layout_marginRight="15dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:background="@android:color/transparent"
-                                     />
-
-                            </LinearLayout>
-
-                        </ScrollView>
-
-<!--                        <androidx.appcompat.widget.AppCompatEditText-->
-<!--                            android:id="@+id/edt_tindakan"-->
-<!--                            android:enabled="false"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="100dp"-->
-<!--                            android:layout_marginLeft="15dp"-->
-<!--                            android:layout_marginTop="40dp"-->
-<!--                            android:layout_marginBottom="10dp"-->
-<!--                            android:background="@android:color/transparent"-->
-<!--                            android:focusable="true"-->
-<!--                            android:fontFamily="@font/bariol_bold"-->
-<!--                            android:gravity="top|left"-->
-<!--                            android:textColor="@color/primaryDisabled"-->
-<!--                            android:hint="isi Tindakan di sini"-->
-<!--                            android:inputType="text|textMultiLine"-->
-<!--                            android:padding="5dp"-->
-<!--                            android:textSize="14sp"-->
-<!--                            android:overScrollMode="always"-->
-<!--                            android:scrollIndicators="right"-->
-<!--                            android:scrollbarStyle="insideOverlay"-->
-<!--                            android:scrollbars="vertical"/>-->
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -878,52 +843,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="110dp">
 
-                        <ScrollView
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rc_icd10"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginBottom="10dp"
                             android:scrollIndicators="right"
-                            android:scrollbarStyle="insideOverlay"
                             android:scrollbars="vertical"
-                            android:layout_height="match_parent">
+                            android:scrollbarStyle="insideOverlay"
+                            android:overScrollMode="always"/>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <ListView
-                                    android:id="@+id/ls_icd10"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginTop="40dp"
-                                    android:layout_marginRight="15dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:background="@android:color/transparent" />
-
-                            </LinearLayout>
-
-                        </ScrollView>
-
-                        <!--                        <androidx.appcompat.widget.AppCompatEditText-->
-                        <!--                            android:id="@+id/edt_tindakan"-->
-                        <!--                            android:enabled="false"-->
-                        <!--                            android:layout_width="match_parent"-->
-                        <!--                            android:layout_height="100dp"-->
-                        <!--                            android:layout_marginLeft="15dp"-->
-                        <!--                            android:layout_marginTop="40dp"-->
-                        <!--                            android:layout_marginBottom="10dp"-->
-                        <!--                            android:background="@android:color/transparent"-->
-                        <!--                            android:focusable="true"-->
-                        <!--                            android:fontFamily="@font/bariol_bold"-->
-                        <!--                            android:gravity="top|left"-->
-                        <!--                            android:textColor="@color/primaryDisabled"-->
-                        <!--                            android:hint="isi Tindakan di sini"-->
-                        <!--                            android:inputType="text|textMultiLine"-->
-                        <!--                            android:padding="5dp"-->
-                        <!--                            android:textSize="14sp"-->
-                        <!--                            android:overScrollMode="always"-->
-                        <!--                            android:scrollIndicators="right"-->
-                        <!--                            android:scrollbarStyle="insideOverlay"-->
-                        <!--                            android:scrollbars="vertical"/>-->
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
