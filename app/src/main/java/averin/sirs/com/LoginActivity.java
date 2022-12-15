@@ -329,10 +329,10 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
         }
 
         //Encrpt to MD%
-        MD5_Hash_String = base64.md5(pass);
-        //Encrypt to base64
-        base64data = MD5_Hash_String.getBytes(StandardCharsets.UTF_8);
-        base64str = Base64.encodeToString(base64data, Base64.DEFAULT);
+            MD5_Hash_String = base64.md5(pass);
+            //Encrypt to base64
+            base64data = MD5_Hash_String.getBytes(StandardCharsets.UTF_8);
+            base64str = Base64.encodeToString(base64data, Base64.DEFAULT);
 
         //if everything is fine
         class masukPakEko extends AsyncTask<Void, Void, String> {

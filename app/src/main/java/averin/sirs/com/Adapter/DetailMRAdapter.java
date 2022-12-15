@@ -6,55 +6,58 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import averin.sirs.com.Model.Klinik;
 import averin.sirs.com.Model.isiSpinner;
 import averin.sirs.com.R;
 
-public class DetailMRAdapter extends BaseAdapter {
+public class DetailMRAdapter extends RecyclerView.Adapter<DetailMRAdapter.DetailMRViewHolder> {
+    public Context context;
     private Activity activity;
-    private LayoutInflater inflater;
-    private List<isiSpinner> item;
+    private ArrayList<isiSpinner> list;
 
-    public DetailMRAdapter(Activity activity, List<isiSpinner> item) {
+    public DetailMRAdapter(Activity activity, ArrayList<isiSpinner> list, Context context) {
         this.activity = activity;
-        this.item = item;
+        this.list = list;
+        this.context = context;
+
     }
 
     @Override
-    public int getCount() {
-        return item.size();
+    public int getItemCount() {
+        return list.size();
     }
 
     @Override
-    public Object getItem(int location) {
-        return item.get(location);
+    public DetailMRAdapter.DetailMRViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.dialog_spinner, parent, false);
+        return new DetailMRAdapter.DetailMRViewHolder(view);
+
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public void onBindViewHolder(DetailMRAdapter.DetailMRViewHolder holder, int position) {
+        holder.txt_ket.setText(list.get(position).getId() + ". " + list.get(position).getKet());
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public class DetailMRViewHolder extends RecyclerView.ViewHolder {
+        public TextView txt_ket;
 
-        if (inflater == null)
-            inflater = (LayoutInflater) activity
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        public DetailMRViewHolder(View itemView) {
+            super(itemView);
+            txt_ket = itemView.findViewById(R.id.txt_ket);
 
-        if (convertView == null)
-            convertView = inflater.inflate(R.layout.dialog_spinner, null);
-
-        TextView pendidikan = (TextView) convertView.findViewById(R.id.txt_ket);
-
-        isiSpinner data;
-        data = item.get(position);
-
-        pendidikan.setText(data.getId() + ". " + data.getKet());
-
-        return convertView;
+        }
     }
 }

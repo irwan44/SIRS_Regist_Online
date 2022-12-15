@@ -32,8 +32,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import averin.sirs.com.Adapter.DetailMRAdapter;
+import averin.sirs.com.Adapter.KlinikAdapter;
 import averin.sirs.com.Adapter.RequestHandler;
 import averin.sirs.com.Adapter.ResepDokterAdapter;
+import averin.sirs.com.Model.Klinik;
 import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.ResepObat;
 import averin.sirs.com.Model.Token;
@@ -62,11 +64,11 @@ public class DetailMR extends AppCompatActivity {
     //Tindakan & ICD10
     DetailMRAdapter adapt_tindakan, adapt_icd10;
     ListView lsTindakan, lsICD10;
-    List<isiSpinner> listtindakan = new ArrayList<isiSpinner>();
-    List<isiSpinner> listicd10 = new ArrayList<isiSpinner>();
+    ArrayList<isiSpinner> listtindakan = new ArrayList<>();
+    ArrayList<isiSpinner> listicd10 = new ArrayList<>();
 
     //Resep Dokter
-    RecyclerView rc_resepdokter;
+    RecyclerView rc_tindakan, rc_icd10, rc_resepdokter;
     ResepDokterAdapter adaptResepDokter;
     List<ResepObat> listresep = new ArrayList<ResepObat>();
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
@@ -174,14 +176,16 @@ public class DetailMR extends AppCompatActivity {
         txt_pernafasan = findViewById(R.id.txt_Pernafasan);
 
 //        Tindakan
-        lsTindakan = findViewById(R.id.ls_tindakan);
-        adapt_tindakan = new DetailMRAdapter(DetailMR.this, listtindakan);
-        lsTindakan.setAdapter(adapt_tindakan);
+        rc_tindakan = findViewById(R.id.rc_tindakan);
+        rc_tindakan.setLayoutManager(new LinearLayoutManager(this));
+        adapt_tindakan = new DetailMRAdapter(this, listtindakan,this);
+        rc_tindakan.setAdapter(adapt_tindakan);
 
 //        ICD10
-        lsICD10 = findViewById(R.id.ls_icd10);
-        adapt_icd10 = new DetailMRAdapter(DetailMR.this, listicd10);
-        lsICD10.setAdapter(adapt_icd10);
+        rc_icd10 = findViewById(R.id.rc_icd10);
+        rc_icd10.setLayoutManager(new LinearLayoutManager(this));
+        adapt_icd10 = new DetailMRAdapter(this, listicd10,this);
+        rc_icd10.setAdapter(adapt_icd10);
 
 //        Resep Obat
         rc_resepdokter = findViewById(R.id.rc_resepobat);
@@ -215,6 +219,8 @@ public class DetailMR extends AppCompatActivity {
         final String iniToken = val_token;
         final String kdklinik = kodeklinik;
         final String Regid = idRegist;
+
+        listtindakan.clear();listicd10.clear();
 
         class ambilDataMR extends AsyncTask<Void, Void, String> {
 
@@ -291,24 +297,25 @@ public class DetailMR extends AppCompatActivity {
 
 //                        Tindakan
                         for(int td = 0; td < res_tindakan.length(); td++) {
+
                             isiSpinner item_tdk = new isiSpinner();
                             JSONObject obj_tdk = res_tindakan.getJSONObject(td);
                             item_tdk.setId(obj_tdk.getString("no_tdk"));
                             item_tdk.setKet(obj_tdk.getString("nama_tindakan"));
-
-                            // adding contact to contact list
                             listtindakan.add(item_tdk);
+
                         }
                         adapt_tindakan.notifyDataSetChanged();
 
 //                        ICD-10
                         for(int icd = 0; icd < res_icd10.length(); icd++) {
+
                             isiSpinner item_icd = new isiSpinner();
                             JSONObject obj_icd = res_icd10.getJSONObject(icd);
                             item_icd.setId(obj_icd.getString("no_icd"));
                             item_icd.setKet(obj_icd.getString("icd10"));
-
                             listicd10.add(item_icd);
+
                         }
                         adapt_icd10.notifyDataSetChanged();
 

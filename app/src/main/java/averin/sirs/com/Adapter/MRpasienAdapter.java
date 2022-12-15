@@ -53,7 +53,7 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
         holder.tv_tgldaftar.setText(list.get(position).getTgl_periksa());
         holder.tv_wktdaftar.setText(list.get(position).getJam_periksa());
         holder.tv_namaklinik.setText(list.get(position).getNama_klinik());
-        holder.txt_umurPasien.setText(list.get(position).getUmur_px());
+//        holder.txt_umurPasien.setText(list.get(position).getUmur_px());
         holder.txt_gender.setText(list.get(position).getGender_px());
         holder.txt_goldarah.setText(list.get(position).getGoldarah_px());
 
@@ -91,7 +91,7 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
             tv_tgldaftar = (TextView) itemView.findViewById(R.id.txt_tgl_daftar);
             tv_wktdaftar = (TextView) itemView.findViewById(R.id.txt_wkt_daftar);
             txt_tglPeriksa = (TextView) itemView.findViewById(R.id.txt_tglPeriksa);
-            txt_umurPasien = (TextView) itemView.findViewById(R.id.txt_umurPasien);
+//            txt_umurPasien = (TextView) itemView.findViewById(R.id.txt_umurPasien);
             txt_gender =  (TextView) itemView.findViewById(R.id.txt_gender);
             txt_goldarah =  (TextView) itemView.findViewById(R.id.txt_goldarah);
 
@@ -109,7 +109,7 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
 
                     String genderPx = txt_gender.getText().toString();
                     String goldarahPx = txt_goldarah.getText().toString();
-                  String umurPx = txt_umurPasien.getText().toString();
+//                  String umurPx = txt_umurPasien.getText().toString();
                     i.putExtra("idRegKlinik", idreg);
                     i.putExtra("kd_klinik", kde_klinik);
 
@@ -118,7 +118,7 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
                     i.putExtra("nama_dokter", nama_dokter);
                     i.putExtra("tgl_daftar", tgl_daftar);
 
-                    i.putExtra("umur_px", umurPx);
+//                    i.putExtra("umur_px", umurPx);
                     i.putExtra("gender_px", genderPx);
                     i.putExtra("goldarah_px", goldarahPx);
                     itemView.getContext().startActivity(i);
