@@ -417,4 +417,8 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
         Intent i = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(i);
     }
+    public void LupaPassword(View v){
+        Intent i = new Intent(LoginActivity.this, LupaPassword.class);
+        startActivity(i);
+    }
 }

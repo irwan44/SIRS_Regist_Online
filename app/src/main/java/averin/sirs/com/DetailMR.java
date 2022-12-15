@@ -176,13 +176,13 @@ public class DetailMR extends AppCompatActivity {
         txt_pernafasan = findViewById(R.id.txt_Pernafasan);
 
 //        Tindakan
-        rc_tindakan = findViewById(R.id.rc_tindakan);
+//        rc_tindakan = findViewById(R.id.rc_tindakan);
         rc_tindakan.setLayoutManager(new LinearLayoutManager(this));
         adapt_tindakan = new DetailMRAdapter(this, listtindakan,this);
         rc_tindakan.setAdapter(adapt_tindakan);
 
 //        ICD10
-        rc_icd10 = findViewById(R.id.rc_icd10);
+//        rc_icd10 = findViewById(R.id.rc_icd10);
         rc_icd10.setLayoutManager(new LinearLayoutManager(this));
         adapt_icd10 = new DetailMRAdapter(this, listicd10,this);
         rc_icd10.setAdapter(adapt_icd10);

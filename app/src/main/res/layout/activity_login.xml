@@ -177,11 +177,11 @@
                 android:fontFamily="@font/bariol_bold"
                 android:text="Lupa Password ?"
                 android:textSize="16dp"
+                android:onClick="LupaPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.889"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_login"

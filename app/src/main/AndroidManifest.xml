@@ -151,6 +151,10 @@
             android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/Theme.D_Medis.NoActionBar" />
+        <activity
+            android:name=".LupaPassword"
+            android:exported="false"
+            android:theme="@style/Theme.D_Medis.NoActionBar" />
     </application>
 
 </manifest>
