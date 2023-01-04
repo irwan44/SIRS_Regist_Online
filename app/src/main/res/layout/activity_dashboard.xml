@@ -169,6 +169,131 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_rectangle_grey2"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="5dp"
+                        android:background="@color/transparan"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="10dp"
+                        app:cardCornerRadius="10dp">
+
+                        <ImageView
+                            android:id="@+id/img_logo_rs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/sirs" />
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_nama_rs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:padding="10dp"
+                        android:text="RS Antan Medika"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/bariol_bold"
+                            android:text="Alamat :"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/txt_alamat_rs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:fontFamily="@font/bariol_bold"
+                            android:text="Dokter Gigi"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bariol_bold"
+                            android:text="Klinik :"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:fontFamily="@font/bariol_bold"
+                            android:text="Omega Citra Raya Gresik"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bariol_bold"
+                            android:text="Politeknik :"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:fontFamily="@font/bariol_bold"
+                            android:text="Dokter Umum"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+                </LinearLayout>
+                </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -309,105 +434,105 @@
                         android:translationY="119dp" />
                 </RelativeLayout>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+<!--                <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/bariol_bold"
-                        android:padding="20dp"
-                        android:paddingLeft="20dp"
-                        android:text="RS Terdekat"
-                        android:textSize="@dimen/activity_horizontal_margin"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/bariol_bold"-->
+<!--                        android:padding="20dp"-->
+<!--                        android:paddingLeft="20dp"-->
+<!--                        android:text="RS Terdekat"-->
+<!--                        android:textSize="@dimen/activity_horizontal_margin"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="58dp"
-                        android:gravity="right"
-                        android:paddingRight="10dp">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="58dp"-->
+<!--                        android:gravity="right"-->
+<!--                        android:paddingRight="10dp">-->
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="90dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            app:cardBackgroundColor="#CEECFF"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="0dp">
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="90dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            app:cardBackgroundColor="#CEECFF"-->
+<!--                            app:cardCornerRadius="20dp"-->
+<!--                            app:cardElevation="0dp">-->
 
-                            <TextView
-                                android:id="@+id/see_KlinikTerdekat"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:clickable="false"
-                                android:focusable="true"
-                                android:fontFamily="@font/bariol_bold"
-                                android:foreground="?attr/selectableItemBackground"
-                                android:gravity="center"
-                                android:onClick="registProvinsi"
-                                android:text="Lihat Semua"
-                                android:textColor="#4BABE7" />
+<!--                            <TextView-->
+<!--                                android:id="@+id/see_KlinikTerdekat"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:clickable="false"-->
+<!--                                android:focusable="true"-->
+<!--                                android:fontFamily="@font/bariol_bold"-->
+<!--                                android:foreground="?attr/selectableItemBackground"-->
+<!--                                android:gravity="center"-->
+<!--                                android:onClick="registProvinsi"-->
+<!--                                android:text="Lihat Semua"-->
+<!--                                android:textColor="#4BABE7" />-->
 
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </androidx.appcompat.widget.LinearLayoutCompat>
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RV_Klinikterdekat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:scrollbars="none" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/RV_Klinikterdekat"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:scrollbars="none" />-->
 
-                <RelativeLayout
-                    android:id="@+id/txt_null_klinikdekat"
-                    android:layout_width="match_parent"
-                    android:layout_height="190dp"
-                    android:gravity="center">
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/txt_null_klinikdekat"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="190dp"-->
+<!--                    android:gravity="center">-->
 
-                    <ImageView
-                        android:id="@+id/img_null_klinikterdekat"
-                        android:layout_width="match_parent"
-                        android:layout_height="137dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginEnd="30dp"
-                        android:scaleType="fitXY"
-                        android:scaleY="2"
-                        android:src="@drawable/klinikterdekat">
+<!--                    <ImageView-->
+<!--                        android:id="@+id/img_null_klinikterdekat"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="137dp"-->
+<!--                        android:layout_alignParentStart="true"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_marginStart="30dp"-->
+<!--                        android:layout_marginEnd="30dp"-->
+<!--                        android:scaleType="fitXY"-->
+<!--                        android:scaleY="2"-->
+<!--                        android:src="@drawable/klinikterdekat">-->
 
-                    </ImageView>
+<!--                    </ImageView>-->
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="80dp"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginEnd="80dp"
-                        app:cardBackgroundColor="#4BABE7"
-                        app:cardCornerRadius="6dp">
+<!--                    <androidx.cardview.widget.CardView-->
+<!--                        android:layout_width="160dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:layout_alignParentStart="true"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_marginStart="80dp"-->
+<!--                        android:layout_marginLeft="80dp"-->
+<!--                        android:layout_marginTop="30dp"-->
+<!--                        android:layout_marginEnd="80dp"-->
+<!--                        app:cardBackgroundColor="#4BABE7"-->
+<!--                        app:cardCornerRadius="6dp">-->
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/bariol_bold"
-                            android:gravity="center"
-                            android:text="Tidak ada RS terdekat"
-                            android:textColor="@color/white">
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:fontFamily="@font/bariol_bold"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="Tidak ada RS terdekat"-->
+<!--                            android:textColor="@color/white">-->
 
-                        </TextView>
-                    </androidx.cardview.widget.CardView>
-                </RelativeLayout>
+<!--                        </TextView>-->
+<!--                    </androidx.cardview.widget.CardView>-->
+<!--                </RelativeLayout>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -460,12 +585,13 @@
                                     tools:ignore="MissingConstraints">
 
                                     <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/img_registrs"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:clickable="true"
                                         android:focusable="true"
                                         android:foreground="?attr/selectableItemBackground"
-                                        android:onClick="registProvinsi"
+                                        android:onClick="RegistRS"
                                         android:paddingStart="20sp"
                                         android:paddingEnd="20sp"
                                         android:paddingBottom="30dp"
@@ -475,10 +601,11 @@
                                     </androidx.appcompat.widget.AppCompatImageView>
 
                                     <TextView
-
+                                        android:id="@+id/txt_registrs"
                                         android:layout_width="match_parent"
                                         android:layout_height="42dp"
                                         android:layout_gravity="bottom"
+                                        android:onClick="RegistRS"
                                         android:fontFamily="@font/bariol_bold"
                                         android:gravity="center"
                                         android:text="Registrasi \nRS">
@@ -772,58 +899,58 @@
                     android:orientation="horizontal"
                     android:scrollbars="none" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+<!--                <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/bariol_bold"
-                        android:padding="20dp"
-                        android:paddingLeft="20dp"
-                        android:text="daftar RS"
-                        android:textSize="@dimen/activity_horizontal_margin"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/bariol_bold"-->
+<!--                        android:padding="20dp"-->
+<!--                        android:paddingLeft="20dp"-->
+<!--                        android:text="daftar RS"-->
+<!--                        android:textSize="@dimen/activity_horizontal_margin"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="58dp"
-                        android:gravity="right"
-                        android:paddingRight="10dp">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="58dp"-->
+<!--                        android:gravity="right"-->
+<!--                        android:paddingRight="10dp">-->
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="90dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            app:cardBackgroundColor="#CEECFF"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="0dp">
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="90dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            app:cardBackgroundColor="#CEECFF"-->
+<!--                            app:cardCornerRadius="20dp"-->
+<!--                            app:cardElevation="0dp">-->
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:clickable="false"
-                                android:focusable="true"
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:clickable="false"-->
+<!--                                android:focusable="true"-->
 
-                                android:fontFamily="@font/bariol_bold"
-                                android:foreground="?attr/selectableItemBackground"
-                                android:gravity="center"
-                                android:onClick="registProvinsi"
-                                android:text="Lihat Semua"
-                                android:textColor="#4BABE7" />
+<!--                                android:fontFamily="@font/bariol_bold"-->
+<!--                                android:foreground="?attr/selectableItemBackground"-->
+<!--                                android:gravity="center"-->
+<!--                                android:onClick="registProvinsi"-->
+<!--                                android:text="Lihat Semua"-->
+<!--                                android:textColor="#4BABE7" />-->
 
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </androidx.appcompat.widget.LinearLayoutCompat>
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RV_listklinik"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:scrollbars="horizontal" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/RV_listklinik"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:scrollbars="horizontal" />-->
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.core.widget.NestedScrollView>

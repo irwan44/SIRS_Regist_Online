@@ -1,6 +1,7 @@
 package averin.sirs.com;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -10,8 +11,10 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -29,7 +32,10 @@ import averin.sirs.com.Ui.base64;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -51,16 +57,15 @@ import org.json.JSONObject;
 
 public class RegistrasiActivity extends AppCompatActivity{
 
-    File fileDirectoty, imageFilename;
     InputViewModel inputViewModel;
     Toolbar toolbar;
     Spinner gender;
     TextView txt_info_success, txt_info_failed;
-    EditText inputNIK, inputNama, inputEmail, inputUsername,
-            inputPassword, inputConfirmPass, inputHP, inputTgllahir, inputAlergi, inputAlamat;
+    EditText inputNIK, inputNama, inputEmail, inputUsername, inputPassword, inputConfirmPass, inputHP, inputTgllahir,
+            inputAlamat, inputAlergi, inputGoldarah;
     ImageView imageKTP, btnGallery, btnCamera;
     Button fabSave;
-    String val_token;
+    String val_token, jenKelamin;
     String userName = null;
     String pass = null;
     String APIurl = RequestHandler.APIdev;
@@ -68,7 +73,7 @@ public class RegistrasiActivity extends AppCompatActivity{
     HashMap<String, String> params = new HashMap<>();
 
     //Spinner Element
-    String[] gndr = new String[] {"Laki-laki", "Perempuan"};
+    String[] gndr = new String[]{"Laki-laki", "Perempuan"};
     AutoCompleteTextView actGender;
 
     //Dialog Confirm
@@ -77,66 +82,56 @@ public class RegistrasiActivity extends AppCompatActivity{
     LayoutInflater inflater;
     View v_success_regist, v_failed_regist, dialogView;
 
-    int REQ_CAMERA = 101;
-    int umurPeserta;
-    byte[] imageBytes;
-
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
-    private int PICK_IMAGE_REQUEST = 1;
-    private Bitmap bitmap;
-    private Uri filePath;
+    private Calendar mCalendar;
     private static final int STORAGE_PERMISSION_CODE = 123;
-    public String postUrl = APIurl+"/api/v1/post-daftar-px-baru.php";
-    public String urlLogin= APIurl+"/api/v1/px-akses.php";
-//    public static final int REQUEST_PICK_PHOTO = 1;
-//    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    public String postUrl = APIurl + "/api/v1/post-daftar-px-baru.php";
+    public String urlLogin = APIurl + "/api/v1/px-akses.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrasi_form);
 
-        toolbar          = findViewById(R.id.toolbar);
-        inputNIK         = findViewById(R.id.inputNIK);
-        inputNama        = findViewById(R.id.inputNama);
-        inputEmail       = findViewById(R.id.inputEmail);
-        inputHP          = findViewById(R.id.inputHP);
-        inputUsername    = findViewById(R.id.inputUsername);
-        inputPassword    = findViewById(R.id.inputPassword);
+        toolbar       = findViewById(R.id.toolbar);
+        inputNIK      = findViewById(R.id.inputNIK);
+        inputNama     = findViewById(R.id.inputNama);
+        inputEmail    = findViewById(R.id.inputEmail);
+        inputHP       = findViewById(R.id.inputHP);
+        inputAlamat   = findViewById(R.id.inputAlamat);
+        inputAlergi   = findViewById(R.id.inputAlergi);
+        inputTgllahir = findViewById(R.id.inputTgllahir);
+        inputGoldarah = findViewById(R.id.inputGoldarah);
+        inputUsername = findViewById(R.id.inputUsername);
+        inputPassword = findViewById(R.id.inputPassword);
         inputConfirmPass = findViewById(R.id.inputConfirmPassword);
-//        inputTgllahir    = findViewById(R.id.inputTglLahir);
-//        inputAlergi      = findViewById(R.id.inputAlergi);
-//        inputAlamat      = findViewById(R.id.inputAlamat);
-//        actGender        = findViewById(R.id.act_gender);
-
-        fabSave          = findViewById(R.id.fabSave);
-//        imageKTP = findViewById(R.id.imageKTP);
-//        btnGallery = findViewById(R.id.imageGallery);
-//        btnCamera = findViewById(R.id.imageCamera);
+        fabSave = findViewById(R.id.fabSave);
+        actGender = findViewById(R.id.act_gender);
 
         Bundle kiriman = getIntent().getExtras();
-        if(kiriman != null){
+        if (kiriman != null) {
             userName = kiriman.get("userName").toString();
-            pass     = kiriman.get("pass").toString();
+            pass = kiriman.get("pass").toString();
         }
-        if(userName != null){
-            if(userName.matches("\\d+(?:\\.\\d+)?")) {
+        if (userName != null) {
+            if (userName.matches("\\d+(?:\\.\\d+)?")) {
                 inputHP.setText(userName);
-            }else{
+            } else {
                 inputEmail.setText(userName);
             }
         }
 
-        if(pass != null){
+        if (pass != null) {
             inputPassword.setText(pass);
         }
 
+        actGender.setHint("Jenis Kelamin");
+        ArrayAdapter<String> spnAdapter = new ArrayAdapter<>(this, R.layout.dialog_spinner, gndr);
+        actGender.setAdapter(spnAdapter);
+
         //Dialog Confirm
         ViewGroup viewGroup = findViewById(android.R.id.content);
-        builder_success = new AlertDialog.Builder(RegistrasiActivity.this,R.style.CustomAlertDialog);
-        builder_failed = new AlertDialog.Builder(RegistrasiActivity.this,R.style.CustomAlertDialog);
+        builder_success = new AlertDialog.Builder(RegistrasiActivity.this, R.style.CustomAlertDialog);
+        builder_failed = new AlertDialog.Builder(RegistrasiActivity.this, R.style.CustomAlertDialog);
         inflater = getLayoutInflater();
         v_success_regist = inflater.inflate(R.layout.dialog_success_regist, viewGroup, false);
         v_failed_regist = inflater.inflate(R.layout.dialog_failed_regist, viewGroup, false);
@@ -151,29 +146,28 @@ public class RegistrasiActivity extends AppCompatActivity{
         dial_failed = builder_failed.create();
         dial_failed.setCancelable(false);
 
+        DatePickerDialog.OnDateSetListener datelahir =new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                mCalendar.set(Calendar.YEAR, year);
+                mCalendar.set(Calendar.MONTH,month);
+                mCalendar.set(Calendar.DAY_OF_MONTH,day);
+                updateLabel();
+            }
+        };
+
+        inputTgllahir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCalendar = Calendar.getInstance();
+                new DatePickerDialog(RegistrasiActivity.this, R.style.DialogTheme,datelahir,mCalendar.get(Calendar.YEAR),
+                        mCalendar.get(Calendar.MONTH),mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         Token tkn = AppController.getInstance(this).isiToken();
         val_token = String.valueOf(tkn.gettoken());
-//        setStatusBar();
         setInitLayput();
-//        btnCamera.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openCamera();
-//            }
-//        });
-
-        //Requesting storage permission
-//        requestStoragePermission();
-//
-//        Initializing views
-//        buttonChoose = (Button) findViewById(R.id.buttonChoose);
-//        buttonUpload = (Button) findViewById(R.id.buttonUpload);
-//        imageView = (ImageView) findViewById(R.id.imageView);
-//        editText = (EditText) findViewById(R.id.editTextName);
-//
-//        Setting clicklistener
-//        btnGallery.setOnClickListener(this);
-//        buttonUpload.setOnClickListener(this);
         fabSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,6 +183,7 @@ public class RegistrasiActivity extends AppCompatActivity{
                 lg.putExtra("pass_px", inputPassword.getText().toString());
                 startActivity(lg);
                 dial_success.dismiss();
+
             }
         });
         btn_ok_failed.setOnClickListener(new View.OnClickListener() {
@@ -206,124 +201,6 @@ public class RegistrasiActivity extends AppCompatActivity{
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
-
-//        inputTanggalLahir.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Calendar tanggalLahir = Calendar.getInstance();
-//                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-//                    @Override
-//                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                        tanggalLahir.set(Calendar.YEAR, year);
-//                        tanggalLahir.set(Calendar.MONTH, monthOfYear);
-//                        tanggalLahir.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//                        String strFormatDefault = "dd-MM-yyyy";
-//                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strFormatDefault, Locale.getDefault());
-//                        inputTanggalLahir.setText(simpleDateFormat.format(tanggalLahir.getTime()));
-//                    }
-//                };
-//
-//                new DatePickerDialog(RegistrasiActivity.this, R.style.DialogTheme, date, tanggalLahir
-//                        .get(Calendar.YEAR), tanggalLahir.get(Calendar.MONTH),
-//                        tanggalLahir.get(Calendar.DAY_OF_MONTH)).show();
-//            }
-//        });
-    }
-    public static void saveToPreferences(Context context, String key, Boolean allowed) {
-        SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-        prefsEditor.putBoolean(key, allowed);
-        prefsEditor.commit();
-    }
-
-    public static Boolean getFromPref(Context context, String key) {
-        SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF,
-                Context.MODE_PRIVATE);
-        return (myPrefs.getBoolean(key, false));
-    }
-
-    private void showAlert() {
-        AlertDialog alertDialog = new AlertDialog.Builder(RegistrasiActivity.this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("App needs to access the Camera.");
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ALLOW",
-                new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        ActivityCompat.requestPermissions(RegistrasiActivity.this,
-                                new String[]{Manifest.permission.CAMERA},
-                                MY_PERMISSIONS_REQUEST_CAMERA);
-                    }
-                });
-        alertDialog.show();
-    }
-
-    private void showSettingsAlert() {
-        AlertDialog alertDialog = new AlertDialog.Builder(RegistrasiActivity.this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("App needs to access the Camera.");
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
-                new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        //finish();
-                    }
-                });
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "SETTINGS",
-                new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        startInstalledAppDetailsActivity(RegistrasiActivity.this);
-                    }
-                });
-
-        alertDialog.show();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_CAMERA: {
-                for (int i = 0, len = permissions.length; i < len; i++) {
-                    String permission = permissions[i];
-
-                    if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                        boolean
-                                showRationale =
-                                ActivityCompat.shouldShowRequestPermissionRationale(
-                                        this, permission);
-
-                        if (showRationale) {
-                            showAlert();
-                        } else if (!showRationale) {
-                            // user denied flagging NEVER ASK AGAIN
-                            // you can either enable some fall back,
-                            // disable features of your app
-                            // or open another dialog explaining
-                            // again the permission and directing to
-                            // the app setting
-                            saveToPreferences(RegistrasiActivity.this, ALLOW_KEY, true);
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -347,9 +224,10 @@ public class RegistrasiActivity extends AppCompatActivity{
         context.startActivity(i);
     }
 
-    private void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
+    private void updateLabel(){
+        String myFormat="MM/dd/yy";
+        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.getDefault());
+        inputTgllahir.setText(dateFormat.format(mCalendar.getTime()));
     }
 
     public void ambilToken() {
@@ -436,10 +314,18 @@ public class RegistrasiActivity extends AppCompatActivity{
         final String username           = inputUsername.getText().toString();
         final String password           = inputPassword.getText().toString();
         final String cPass              = inputConfirmPass.getText().toString();
-//        final String alamat             = inputAlamat.getText().toString();
-//        final String alergi             = inputAlergi.getText().toString();
-//        final String jenis_kelamin      = gender.getSelectedItem().toString();
-//        final String tanggal_lahir      = inputTanggalLahir.getText().toString();
+        final String alamat             = inputAlamat.getText().toString();
+        final String alergi             = inputAlergi.getText().toString();
+        final String goldarah           = inputGoldarah.getText().toString();
+        final String jenis_kelamin      = actGender.getText().toString();
+        final String tanggal_lahir      = inputTgllahir.getText().toString();
+
+        String jekel                    = actGender.getText().toString();
+        if(jekel.equals("Laki-laki")){
+            jenKelamin = "L";
+        }else if(jekel.equals("Perempuan")){
+            jenKelamin = "P";
+        }
 
         //For Encrypt Password
         byte[] base64data;
@@ -476,23 +362,23 @@ public class RegistrasiActivity extends AppCompatActivity{
             return;
         }
 
-//        if (jenis_kelamin.equals("-Pilih gender-")) {
-//            error_spinner.setError("Silahkan pilih jenis kelamin anda");
-//            gender.requestFocus();
-//            return;
-//        }
+        if (jenis_kelamin.equals("Jenis Kelamin")) {
+            actGender.setError("Silahkan pilih jenis kelamin anda");
+            actGender.requestFocus();
+            return;
+        }
 
-//        if (TextUtils.isEmpty(alamat)) {
-//            inputAlamat.setError("Silahkan input alamat anda");
-//            inputAlamat.requestFocus();
-//            return;
-//        }
+        if (TextUtils.isEmpty(alamat)) {
+            inputAlamat.setError("Silahkan input alamat anda");
+            inputAlamat.requestFocus();
+            return;
+        }
 
-//        if (TextUtils.isEmpty(tanggal_lahir)) {
-//            inputTanggalLahir.setError("Silahkan input tgl lahir anda");
-//            inputTanggalLahir.requestFocus();
-//            return;
-//        }
+        if (TextUtils.isEmpty(tanggal_lahir)) {
+            inputTgllahir.setError("Silahkan input tgl lahir anda");
+            inputTgllahir.requestFocus();
+            return;
+        }
 
         if (no_hp.length() < 10) {
             inputHP.setError("Masukkan No. HP dengan benar");
@@ -526,11 +412,12 @@ public class RegistrasiActivity extends AppCompatActivity{
                 params.put("nama_pasien", nama_pasien);
                 params.put("email", email);
                 params.put("no_ktp", no_ktp);
-                params.put("jenis_kelamin", "");
+                params.put("jenis_kelamin", jenKelamin);
                 params.put("tanggal_lahir", "");
                 params.put("no_hp", no_hp);
-                params.put("alamat", "");
-                params.put("alergi", "");
+                params.put("alamat", alamat);
+                params.put("alergi", alergi);
+                params.put("golongan_darah", goldarah);
                 params.put("username", username);
                 params.put("password", MD5_Hash_String);
 
@@ -560,88 +447,6 @@ public class RegistrasiActivity extends AppCompatActivity{
                     } else {
                         dial_failed.show();
                         txt_info_failed.setText(obj.getString("msg"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        masukPakEko pl = new masukPakEko();
-        pl.execute();
-    }
-
-    private void masukLogin(String email, String pwd) {
-        //first getting the values
-        final String iniToken   = val_token;
-
-        //For Encrypt Password
-        byte[] base64data;
-        String base64str;
-        String MD5_Hash_String;
-
-        //Encrpt to MD%
-        MD5_Hash_String = base64.md5(pwd);
-        //Encrypt to base64
-        base64data = MD5_Hash_String.getBytes(StandardCharsets.UTF_8);
-        base64str = Base64.encodeToString(base64data, Base64.DEFAULT);
-
-        //if everything is fine
-        class masukPakEko extends AsyncTask<Void, Void, String> {
-
-            private ProgressBar progressBar;
-            @Override
-            protected String doInBackground(Void... voids) {
-                //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
-
-                //creating request parameters
-                HashMap<String, String> params = new HashMap<>();
-//                params.put("Mail", email);
-                params.put("User", email);
-                params.put("Pass", base64str);
-//                params.put("Pass", "ZDQ2YTFjZjllZTAzNzJiMGI4MzBkYWEwOTI5Y2M2ZWI=");
-
-                //returing the response
-
-                return requestHandler.postRequest(urlLogin, "POST", "X-Api-Token", iniToken, params);
-            }
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                /*progressBar = findViewById(R.id.loading);*/
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                progressBar.setVisibility(View.GONE);
-
-                try {//converting response to json object
-                    JSONObject obj = new JSONObject(s);
-
-                    //if no error in response
-                    if (obj.getString("code").equals("200")) {
-                        //getting the user from the response
-                        JSONObject lj = obj.getJSONObject("res");
-
-                        //creating a new user object
-                        Login login = new Login(
-                                lj.getString("nama_pasien"),
-                                lj.getString("no_ktp"),
-                                lj.getString("foto_pasien")
-                        );
-
-                        //storing the user in shared preferences
-                        AppController.getInstance(getApplicationContext()).userLogin(login);
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    } else if(obj.getString("code").equals("500")){
-//                        Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
-                        ambilToken();
-                    }else if(obj.getString("code").equals("300")){
-                        Intent ra = new Intent(RegistrasiActivity.this,LoginActivity.class);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

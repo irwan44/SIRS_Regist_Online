@@ -60,12 +60,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     String no_ktp, val_token, np, alamat, idk, urllogo, url_fotoPasien, spnidKota,
-            kd_klinik, nm_klinik, code_menu="1";
+            kode_rs, nama_rs, alamat_rs, code_menu="1";
     ConnectivityManager conMgr;
-    TextView txt_login, txt_namaPasien, txt_noktp, txt_lbl, txt_null_antrian, txt_see_klinikterdekat, txt_see_jadwaldokter;
+    TextView txt_login, txt_namaPasien, txt_noktp, txt_lbl, txt_null_antrian, txt_see_klinikterdekat,
+            txt_see_jadwaldokter, txt_namars,txt_alamatrs, txt_registrs;
     CircleImageView fotoPasien;
     ImageButton btn_notif;
-    ImageView img_antrian, img_user, img_mrpasien, img_null_antrian;
+    ImageView img_antrian, img_user, img_mrpasien, img_registrs, img_null_antrian, img_logors;
     CardView cv_null_antrian;
     RelativeLayout txt_null_klinikdekat;
     SharedPreferences sharedpreferences;
@@ -188,9 +189,16 @@ public class MainActivity extends AppCompatActivity {
         cv_null_antrian         = findViewById(R.id.cv_null_antrian);
         img_antrian             = findViewById(R.id.img_antrian);
         img_user                = findViewById(R.id.img_user);
-        txt_null_klinikdekat    = findViewById(R.id.txt_null_klinikdekat);
+        img_registrs            = findViewById(R.id.img_registrs);
+        txt_registrs            = findViewById(R.id.txt_registrs);
+
+        img_logors = findViewById(R.id.img_logo_rs);
+        txt_namars = findViewById(R.id.txt_nama_rs);
+        txt_alamatrs = findViewById(R.id.txt_alamat_rs);
+
+//        txt_null_klinikdekat    = findViewById(R.id.txt_null_klinikdekat);
         img_mrpasien            = findViewById(R.id.img_mrpasien);
-        txt_see_klinikterdekat  = findViewById(R.id.see_KlinikTerdekat);
+//        txt_see_klinikterdekat  = findViewById(R.id.see_KlinikTerdekat);
         txt_see_jadwaldokter    = findViewById(R.id.see_JadwalDokter);
 
         //CEK SESSION LOGIN
@@ -205,19 +213,19 @@ public class MainActivity extends AppCompatActivity {
             txt_login.setVisibility(View.VISIBLE);
             btn_notif.setVisibility(View.GONE);
             txt_lbl.setVisibility(View.GONE);
-            txt_null_klinikdekat.setVisibility(View.VISIBLE);
+//            txt_null_klinikdekat.setVisibility(View.VISIBLE);
             txt_namaPasien.setVisibility(View.GONE);
             fotoPasien.setVisibility(View.INVISIBLE);
             txt_noktp.setVisibility(View.GONE);
 
-            txt_null_klinikdekat.setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
-                    if(dialogView.getParent() != null){
-                        ((ViewGroup)dialogView.getParent()).removeView(dialogView);
-                    }
-                    dial_login.show();
-                }
-            });
+//            txt_null_klinikdekat.setOnClickListener(new View.OnClickListener(){
+//                public void onClick(View v){
+//                    if(dialogView.getParent() != null){
+//                        ((ViewGroup)dialogView.getParent()).removeView(dialogView);
+//                    }
+//                    dial_login.show();
+//                }
+//            });
 
             img_antrian.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
@@ -242,6 +250,22 @@ public class MainActivity extends AppCompatActivity {
                     dial_login.show();
                 }
             });
+            img_registrs.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+//                    if(dialogView.getParent() != null){
+//                        ((ViewGroup)dialogView.getParent()).removeView(dialogView);
+//                    }
+                    dial_login.show();
+                }
+            });
+            txt_registrs.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+//                    if(dialogView.getParent() != null){
+//                        ((ViewGroup)dialogView.getParent()).removeView(dialogView);
+//                    }
+                    dial_login.show();
+                }
+            });
         }else{
             txt_login.setVisibility(View.GONE);
             //SET DATA T0 TOOLBAR
@@ -258,13 +282,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        txt_see_klinikterdekat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent aw = new Intent(MainActivity.this, RegistbyProvinsi.class);
-                startActivityForResult(aw, 2);
-            }
-        });
+//        txt_see_klinikterdekat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent aw = new Intent(MainActivity.this, RegistbyProvinsi.class);
+//                startActivityForResult(aw, 2);
+//            }
+//        });
         //SPINNER KOTA
         spnKota = findViewById(R.id.s_kota);
         spnKotaadapter = new SpinnerAdapter(MainActivity.this, listKota);
@@ -276,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 ArrayKlinikDekat.clear();
                 spnidKota =listKota.get(position).getId();
-                viewKlinikDekat(spnidKota);
+//                viewKlinikDekat(spnidKota);
                 viewDokter(spnidKota);
             }
             @Override
@@ -287,21 +311,21 @@ public class MainActivity extends AppCompatActivity {
 
         //Declare RecyleView
         list_Antrian = findViewById(R.id.RV_listAntrian);
-        list_Klinik = findViewById(R.id.RV_listklinik);
-        list_Klinikterdekat = findViewById(R.id.RV_Klinikterdekat);
+//        list_Klinik = findViewById(R.id.RV_listklinik);
+//        list_Klinikterdekat = findViewById(R.id.RV_Klinikterdekat);
         list_Dokter = findViewById(R.id.RV_listDokter);
         LinearLayoutManager horizondokter = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        LinearLayoutManager horizonKlinikDekat = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+//        LinearLayoutManager horizonKlinikDekat = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
 
         list_Antrian.setLayoutManager(new LinearLayoutManager(this));
-        list_Klinik.setLayoutManager(new LinearLayoutManager(this));
-        list_Klinikterdekat.setLayoutManager(horizonKlinikDekat);
+//        list_Klinik.setLayoutManager(new LinearLayoutManager(this));
+//        list_Klinikterdekat.setLayoutManager(horizonKlinikDekat);
         list_Dokter.setLayoutManager(horizondokter);
 
-        klinikshortadapter = new KlinikshortAdapter(this,ArrayKlinik, this);
-        list_Klinik.setAdapter(klinikshortadapter);
-        klinikdekatadapter = new KlinikDekatAdapter(this, ArrayKlinikDekat, this);
-        list_Klinikterdekat.setAdapter(klinikdekatadapter);
+//        klinikshortadapter = new KlinikshortAdapter(this,ArrayKlinik, this);
+//        list_Klinik.setAdapter(klinikshortadapter);
+//        klinikdekatadapter = new KlinikDekatAdapter(this, ArrayKlinikDekat, this);
+//        list_Klinikterdekat.setAdapter(klinikdekatadapter);
         antrianDSBadapt = new AntrianDSBAdapter(this, ArrayAntrian);
         list_Antrian.setAdapter(antrianDSBadapt);
         jadwaldokterAdapter = new JadwalDokterDSBAdapter(this, ArrayDokterPoli);
@@ -371,8 +395,8 @@ public class MainActivity extends AppCompatActivity {
                     if (obj.getString("code").equals("500")) {
                         ambilToken();
                     } else {
-                        GetspnKota();
-                        viewKlinik();
+//                        GetspnKota();
+//                        viewKlinik();
                         viewAntrian();
                         viewDetail();
                     }
@@ -445,8 +469,8 @@ public class MainActivity extends AppCompatActivity {
                         //storing the user in shared preferences
                         AppController.getInstance(getApplicationContext()).getToken(token);
                         val_token = String.valueOf(obj.getString("token"));
-                        GetspnKota();
-                        viewKlinik();
+//                        GetspnKota();
+//                        viewKlinik();
                         viewAntrian();
                         viewDetail();
 
@@ -526,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
                                 ArrayKlinik.add(new Klinik(idk, np, alamat, urllogo));
                             }
                         }
-                        klinikshortadapter.notifyDataSetChanged();
+//                        klinikshortadapter.notifyDataSetChanged();
 //                        klinikdekatadapter.notifyDataSetChanged();
                     }
                 } catch (JSONException e) {
@@ -541,7 +565,7 @@ public class MainActivity extends AppCompatActivity {
     private void viewKlinikDekat(final String idKota) {
         //first getting the values
         final String iniToken   = val_token;
-        ArrayKlinikDekat.clear();
+//        ArrayKlinikDekat.clear();
 
         //if everything is fine
         class masukPakEko extends AsyncTask<Void, Void, String> {
@@ -581,8 +605,8 @@ public class MainActivity extends AppCompatActivity {
                     //if no error in response
                     if (obj.getString("code").equals("200")) {
                         JSONArray jr = obj.getJSONArray("res");
-                        txt_null_klinikdekat.setVisibility(View.GONE);
-                        list_Klinikterdekat.setVisibility(View.VISIBLE);
+//                        txt_null_klinikdekat.setVisibility(View.GONE);
+//                        list_Klinikterdekat.setVisibility(View.VISIBLE);
 
 //                        if (jr.length() > 5) {
                         for (int a = 0; a < jr.length(); a++) {
@@ -591,13 +615,13 @@ public class MainActivity extends AppCompatActivity {
                             alamat = jso.getString("alamat");
                             idk = jso.getString("id");
                             urllogo = jso.getString("logo_yankes");
-                            ArrayKlinikDekat.add(new Klinik(idk, np, alamat, urllogo));
+//                            ArrayKlinikDekat.add(new Klinik(idk, np, alamat, urllogo));
                         }
-                        klinikdekatadapter.notifyDataSetChanged();
+//                        klinikdekatadapter.notifyDataSetChanged();
 
                     } else if(obj.getString("code").equals("500")) {
-                        list_Klinikterdekat.setVisibility(View.GONE);
-                        txt_null_klinikdekat.setVisibility(View.VISIBLE);
+//                        list_Klinikterdekat.setVisibility(View.GONE);
+//                        txt_null_klinikdekat.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -751,61 +775,6 @@ public class MainActivity extends AppCompatActivity {
         pl.execute();
     }
 
-    private void viewDetail() {
-        //first getting the values
-        final String iniToken   = val_token;
-        final String id_klinik  = "NDcx";
-
-        //if everything is fine
-        class masukPakEko extends AsyncTask<Void, Void, String> {
-
-            private ProgressBar progressBar;
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
-
-                //creating request parameters
-                HashMap<String, String> params = new HashMap<>();
-                params.put("id", id_klinik);
-
-                //returing the response
-                return requestHandler.requestData(urlKlinikDetail, "POST", "application/json; charset=utf-8", "X-Api-Token",
-                        iniToken, "X-Px-Key", "", params);
-            }
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-//                progressBar = findViewById(R.id.progressBar);
-//                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-//                progressBar.setVisibility(View.GONE);
-
-                try {//converting response to json object
-                    JSONObject obj = new JSONObject(s);
-                    //if no error in response
-//                    if (obj.getString("code").equals("500")) {
-//                        Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
-//                    } else {
-                    kd_klinik = obj.getString("kode_klinik");
-                    nm_klinik = obj.getString("nama_perusahaan");
-//                    viewDokter(kd_klinik);
-//                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        masukPakEko pl = new masukPakEko();
-        pl.execute();
-    }
-
     private void viewDokter(final String id_kota) {
         //first getting the values
         final String iniToken   = val_token;
@@ -862,7 +831,7 @@ public class MainActivity extends AppCompatActivity {
                         String jam_akhir    = jso.getString("jam_akhir");
                         String wkt_periksa  = jso.getString("waktu_periksa");
                         String sFoto        = jso.getString("foto");
-                        ArrayDokterPoli.add(new DokterPoli(kd_klinik, nm_klinik, nm_dokter, kd_dokter, idnya_dokter, kd_bag, bag, jam_mulai, jam_akhir, wkt_periksa, sFoto));
+                        ArrayDokterPoli.add(new DokterPoli(kode_rs, nama_rs, nm_dokter, kd_dokter, idnya_dokter, kd_bag, bag, jam_mulai, jam_akhir, wkt_periksa, sFoto));
                     }
                     jadwaldokterAdapter.notifyDataSetChanged();
 //                    }
@@ -875,30 +844,72 @@ public class MainActivity extends AppCompatActivity {
         pl.execute();
     }
 
-    public void openvcs(View v) {
-//        if(dialogView.getParent() != null){
-//        ((ViewGroup)dialogView.getParent()).removeView(dialogView);
-//        }
-        dial_login.show();
+    private void viewDetail() {
+        //first getting the values
+        final String iniToken   = val_token;
+        final String id_klinik  = "NDcy";
+
+        //if everything is fine
+        class masukPakEko extends AsyncTask<Void, Void, String> {
+
+            private ProgressBar progressBar;
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id", id_klinik);
+
+                //returing the response
+                return requestHandler.requestData(urlKlinikDetail, "POST", "application/json; charset=utf-8", "X-Api-Token",
+                        iniToken, "X-Px-Key", "", params);
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+//                progressBar = findViewById(R.id.progressBar);
+//                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+//                progressBar.setVisibility(View.GONE);
+
+                try {//converting response to json object
+                    JSONObject jr = new JSONObject(s);
+                    //if no error in response
+                    if (jr.getString("code").equals("500")) {
+                        txt_namars.setText(" - ");
+                        txt_alamatrs.setText(" - ");
+
+                    } else if(jr.getString("code").equals("200")){
+                        JSONArray res = jr.getJSONArray("res");
+                        for(int a = 0; a < jr.length(); a++) {
+                            JSONObject obj = res.getJSONObject(a);
+                            kode_rs = obj.getString("kode_klinik");
+                            nama_rs = obj.getString("nama_perusahaan");
+                            alamat_rs = obj.getString("alamat");
+                            String mailKlinik = obj.getString("email");
+                            txt_namars.setText(nama_rs);
+                            txt_alamatrs.setText(alamat_rs);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        masukPakEko pl = new masukPakEko();
+        pl.execute();
     }
-    @Override
-    public void onBackPressed() {
-//        if (doubleTapParam) {
-//            super.onBackPressed();
-//            MainActivity.this.finish();
-//            System.exit(0);
-//        }
-//
-//        this.doubleTapParam = true;
-//        Toast.makeText(this, "Tap sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
-//
-//        new Handler().postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                doubleTapParam = false;
-//            }
-//        }, 3000);
+
+    public void openvcs(View v) {
+        dial_login.show();
     }
 
     public void actLogin(View v) {
@@ -916,13 +927,12 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(MainActivity.this, InfoDmedis.class);
         startActivity(i);
     }
-    public void DaftarKlinik(View view) {
-        Intent i = new Intent(MainActivity.this, RegistKlinik.class);
-        startActivity(i);
-    }
-
-    public void Development(View view) {
-        Intent i = new Intent(MainActivity.this, DevelopmentActivity.class);
+    public void RegistRS(View view) {
+        Intent i = new Intent(MainActivity.this, RegistPoli.class);
+        i.putExtra("kde_Klinik", kode_rs);
+        i.putExtra("kde_dokter", "");
+        i.putExtra("nma_Klinik", nama_rs);
+        i.putExtra("nma_dokter", "");
         startActivity(i);
     }
     public void MRpasien(View view) {
