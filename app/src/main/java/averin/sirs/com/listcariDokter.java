@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,17 +29,20 @@ import java.util.List;
 
 import averin.sirs.com.Adapter.CariDokterAdapter;
 import averin.sirs.com.Adapter.RequestHandler;
+import averin.sirs.com.Model.Antrian;
 import averin.sirs.com.Model.CariDokter;
 import averin.sirs.com.Model.DokterPoli;
+import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.Token;
 import averin.sirs.com.Ui.AppController;
 
-public class listcariDokter extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class listcariDokter extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    String val_token, kodeKlinik, namaKlinik, idDokter, kdDokter, namaDokter;
+    String val_token, kodeKlinik, namaKlinik, kd_klinik, nm_klinik, nm_Dokter, nm_dokter, kd_dokter, idnya_dokter,
+            kd_bag, bag, sFoto, jam_mulai, jam_akhir, wkt_periksa, idk;
 
     ProgressDialog pDialog;
-    List<CariDokter> caridokter = new ArrayList<CariDokter>();
+    List<DokterPoli> caridokter = new ArrayList<DokterPoli>();
     CariDokterAdapter adapter;
     SwipeRefreshLayout swipe;
     ConnectivityManager conMgr;
@@ -98,36 +102,35 @@ public class listcariDokter extends AppCompatActivity implements SwipeRefreshLay
         list_view.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(listcariDokter.this, RegistPoli.class);
-                idDokter = caridokter.get(position).getIdDokter();
-                kdDokter = caridokter.get(position).getkodeDokter();
-                namaDokter = caridokter.get(position).getnamaDokter();
-                i.putExtra("kde_Klinik",kodeKlinik);
-                i.putExtra("kde_dokter", kdDokter);
-                i.putExtra("nma_Klinik",namaKlinik);
-                i.putExtra("nma_dokter", namaDokter);
-                startActivity(i);
-
-//                Intent i = new Intent(listcariDokter.this, DaftarPoli.class);
-//                String urlFoto = caridokter.get(position).getFoto_dokter();
-//                String kode_dokter = caridokter.get(position).getKode_dokter();
-//                String idnya_dokter = caridokter.get(position).getIdnya_dokter();
-//                String nama_pegawai = caridokter.get(position).getNama_dokter();
-//                String kode_bagian = caridokter.get(position).getKode_bag();
-//                String nama_bagian = caridokter.get(position).getBagian();
-//                String kde_klinik = caridokter.get(position).getKd_klinik();
-//                String nma_klinik = caridokter.get(position).getNm_klinik();
-//                String durasi = caridokter.get(position).getWaktu_periksa();
-//                i.putExtra("urlFoto", urlFoto);
-//                i.putExtra("kd_dokter", kode_dokter);
-//                i.putExtra("idnya_dokter", idnya_dokter);
-//                i.putExtra("nm_dokter", nama_pegawai);
-//                i.putExtra("kd_bag", kode_bagian);
-//                i.putExtra("nm_bag", nama_bagian);
-//                i.putExtra("kd_klinik1", kde_klinik);
-//                i.putExtra("nm_klinik", nma_klinik);
-//                i.putExtra("durasi", durasi);
+                Intent i = new Intent(listcariDokter.this, DaftarPoli.class);
+//                idDokter = caridokter.get(position).getIdDokter();
+//                kdDokter = caridokter.get(position).getkodeDokter();
+//                namaDokter = caridokter.get(position).getnamaDokter();
+//                i.putExtra("kde_Klinik",kodeKlinik);
+//                i.putExtra("kde_dokter", kdDokter);
+//                i.putExtra("nma_Klinik",namaKlinik);
+//                i.putExtra("nma_dokter", namaDokter);
 //                startActivity(i);
+
+                String urlFoto = caridokter.get(position).getFoto_dokter();
+                String kode_dokter = caridokter.get(position).getKode_dokter();
+                String idnya_dokter = caridokter.get(position).getIdnya_dokter();
+                String nama_pegawai = caridokter.get(position).getNama_dokter();
+                String kode_bagian = caridokter.get(position).getKode_bag();
+                String nama_bagian = caridokter.get(position).getBagian();
+                String kde_klinik = caridokter.get(position).getKd_klinik();
+                String nma_klinik = caridokter.get(position).getNm_klinik();
+                String durasi = caridokter.get(position).getWaktu_periksa();
+                i.putExtra("urlFoto", urlFoto);
+                i.putExtra("kd_dokter", kode_dokter);
+                i.putExtra("idnya_dokter", idnya_dokter);
+                i.putExtra("nm_dokter", nama_pegawai);
+                i.putExtra("kd_bag", kode_bagian);
+                i.putExtra("nm_bag", nama_bagian);
+                i.putExtra("kd_klinik", kodeKlinik);
+                i.putExtra("nm_klinik", namaKlinik);
+                i.putExtra("durasi", durasi);
+                startActivity(i);
 
             }
         });
@@ -174,9 +177,9 @@ public class listcariDokter extends AppCompatActivity implements SwipeRefreshLay
                 //creating request parameters
                 params = new HashMap<String, HashMap<String, String>>();
                 HashMap<String, String> val = new HashMap<String, String>();
-                val.put("filter", keyword);
+//                val.put("filter", keyword);
                 params.put("kode_klinik", kdeKlinik);
-                params.put("src", val);
+                params.put("filter", keyword);
                 //returing the response
                 return requestHandler.requestData(urlCariDokter, "POST", "application/json; charset=utf-8", "X-Api-Token",
                         iniToken, "X-Px-Key", "", params);
@@ -199,30 +202,32 @@ public class listcariDokter extends AppCompatActivity implements SwipeRefreshLay
                     //if no error in response
                     if (obj.getString("code").equals("500")) {
                         Toast.makeText(getApplicationContext(), obj.getString("msg"),
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
                     } else {
                         caridokter.clear();
                         adapter.notifyDataSetChanged();
-                        JSONArray jr = obj.getJSONArray("res");
+                        JSONArray jr = obj.getJSONArray("items");
                         for (int a = 0; a < jr.length(); a++) {
                             JSONObject jso = jr.getJSONObject(a);
-//                            nm_dokter    = jso.getString("nama_pegawai");
-//                            kd_dokter    = jso.getString("kode_dokter");
-//                            idnya_dokter = jso.getString("id");
-//                            kd_bag       = jso.getString("kode_bagian");
-//                            bag          = jso.getString("nama_bagian");
-//                            jam_mulai    = jso.getString("jam_mulai");
-//                            jam_akhir    = jso.getString("jam_akhir");
-//                            wkt_periksa  = jso.getString("waktu_periksa");
-//                            sFoto        = jso.getString("foto");
-                            idDokter    = jso.getString("id_dokter");
-                            kdDokter    = jso.getString("kode_dokter");
-                            namaDokter  = jso.getString("nama_dokter");
-                            caridokter.add(new CariDokter(idDokter,kdDokter,namaDokter));
 
-//                            caridokter.add(new DokterPoli(kd_klinik, nm_klinik, nm_dokter,
-//                                    kd_dokter, idnya_dokter, kd_bag, bag, jam_mulai, jam_akhir,
-//                                    wkt_periksa, sFoto));
+//                            idDokter    = jso.getString("id_dokter");
+//                            kdDokter    = jso.getString("kode_dokter");
+//                            namaDokter  = jso.getString("nama_dokter");
+//                            caridokter.add(new CariDokter(idDokter,kdDokter,namaDokter));
+
+                            nm_dokter    = jso.getString("nama_pegawai");
+                            kd_dokter    = jso.getString("kode_dokter");
+                            idnya_dokter = jso.getString("id");
+                            kd_bag       = jso.getString("kode_bagian");
+                            bag          = jso.getString("nama_bagian");
+                            jam_mulai    = jso.getString("jam_mulai");
+                            jam_akhir    = jso.getString("jam_akhir");
+                            wkt_periksa  = jso.getString("waktu_periksa");
+                            sFoto        = jso.getString("foto");
+
+                            caridokter.add(new DokterPoli(kd_klinik, nm_klinik, nm_dokter,
+                                    kd_dokter, idnya_dokter, kd_bag, bag, jam_mulai, jam_akhir,
+                                    wkt_periksa, sFoto));
                         }
                     }
                 } catch (JSONException e) {
@@ -276,18 +281,33 @@ public class listcariDokter extends AppCompatActivity implements SwipeRefreshLay
                     //if no error in response
                     if (obj.getString("code").equals("500")) {
                         String pesan = obj.getString("msg");
-                        caridokter.add(new CariDokter("","",pesan));
+                        Toast.makeText(listcariDokter.this,
+                                pesan, Toast.LENGTH_SHORT).show();
                     } else {
                         caridokter.clear();
                         adapter.notifyDataSetChanged();
                         swipe.setRefreshing(true);
-                        JSONArray jr = obj.getJSONArray("res");
+                        JSONArray jr = obj.getJSONArray("items");
                         for (int a = 0; a < jr.length(); a++) {
                             JSONObject jso = jr.getJSONObject(a);
-                            idDokter    = jso.getString("id_dokter");
-                            kdDokter    = jso.getString("kode_dokter");
-                            namaDokter  = jso.getString("nama_dokter");
-                            caridokter.add(new CariDokter(idDokter,kdDokter,namaDokter));
+//                            idDokter    = jso.getString("id_dokter");
+//                            kdDokter    = jso.getString("kode_dokter");
+//                            namaDokter  = jso.getString("nama_dokter");
+//                            caridokter.add(new CariDokter(idDokter,kdDokter,namaDokter));
+
+                            nm_dokter    = jso.getString("nama_pegawai");
+                            kd_dokter    = jso.getString("kode_dokter");
+                            idnya_dokter = jso.getString("id");
+                            kd_bag       = jso.getString("kode_bagian");
+                            bag          = jso.getString("nama_bagian");
+                            jam_mulai    = jso.getString("jam_mulai");
+                            jam_akhir    = jso.getString("jam_akhir");
+                            wkt_periksa  = jso.getString("waktu_periksa");
+                            sFoto        = jso.getString("foto");
+
+                            caridokter.add(new DokterPoli(kd_klinik, nm_klinik, nm_dokter,
+                                    kd_dokter, idnya_dokter, kd_bag, bag, jam_mulai, jam_akhir,
+                                    wkt_periksa, sFoto));
                         }
                     }
                     adapter.notifyDataSetChanged();

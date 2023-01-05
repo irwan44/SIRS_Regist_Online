@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -116,6 +117,11 @@ public class AntrianActivity extends AppCompatActivity {
                 }, 4000); // your progress will start after 5 seconds
             }
         });
+    }
+
+    public void onBackPressed() {
+        Intent startMain = new Intent(AntrianActivity.this,MainActivity.class);
+        startActivity(startMain);
     }
 
     public void cekToken() {

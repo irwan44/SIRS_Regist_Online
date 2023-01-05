@@ -231,14 +231,11 @@ public class ScanQRCode extends AppCompatActivity {
                 .check();
     }
 
-//    @Override
-//    public void handleResult(Result rawResult) {
-//        Log.v("TAG", rawResult.getText()); // Prints scan results
-//        Log.v("TAG", rawResult.getBarcodeFormat().toString());
-//        hsl_qrcode = rawResult.getText();
-//        cekToken(hsl_qrcode);
-//        mScannerView.resumeCameraPreview(this);
-//    }
+    public void onBackPressed() {
+        Intent ad = new Intent(ScanQRCode.this,AntrianDetail.class);
+        ad.putExtra("regId", regId);
+        startActivity(ad);
+    }
 
     public void cekToken(final String str_qrcode) {
         //first getting the values

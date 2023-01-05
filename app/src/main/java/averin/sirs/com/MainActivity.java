@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         img_registrs            = findViewById(R.id.img_registrs);
         txt_registrs            = findViewById(R.id.txt_registrs);
 
-        img_logors = findViewById(R.id.img_logo_rs);
+//        img_logors = findViewById(R.id.img_logo_rs);
         txt_namars = findViewById(R.id.txt_nama_rs);
         txt_alamatrs = findViewById(R.id.txt_alamat_rs);
 
@@ -349,6 +349,11 @@ public class MainActivity extends AppCompatActivity {
         cekToken();
         //When BACK BUTTON is pressed, the activity on the stack is restarted
         //Do what you want on the refresh procedure here
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     public void cekToken() {
