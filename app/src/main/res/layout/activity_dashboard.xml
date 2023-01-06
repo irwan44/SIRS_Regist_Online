@@ -227,74 +227,74 @@
                             android:drawableLeft="@drawable/ic_location15"
                             android:drawablePadding="7dp"
                             android:fontFamily="@font/bariol_bold"
-                            android:text="Dokter Gigi"
+                            android:text="Alamat RS"
                             android:textColor="@color/black" />
 
                 </LinearLayout>
                 </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center">-->
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/pg_lokasi"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/border"
-                        android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/nestedScrollView"
-                        tools:ignore="MissingConstraints">
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/pg_lokasi"-->
+<!--                        android:layout_width="350dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/border"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/nestedScrollView"-->
+<!--                        tools:ignore="MissingConstraints">-->
 
-                        <LinearLayout
-                            android:id="@+id/linearLayout3"
-                            android:layout_width="190dp"
-                            android:layout_height="50dp"
-                            android:gravity="center"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/linearLayout3"-->
+<!--                            android:layout_width="190dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:gravity="center"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/bariol_regular"
-                                android:gravity="center"
-                                android:padding="5sp"
-                                android:text="Silahkan pilih lokasi" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/bariol_regular"-->
+<!--                                android:gravity="center"-->
+<!--                                android:padding="5sp"-->
+<!--                                android:text="Silahkan pilih lokasi" />-->
 
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="5sp"
-                                android:src="@drawable/ic_location15" />
-                        </LinearLayout>
+<!--                            <ImageView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:padding="5sp"-->
+<!--                                android:src="@drawable/ic_location15" />-->
+<!--                        </LinearLayout>-->
 
-                        <LinearLayout
-                            android:layout_width="190dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="24dp"
-                            android:gravity="center"
-                            android:translationX="20dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="190dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginEnd="24dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:translationX="20dp"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintVertical_bias="0.0">-->
 
-                            <Spinner
-                                android:id="@+id/s_kota"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent" />
-                        </LinearLayout>
+<!--                            <Spinner-->
+<!--                                android:id="@+id/s_kota"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="match_parent" />-->
+<!--                        </LinearLayout>-->
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -523,7 +523,7 @@
                                     android:layout_marginEnd="5sp"
                                     android:layout_marginBottom="10sp"
                                     android:hapticFeedbackEnabled="true"
-                                    android:onClick="registProvinsi"
+                                    android:onClick="RegistRS"
                                     app:cardCornerRadius="13dp"
                                     tools:ignore="MissingConstraints">
 
@@ -824,7 +824,7 @@
                                 android:fontFamily="@font/bariol_bold"
                                 android:foreground="?attr/selectableItemBackground"
                                 android:gravity="center"
-                                android:onClick="registProvinsi"
+                                android:onClick="RegistRS"
                                 android:text="Lihat Semua"
                                 android:textColor="#4BABE7" />
 

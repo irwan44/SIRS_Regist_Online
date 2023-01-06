@@ -1,11 +1,15 @@
 package averin.sirs.com;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -16,16 +20,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.fenchtose.nocropper.BitmapResult;
 import com.fenchtose.nocropper.CropInfo;
 import com.fenchtose.nocropper.CropMatrix;
@@ -64,7 +73,7 @@ public class CropImage extends AppCompatActivity {
     TextView txt_info_success,txt_info_failed;
     Button btn_ok_success, btn_ok_failed;
 
-    String val_token, no_ktp, code_kirim, strImgPath, urlfoto, strFilePath, strEncodedImage;
+    String val_token, no_ktp, namaPasien, code_kirim, strImgPath, urlfoto, strFilePath, strEncodedImage;
     CropperView mImageView;
     CheckBox originalImageCheckbox, cropAsyncCheckbox;
     byte[] imageBytes;
@@ -81,9 +90,24 @@ public class CropImage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_image);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+        //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
+        Toolbar LabToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(LabToolbar);
+//        LabToolbar.setLogoDescription(getResources().getString(R.string.app_name));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        LabToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         mImageView = findViewById(R.id.imageview);
 //        originalImageCheckbox = findViewById(R.id.original_checkbox);
-        cropAsyncCheckbox = findViewById(R.id.crop_checkbox);
+        cropAsyncCheckbox = findViewById(R.id.cropasync_checkbox);
 
         Bundle data = getIntent().getExtras();
         if(data!=null){
@@ -91,6 +115,9 @@ public class CropImage extends AppCompatActivity {
             urlfoto = data.get("urlFoto").toString();
         }
         if(code_kirim.equals("1")){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    PackageManager.PERMISSION_GRANTED);
+            checkCameraHardware(this);
             Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(camera_intent, REQUEST_CAM);
         }else if(code_kirim.equals("2")) {
@@ -105,8 +132,9 @@ public class CropImage extends AppCompatActivity {
 
         Token token = AppController.getInstance(this).isiToken();
         Login lgn = AppController.getInstance(this).getPasien();
-        val_token = String.valueOf(token.gettoken());
-        no_ktp    = String.valueOf(lgn.getKTP_pasien());
+        val_token  = String.valueOf(token.gettoken());
+        no_ktp     = String.valueOf(lgn.getKTP_pasien());
+        namaPasien = String.valueOf(lgn.getNama_pasien());
 
         //Dialog Confirm
         ViewGroup viewGroup = findViewById(android.R.id.content);
@@ -132,6 +160,8 @@ public class CropImage extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(balikedit);
                 dial_success.dismiss();
+                Intent i = new Intent(CropImage.this, EditPasienLama.class);
+                startActivity(i);
 
             }
         });
@@ -186,8 +216,16 @@ public class CropImage extends AppCompatActivity {
         });
     }
 
-    public void onImageButtonClicked() {
-        startGalleryIntent();
+    private boolean checkCameraHardware(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            // this device has a camera
+            return true;
+        } else {
+            // no camera on this device
+            Toast.makeText(getBaseContext(), "No camera found on this device",
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
     }
 
     public void onImageCropClicked() {
@@ -321,14 +359,10 @@ public class CropImage extends AppCompatActivity {
             @Override
             public void onCropped(Bitmap bitmap) {
                 if (bitmap != null) {
-
-                    //BitmapUtil.writeBitmapToFile(bitmap, new File(Environment.getExternalStorageDirectory() + "/crop_test.jpg"), 90);
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    bitmap = BitmapFactory.decodeFile(strFilePath, options);
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                    imageBytes = baos.toByteArray();
-                    strEncodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+                    strEncodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     sendEditFoto(strEncodedImage);
                 }
             }
@@ -360,21 +394,12 @@ public class CropImage extends AppCompatActivity {
         Bitmap bitmap = result.getBitmap();
 
         if (bitmap != null) {
-            Log.d("Cropper", "crop1 bitmap: " + bitmap.getWidth() + ", " + bitmap.getHeight());
-            //BitmapUtil.writeBitmapToFile(bitmap, new File(Environment.getExternalStorageDirectory() + "/crop_test.jpg"), 90);
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            bitmap = BitmapFactory.decodeFile(strFilePath, options);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            imageBytes = baos.toByteArray();
-            strEncodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            strEncodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
             sendEditFoto(strEncodedImage);
         }
-
-        if (originalImageCheckbox.isChecked()) {
-            cropOriginalImage();
-        }
-
     }
 
     private ScaledCropper prepareCropForOriginalImage() {
@@ -406,7 +431,8 @@ public class CropImage extends AppCompatActivity {
             Bitmap bitmap = cropper.cropBitmap();
             if (bitmap != null) {
                 try {
-                    BitmapUtil.writeBitmapToFile(bitmap, new File(Environment.getExternalStorageDirectory() + "/crop_test_info_orig.jpg"), 90);
+                    BitmapUtil.writeBitmapToFile(bitmap, new File(Environment
+                            .getExternalStorageDirectory() + "/crop_test_info_orig.jpg"), 90);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -457,10 +483,11 @@ public class CropImage extends AppCompatActivity {
         isSnappedToCenter = !isSnappedToCenter;
     }
 
-    private void sendEditFoto(final String strImage) {
+    private void sendEditFoto(String strImage) {
 
         final String isiToken       = val_token;
         final String iniKTP         = no_ktp;
+        final String strFoto        = "data:image/jpeg;base64,"+strImage;
 
         //if everything is fine
         class masukPakEko extends AsyncTask<Void, Void, String> {
@@ -475,7 +502,7 @@ public class CropImage extends AppCompatActivity {
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("no_ktp", iniKTP);
-                params.put("strFoto", strImage);
+                params.put("fotoProfile", strFoto);
 
                 //returing the response
                 return requestHandler.requestData(url_editFoto, "POST", "application/json; charset=utf-8", "X-Api-Token",
@@ -485,14 +512,14 @@ public class CropImage extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-//                progressBar = findViewById(R.id.progressBar);
-//                progressBar.setVisibility(View.VISIBLE);
+                progressBar = findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-//                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
 
                 try {//converting response to json object
                     JSONObject obj = new JSONObject(s);
@@ -500,6 +527,8 @@ public class CropImage extends AppCompatActivity {
                     if (obj.getString("code").equals("200")) {
                         dial_success.show();
                         txt_info_success.setText(obj.getString("msg"));
+                        Login updlogin = new Login(namaPasien,no_ktp,strFoto);
+                        AppController.getInstance(getApplicationContext()).userLogin(updlogin);
                     } else {
                         dial_failed.show();
                         txt_info_failed.setText(obj.getString("msg"));

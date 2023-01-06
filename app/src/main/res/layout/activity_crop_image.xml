@@ -3,12 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CropImage">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/transparan"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/bariol_bold"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Edit Photo"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="37dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navigationIcon="@drawable/arrow_left"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     <FrameLayout
         android:id="@+id/top_frame"
         android:layout_width="match_parent"
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="200dp"
         android:layout_height="wrap_content">
 
         <com.fenchtose.nocropper.CropperView
@@ -44,30 +95,63 @@
             android:src="@mipmap/ic_rotate_right_white_24dp"/>
 
     </FrameLayout>
+
     <LinearLayout
+        android:id="@+id/center_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/top_frame">
+        android:layout_height="389dp"
+        android:layout_below="@+id/top_frame"
+        android:layout_marginTop="-127dp"
+        android:layout_marginBottom="80dp"
+        android:orientation="horizontal">
+
         <CheckBox
             android:id="@+id/gesture_checkbox"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Allow Gesture"/>
+            android:text="Allow Gesture"
+            android:visibility="gone" />
+
         <CheckBox
-            android:id="@+id/crop_checkbox"
+            android:id="@+id/cropasync_checkbox"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Crop Async"/>
-        <ImageButton
+            android:text="Crop Async"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/crop_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_save24"
-            android:background="@color/birufigma"
-            android:padding="5dp"
-            android:layout_gravity="center"/>
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="16sp"
+            android:background="@drawable/ic_background_accent_rounded"
+            android:outlineAmbientShadowColor="@color/birufigma"
+            android:outlineSpotShadowColor="@color/birufigma"
+            android:text="Save Profile"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:theme="@style/FabExtendedMaterialTheme"
+            app:iconTint="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@+id/center_frame">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="70dp"
+            android:layout_marginTop="50dp"
+            android:indeterminateTint="@color/birufigma" />
     </LinearLayout>
 </RelativeLayout>

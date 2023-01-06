@@ -1,6 +1,7 @@
 package averin.sirs.com;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,22 +19,28 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import averin.sirs.com.Adapter.AntrianAdapter;
+import averin.sirs.com.Adapter.KlinikAdapter;
 import averin.sirs.com.Adapter.RequestHandler;
 import averin.sirs.com.Model.Antrian;
+import averin.sirs.com.Model.Klinik;
 import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.Token;
 import averin.sirs.com.Ui.AppController;
@@ -51,6 +58,7 @@ public class AntrianActivity extends AppCompatActivity {
     ImageButton cariAntrian;
     CircleImageView fotoPasien;
     RecyclerView listAntrian;
+    RelativeLayout rl_null;
     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private ArrayList<Antrian> ArrayAntrian = new ArrayList<>();
     private AntrianAdapter Aa;
@@ -77,11 +85,26 @@ public class AntrianActivity extends AppCompatActivity {
 
         listAntrian = (RecyclerView) findViewById(R.id.listAntrian);
         edt_pilihtanggal = findViewById(R.id.tglAntrian);
-        cariAntrian = findViewById(R.id.cariAntrian);
+        cariAntrian = findViewById(R.id.btn_cari);
         txt_nullantrian = findViewById(R.id.txt_null_antrian);
         img_nullantrian = findViewById(R.id.img_null_antrian);
         cv_nullantrian = findViewById(R.id.cv_null_antrian);
+        rl_null = findViewById(R.id.rl_null_antrian);
         prgbar = findViewById(R.id.progressBar);
+
+        edt_pilihtanggal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                cekToken();
+            }
+        });
+
+        cariAntrian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cekToken();
+            }
+        });
 
         //GET DATA FROM CONTROLLER
         Login login = AppController.getInstance(this).getPasien();
@@ -95,7 +118,7 @@ public class AntrianActivity extends AppCompatActivity {
         listAntrian.setAdapter(Aa);
 
         dateNow = df.format(new Date());
-            edt_pilihtanggal.setText(dateNow);
+        edt_pilihtanggal.setText(dateNow);
 
         edt_pilihtanggal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,18 +126,6 @@ public class AntrianActivity extends AppCompatActivity {
                 mCalendar = Calendar.getInstance();
                 new DatePickerDialog(AntrianActivity.this, R.style.DialogTheme, datestart, mCalendar.get(Calendar.YEAR),
                         mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-        cariAntrian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                            prgbar.setVisibility(View.VISIBLE);
-                        viewAntrian();
-                    }
-                }, 4000); // your progress will start after 5 seconds
             }
         });
     }
@@ -290,8 +301,8 @@ public class AntrianActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-//                progressBar = findViewById(R.id.progressBar);
-//                progressBar.setVisibility(View.VISIBLE);
+                prgbar = findViewById(R.id.progressBar);
+                prgbar.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -303,10 +314,12 @@ public class AntrianActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(s);
                     //if no error in response
 
+                    if(obj.getString("code").equals("200")){
+
+                        cv_nullantrian.setVisibility(View.GONE);
+                        txt_nullantrian.setVisibility(View.GONE);
+                        img_nullantrian.setVisibility(View.GONE);
                         JSONArray jr = obj.getJSONArray("list");
-                    if (jr.equals("null")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
-                    } else {
                         for (int a = 0; a < jr.length(); a++) {
                             txt_nullantrian.setVisibility(View.GONE);
                             img_nullantrian.setVisibility(View.GONE);
@@ -322,11 +335,17 @@ public class AntrianActivity extends AppCompatActivity {
                             String status = jso.getString("status");
                             String nmKlinik = jso.getString("nama_klinik");
                             String nmBagian = jso.getString("nama_bagian");
-                            String ketKlinik = jso.getString("ket_klinik");
 //                            ArrayKlinik.add(new Klinik(idk,np,alamat,logo));
-                            ArrayAntrian.add(new Antrian(idReg,no_antrian,nmDokter,tgl,jamAwal,jamAkhir,status,nmKlinik,nmBagian, ketKlinik));
+                            ArrayAntrian.add(new Antrian(idReg,no_antrian,nmDokter,tgl,jamAwal,jamAkhir,status,nmKlinik,nmBagian));
                         }
                         Aa.notifyDataSetChanged();
+
+                    }else if(obj.getString("code").equals("500")){
+                        cv_nullantrian.setVisibility(View.VISIBLE);
+                        img_nullantrian.setVisibility(View.VISIBLE);
+                        txt_nullantrian.setVisibility(View.VISIBLE);
+                        Toast.makeText(getApplicationContext(), obj.getString("msg"),
+                                Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -112,9 +112,8 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:translationX="20dp"
@@ -152,12 +151,12 @@
                     android:paddingBottom="2dp" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="9dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
-                    android:translationX="-60dp"
+                    android:translationX="-80dp"
                     android:translationY="20dp">
 
                     <TextView

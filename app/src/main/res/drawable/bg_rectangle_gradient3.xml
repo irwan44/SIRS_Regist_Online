@@ -3,7 +3,7 @@
     <!-- Bottom 2dp Shadow -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#F96666"></solid>
+            <solid android:color="@color/backgroundDarkGrey"></solid>
             <corners android:radius="20dp" />
         </shape>
     </item>
@@ -15,7 +15,7 @@
         android:left="40dp">
 
         <shape  android:shape="rectangle">
-            <solid android:color="#F96666" />
+            <solid android:color="@color/backgroundDarkGrey" />
             <corners android:radius="10dp" />
         </shape>
     </item>

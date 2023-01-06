@@ -2,8 +2,8 @@ package averin.sirs.com;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,15 +12,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,18 +32,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.fenchtose.nocropper.CropMatrix;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -62,43 +54,32 @@ import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.Token;
 import averin.sirs.com.Ui.AppController;
 import de.hdodenhof.circleimageview.CircleImageView;
+import averin.sirs.com.Ui.BitmapUtil;
 
 public class EditPasienLama extends AppCompatActivity {
 
     String val_token, no_ktp, url_fotoPasien, nama, usia, gol_darah, alergi, alamat, gender, tgl_lahir,
-            tmp_lahir, tgl_konvert, strTimeStamp, strImageName, strFilePath, strEncodedImage;
+            tmp_lahir, tgl_konvert, jenKelamin, kd_menu;
     EditText et_nama, et_usia, et_goldarah, et_alergi, et_alamat, et_tglLahir, et_tmptLahir, et_ktpPasien;
     TextView txt_info_success, txt_info_failed;
-    Button btnSave, btnEditFoto, btn_ok_failed, btn_ok_success;
-    ExtendedFloatingActionButton fabEdit;
-//    ImageView img_fotoPasien;
+    Button btn_ok_failed, btn_ok_success, fabEdit, fabEditPrivy;
+    TextInputLayout edt_tgllahir;
+
+    //    ImageView img_fotoPasien;
     DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     //BOTTOM SHEET EDIT FOTO
-    CircleImageView img_fotoPasien, cb_editFoto;
+    CircleImageView img_fotoPasien, cb_editFoto, cb_iconedit;
     BottomSheetBehavior sheetBehavior;
     BottomSheetDialog sheetDialog;
     View  sheetView;
+    private byte[] byt_foto;
 
     SimpleDateFormat df = new SimpleDateFormat("YYY-MM-dd");
     ProgressDialog pDialog;
     ConnectivityManager conMgr;
     private Calendar mCalendar;
-    private String currentFilePath = null;
-
-    //FUNGSI OPEN CAMERA & SAVE IMAGE
-    int REQ_CAMERA = 101;
-    private byte[] byt_foto;
-    byte[] imageBytes;
-    File fileDirectoty, imageFilename;
-    private HashMap<String, CropMatrix> matrixMap = new HashMap<>();
-
-    //FUNGSI OPEN GALERY & SAVE IMAGE
-    private static final int REQUEST_CODE_READ_PERMISSION = 22;
-    private static final int pic_id = 123;
-    public static final int REQUEST_PICK_PHOTO = 1;
-    private static final int REQUEST_GALLERY = 21;
 
     //Spinner Element
     String[] gndr = new String[] {"Laki-laki", "Perempuan"};
@@ -120,6 +101,10 @@ public class EditPasienLama extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_pasien_lama);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
         Toolbar LabToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -152,20 +137,53 @@ public class EditPasienLama extends AppCompatActivity {
         no_ktp = (String.valueOf(login.getKTP_pasien()));
 
         sheetView = findViewById(R.id.bottom_ubah_foto);
-        sheetBehavior = BottomSheetBehavior.from(sheetView);
-        cb_editFoto = findViewById(R.id.btn_openEditFoto);
+        sheetBehavior   = BottomSheetBehavior.from(sheetView);
+        cb_editFoto     = findViewById(R.id.cb_edit_foto);
+        cb_iconedit     = findViewById(R.id.btn_openEditFoto);
         img_fotoPasien  = findViewById(R.id.fotoPasien);
         et_nama         = findViewById(R.id.et_namapasien);
         et_usia         = findViewById(R.id.et_usia);
         et_goldarah     = findViewById(R.id.et_goldarah);
-        actGender      = findViewById(R.id.act_gender);
+        actGender       = findViewById(R.id.act_gender);
         et_alergi       = findViewById(R.id.et_alergi);
         et_alamat       = findViewById(R.id.et_alamat);
         et_tglLahir     = findViewById(R.id.et_tglLahir);
+        edt_tgllahir    = findViewById(R.id.edt_tgllahir);
         et_tmptLahir    = findViewById(R.id.et_tmptLahir);
         et_ktpPasien    = findViewById(R.id.et_ktpPasien);
         fabEdit         = findViewById(R.id.fabEdit);
+        fabEditPrivy    = findViewById(R.id.fabEditPrivy);
         getPasien();
+
+//        Bundle kiriman = getIntent().getExtras();
+//        if(kiriman != null){
+//            kd_menu = kiriman.get("kd_menu").toString();
+//        }
+
+//        if(kd_menu.equals("prv")){
+//            fabEditPrivy.setVisibility(View.VISIBLE);
+//            fabEdit.setVisibility(View.GONE);
+//        }else{
+//            fabEdit.setVisibility(View.VISIBLE);
+//            fabEditPrivy.setVisibility(View.GONE);
+//        }
+
+        fabEditPrivy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendEditProfile();
+            }
+        });
+
+        DatePickerDialog.OnDateSetListener datelahir =new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                mCalendar.set(Calendar.YEAR, year);
+                mCalendar.set(Calendar.MONTH,month);
+                mCalendar.set(Calendar.DAY_OF_MONTH,day);
+                updateLabel();
+            }
+        };
 
         //Dialog Delete Foto
         dial_builder = new AlertDialog.Builder(EditPasienLama.this,R.style.CustomAlertDialog);
@@ -181,6 +199,7 @@ public class EditPasienLama extends AppCompatActivity {
         dial_builder.setView(v_delete_foto);
         dial_Foto = dial_builder.create();
         dial_Foto.setCancelable(false);
+
         btn_act_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,20 +218,30 @@ public class EditPasienLama extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ShowEditFoto();
-//                Intent i = new Intent(EditPasienLama.this, CropImage.class);
-//                startActivity(i);
-//                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(camera_intent, pic_id);
+            }
+        });
+        cb_iconedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowEditFoto();
             }
         });
 
+        edt_tgllahir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCalendar = Calendar.getInstance();
+                new DatePickerDialog(EditPasienLama.this, R.style.DialogTheme,datelahir,mCalendar.get(Calendar.YEAR),
+                        mCalendar.get(Calendar.MONTH),mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         et_tglLahir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCalendar = Calendar.getInstance();
-                new DatePickerDialog(EditPasienLama.this, R.style.DialogTheme, datestart, mCalendar.get(Calendar.YEAR),
-                        mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(EditPasienLama.this, R.style.DialogTheme,datelahir,mCalendar.get(Calendar.YEAR),
+                        mCalendar.get(Calendar.MONTH),mCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -257,6 +286,17 @@ public class EditPasienLama extends AppCompatActivity {
 
         ArrayAdapter<String> spnAdapter = new ArrayAdapter<>(this, R.layout.dialog_spinner, gndr);
         actGender.setAdapter(spnAdapter);
+    }
+
+    public void onBackPressed() {
+        Intent bck = new Intent(EditPasienLama.this,MainActivity.class);
+        startActivity(bck);
+    }
+
+    private void updateLabel(){
+        String myFormat="yyyy-MM-dd";
+        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.getDefault());
+        et_tglLahir.setText(dateFormat.format(mCalendar.getTime()));
     }
 
     private void getPasien() {
@@ -314,15 +354,10 @@ public class EditPasienLama extends AppCompatActivity {
                             et_ktpPasien.setText(no_ktp);
                             et_nama.setText(nama);
                             byt_foto = url_fotoPasien.getBytes(StandardCharsets.UTF_8);
-
-                            if(no_ktp.equals("3174586231698546")) {
-                                img_fotoPasien.setImageResource(R.drawable.foto_bos);
+                            if(url_fotoPasien.equals("null")){
+                                img_fotoPasien.setImageResource(R.drawable.profile_img_empty);
                             }else {
-                                if (url_fotoPasien.equals("null")) {
-                                    img_fotoPasien.setImageResource(R.drawable.profile_img_empty);
-                                } else {
-                                    Glide.with(EditPasienLama.this).load(url_fotoPasien).into(img_fotoPasien);
-                                }
+                                Glide.with(EditPasienLama.this).load(url_fotoPasien).into(img_fotoPasien);
                             }
 
                             if(usia.equals("null")){
@@ -372,7 +407,7 @@ public class EditPasienLama extends AppCompatActivity {
                             }
                         }
                     }else if(jb.getString("code").equals("500")){
-                        dial_failed.show();
+//                        dial_failed.show();
                         img_fotoPasien.setImageResource(R.drawable.profile_img_empty);
                         actGender.setHint("Jenis Kelamin");
                         et_nama.setText("Data not found");
@@ -405,7 +440,7 @@ public class EditPasienLama extends AppCompatActivity {
             }
         });
 
-       (v.findViewById(R.id.cv_open_cam)).setOnClickListener(new View.OnClickListener() {
+        (v.findViewById(R.id.cv_open_cam)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ci = new Intent(EditPasienLama.this, CropImage.class);
@@ -440,36 +475,6 @@ public class EditPasienLama extends AppCompatActivity {
         });
     }
 
-  /*  @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_OK) {
-            String absPath = BitmapUtil.getFilePathFromUri(this, data.getData());
-            Intent ci = new Intent(EditPasienLama.this, CropImage.class);
-            ci.putExtra("pick_kode", 2);
-            ci.putExtra("urlFoto", absPath);
-            startActivity(ci);
-        }
-    }*/
-
-    private void convertImage(String imageFilePath) {
-        File imageFile = new File(imageFilePath);
-        if (imageFile.exists()) {
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            final Bitmap bitmap = BitmapFactory.decodeFile(strFilePath, options);
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            Glide.with(this)
-                    .load(bitmap)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(R.drawable.profile_img_empty)
-                    .into(img_fotoPasien);
-            imageBytes = baos.toByteArray();
-            strEncodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        }
-    }
-
     private void setStatusBar() {
         if (Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -496,29 +501,6 @@ public class EditPasienLama extends AppCompatActivity {
         window.setAttributes(layoutParams);
     }
 
-    private boolean hasGalleryPermission() {
-        return ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void askForGalleryPermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
-                REQUEST_CODE_READ_PERMISSION);
-    }
-
-    private final DatePickerDialog.OnDateSetListener datestart = new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            mCalendar.set(Calendar.YEAR, year);
-            mCalendar.set(Calendar.MONTH, monthOfYear);
-            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            et_tglLahir.setText(df.format(mCalendar.getTime()));
-        }
-    };
-
     private void sendEditProfile() {
 
         final String isiToken       = val_token;
@@ -528,9 +510,14 @@ public class EditPasienLama extends AppCompatActivity {
         final String golDarah       = et_goldarah.getText().toString();
         final String alergiPasien   = et_alergi.getText().toString();
         final String alamatPasien   = et_alamat.getText().toString();
-        final String jekel          = actGender.getText().toString();
         final String tglLahir       = et_tglLahir.getText().toString();
         final String tmpLahir       = et_tmptLahir.getText().toString();
+        String jekel                = actGender.getText().toString();
+        if(jekel.equals("Laki-laki")){
+            jenKelamin = "L";
+        }else if(jekel.equals("Perempuan")){
+            jenKelamin = "P";
+        }
 
         //if everything is fine
         class masukPakEko extends AsyncTask<Void, Void, String> {
@@ -545,12 +532,12 @@ public class EditPasienLama extends AppCompatActivity {
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("no_ktp", iniKTP);
-//                params.put("namaPasien", namaPasien);
+                params.put("namaPasien", namaPasien);
                 params.put("umurPasien", usiaPasien);
                 params.put("goldarah", golDarah);
                 params.put("tanggal_lhr", tglLahir);
                 params.put("tempat_lhr", tmpLahir);
-                params.put("gender", jekel);
+                params.put("gender", jenKelamin);
                 params.put("alergi", alergiPasien);
                 params.put("alamat", alamatPasien);
 
@@ -577,7 +564,14 @@ public class EditPasienLama extends AppCompatActivity {
                     if (obj.getString("code").equals("200")) {
                         dial_success.show();
                         txt_info_success.setText(obj.getString("msg"));
-                        getPasien();
+                        Login updatelogin = new Login(namaPasien,iniKTP,url_fotoPasien);
+                        AppController.getInstance(getApplicationContext()).userLogin(updatelogin);
+//                        if(kd_menu.equals("prv")){
+//                            Intent rp = new Intent(EditPasienLama.this, FormPrivy.class);
+//                            startActivity(rp);
+//                        }else {
+                            getPasien();
+//                        }
                     } else {
                         dial_failed.show();
                         txt_info_failed.setText(obj.getString("msg"));

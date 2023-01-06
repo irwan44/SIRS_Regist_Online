@@ -163,6 +163,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
 
     @Override
     public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     public void cekToken() {

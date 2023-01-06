@@ -290,24 +290,24 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
         //SPINNER KOTA
-        spnKota = findViewById(R.id.s_kota);
-        spnKotaadapter = new SpinnerAdapter(MainActivity.this, listKota);
-        spnKota.setAdapter(spnKotaadapter);
-        spnKota.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//        spnKota = findViewById(R.id.s_kota);
+//        spnKotaadapter = new SpinnerAdapter(MainActivity.this, listKota);
+//        spnKota.setAdapter(spnKotaadapter);
+//        spnKota.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // TODO Auto-generated method stub
-                ArrayKlinikDekat.clear();
-                spnidKota =listKota.get(position).getId();
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                // TODO Auto-generated method stub
+//                ArrayKlinikDekat.clear();
+//                spnidKota =listKota.get(position).getId();
 //                viewKlinikDekat(spnidKota);
-                viewDokter(spnidKota);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // TODO Auto-generated method stub
-            }
-        });
+//                viewDokter(spnidKota);
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                // TODO Auto-generated method stub
+//            }
+//        });
 
         //Declare RecyleView
         list_Antrian = findViewById(R.id.RV_listAntrian);
@@ -404,6 +404,7 @@ public class MainActivity extends AppCompatActivity {
 //                        viewKlinik();
                         viewAntrian();
                         viewDetail();
+                        viewDokter();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -478,6 +479,7 @@ public class MainActivity extends AppCompatActivity {
 //                        viewKlinik();
                         viewAntrian();
                         viewDetail();
+                        viewDokter();
 
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
@@ -703,8 +705,7 @@ public class MainActivity extends AppCompatActivity {
                             String status = jso.getString("status");
                             String nmKlinik = jso.getString("nama_klinik");
                             String nmBagian = jso.getString("nama_bagian");
-                            String ketKlinik = jso.getString("ket_klinik");
-                            ArrayAntrian.add(new Antrian(idReg,noAntri,nmDokter,tgl,jamAwal,jamAkhir,status,nmKlinik,nmBagian,ketKlinik));
+                            ArrayAntrian.add(new Antrian(idReg,noAntri,nmDokter,tgl,jamAwal,jamAkhir,status,nmKlinik,nmBagian));
                         }
                         antrianDSBadapt.notifyDataSetChanged();
                     }
@@ -780,7 +781,7 @@ public class MainActivity extends AppCompatActivity {
         pl.execute();
     }
 
-    private void viewDokter(final String id_kota) {
+    private void viewDokter() {
         //first getting the values
         final String iniToken   = val_token;
 
@@ -797,7 +798,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //creating request parameters
                 params = new HashMap<String, HashMap<String, String>>();
-                params.put("idKota", id_kota);
+                params.put("idKota", "42");
                 //returing the response
                 return requestHandler.requestData(urlGetDokter, "POST", "application/json; charset=utf-8", "X-Api-Token",
                         iniToken, "X-Px-Key", "", params);

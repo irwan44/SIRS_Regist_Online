@@ -411,7 +411,7 @@ public class DaftarPoli extends AppCompatActivity {
                     JSONObject obj = new JSONObject(s);
                     if (obj.getString("code").equals("500")) {
                         isiSpinner item = new isiSpinner();
-                        item.setId(obj.getString(""));
+                        item.setId("");
                         item.setKet(obj.getString("msg"));
                         listisian.add(item);
                         adapter.notifyDataSetChanged();

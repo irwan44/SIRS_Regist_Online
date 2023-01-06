@@ -95,6 +95,11 @@ public class AntrianDetail extends AppCompatActivity{
 
     }
 
+    public void onBackPressed() {
+        Intent startMain = new Intent(AntrianDetail.this,AntrianActivity.class);
+        startActivity(startMain);
+    }
+
     private void viewDetailAntrian() {
         //first getting the values
         final String iniToken   = val_token;
