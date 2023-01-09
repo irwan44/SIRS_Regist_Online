@@ -17,7 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
-
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/pg_toolbar"
             android:layout_width="match_parent"

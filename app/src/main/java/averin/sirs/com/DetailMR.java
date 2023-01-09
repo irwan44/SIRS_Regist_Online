@@ -49,7 +49,7 @@ public class DetailMR extends AppCompatActivity {
             nama_px, nomr_px, umur_px, goldarah_px, gender_px,
             namaKlinik, namaDokter, namaBagian, tglPeriksa, wktPeriksa,
             keadaan_umum, tekanan_darah, suhu, tinggi_badan, kesadaran, nadi, pernafasan, bb,
-            nama_obat,jml_obat,note_obat,ket_obat,aturan_pakai;
+            nama_obat,jml_obat,note_obat,ket_obat,aturan_pakai, jns_obat;
     TextView txt_namaklinik, txt_namadokter, txt_namapoli, txt_tglperiksa,
             txt_namapasien, txt_nomr, txt_umur, txt_goldarah, txt_jekel,
             txt_KeadaanUmum, txt_TekananDarah, txt_suhu, txt_tinggi, txt_kesadaran, txt_nadi, txt_pernafasan, txt_bb;
@@ -176,13 +176,13 @@ public class DetailMR extends AppCompatActivity {
         txt_pernafasan = findViewById(R.id.txt_Pernafasan);
 
 //        Tindakan
-//        rc_tindakan = findViewById(R.id.rc_tindakan);
+        rc_tindakan = findViewById(R.id.rc_tindakan);
         rc_tindakan.setLayoutManager(new LinearLayoutManager(this));
         adapt_tindakan = new DetailMRAdapter(this, listtindakan,this);
         rc_tindakan.setAdapter(adapt_tindakan);
 
 //        ICD10
-//        rc_icd10 = findViewById(R.id.rc_icd10);
+        rc_icd10 = findViewById(R.id.rc_icd10);
         rc_icd10.setLayoutManager(new LinearLayoutManager(this));
         adapt_icd10 = new DetailMRAdapter(this, listicd10,this);
         rc_icd10.setAdapter(adapt_icd10);
@@ -329,7 +329,7 @@ public class DetailMR extends AppCompatActivity {
                             aturan_pakai = obj_ro.getString("nama_dosis");
                             ket_obat = obj_ro.getString("ket");
 
-                            listresep.add(new ResepObat(nama_obat,note_obat,aturan_pakai,jml_obat,ket_obat));
+                            listresep.add(new ResepObat(nama_obat,note_obat,aturan_pakai,jml_obat,ket_obat, jns_obat));
                         }
                         adaptResepDokter.notifyDataSetChanged();
                     }
@@ -341,5 +341,4 @@ public class DetailMR extends AppCompatActivity {
         ambilDataMR pl = new ambilDataMR();
         pl.execute();
     }
-
 }

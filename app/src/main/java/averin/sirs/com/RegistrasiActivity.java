@@ -84,7 +84,7 @@ public class RegistrasiActivity extends AppCompatActivity{
 
     private Calendar mCalendar;
     private static final int STORAGE_PERMISSION_CODE = 123;
-    public String postUrl = APIurl + "/api/v1/post-daftar-rs-baru.php";
+    public String postUrl = APIurl + "/api/v1/post-daftar-px-baru.php";
     public String urlLogin = APIurl + "/api/v1/px-akses.php";
 
     @Override

@@ -3,11 +3,13 @@ package averin.sirs.com;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +22,6 @@ import java.util.HashMap;
 
 import averin.sirs.com.Adapter.MRpasienAdapter;
 import averin.sirs.com.Adapter.RequestHandler;
-import averin.sirs.com.Model.Klinik;
 import averin.sirs.com.Model.Login;
 import averin.sirs.com.Model.MRpasien;
 import averin.sirs.com.Model.Token;
@@ -30,14 +31,19 @@ public class MRpasienActivity extends AppCompatActivity {
 
     String val_token, no_ktp, iniktp, nama_px, umur_px, gender_px, goldarah_px,
             kode_klinik, nama_klinik, idReg, tgl_daftar, jam_awal, nama_bagian, nama_dokter, wkt_periksa;
-    TextView tv_namapasien, tv_noktp, tv_goldarah, tv_gender, tv_umur;
+    TextView txt_null;
     //    List MR
     RecyclerView MRpasien_Recyleview;
     private ArrayList<MRpasien> listMRpasien = new ArrayList<>();
     private MRpasienAdapter MRpasienadapter;
-//    URL API
+    //    URL API
     public String APIurl = RequestHandler.APIdev;
     public String urlListMR = APIurl+"/api/v1/get-list-mr.php";
+
+    //Null data
+    CardView cd_null;
+    ImageView img_null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +62,12 @@ public class MRpasienActivity extends AppCompatActivity {
         no_ktp    = String.valueOf(login.getKTP_pasien());
 
 //        Declarate Object
-//        tv_namapasien  = findViewById(R.id.txt_namaPasien);
-//        tv_umur        = findViewById(R.id.txt_umurPasien);
-//        tv_goldarah    = findViewById(R.id.txt_golDarah);
-//        tv_gender      = findViewById(R.id.txt_jekelPasien);
-
+        cd_null = findViewById(R.id.cv_null_history);
+        txt_null = findViewById(R.id.txt_null_history);
+        img_null = findViewById(R.id.img_null_history);
+        cd_null.setVisibility(View.GONE);
+        txt_null.setVisibility(View.GONE);
+        img_null.setVisibility(View.GONE);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         LabToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -120,7 +127,9 @@ public class MRpasienActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(s);
                     //if no error in response
                     if(obj.getString("code").equals("500")){
-//                        txt_infonull.setVisibility(View.VISIBLE);
+                        cd_null.setVisibility(View.VISIBLE);
+                        txt_null.setVisibility(View.VISIBLE);
+                        img_null.setVisibility(View.VISIBLE);
                         MRpasien_Recyleview.setVisibility(View.GONE);
 
                     }else if(obj.getString("code").equals("200")){
@@ -171,4 +180,5 @@ public class MRpasienActivity extends AppCompatActivity {
         masukPakEko pl = new masukPakEko();
         pl.execute();
     }
+
 }

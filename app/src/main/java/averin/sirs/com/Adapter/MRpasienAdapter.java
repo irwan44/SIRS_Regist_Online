@@ -1,9 +1,13 @@
 package averin.sirs.com.Adapter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,19 +17,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import averin.sirs.com.DetailMR;
-//import averin.sirs.com.MRDetail;
+import averin.sirs.com.Model.Berita;
 import averin.sirs.com.Model.MRpasien;
 import averin.sirs.com.R;
 
 public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasienViewHolder> {
     private ArrayList<MRpasien> list;
-    DateFormat outputFormat = new SimpleDateFormat("EEEE, dd MMM yyyy", Locale.getDefault());
-    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat outputwaktu = new SimpleDateFormat("HH:mm", Locale.getDefault());
     DateFormat inputwaktu = new SimpleDateFormat("HH:mm:ss");
+
     public MRpasienAdapter(ArrayList<MRpasien> list) {
         this.list = list;
     }
@@ -56,29 +62,32 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
 //        holder.txt_umurPasien.setText(list.get(position).getUmur_px());
         holder.txt_gender.setText(list.get(position).getGender_px());
         holder.txt_goldarah.setText(list.get(position).getGoldarah_px());
+        holder.tv_namadokter.setText(list.get(position).getNama_dokter());
+        holder.tv_namabagian.setText(list.get(position).getNama_bagian());
 
         tgl_daft = holder.tv_tgldaftar.getText().toString();
         wkt_daft = holder.tv_wktdaftar.getText().toString();
-        try {
-            tgl = inputFormat.parse(tgl_daft);
-            wkt = inputwaktu.parse(wkt_daft);
 
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if(tgl_daft.equals("") && wkt_daft.equals("")) {
+        }else {
+
+            try {
+                tgl = inputFormat.parse(tgl_daft);
+                wkt = inputwaktu.parse(wkt_daft);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String tglKonvert = outputFormat.format(tgl);
+            String jam_konvert = outputwaktu.format(wkt);
+            holder.txt_tglPeriksa.setText(tglKonvert + " " + jam_konvert);
         }
-        String tglKonvert = outputFormat.format(tgl);
-        String jam_konvert = outputwaktu.format(wkt);
-
-        holder.tv_namadokter.setText(list.get(position).getNama_dokter());
-        holder.tv_namabagian.setText(list.get(position).getNama_bagian());
-        holder.txt_tglPeriksa.setText(tglKonvert+" "+jam_konvert);
 //        holder.txt_namaKlinik.setText(list.get(position).getNama_klinik());
-
     }
 
     public class MRpasienViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_kodeklinik, tv_namaklinik, tv_idreg, tv_namadokter, tv_namabagian, tv_tgldaftar, tv_wktdaftar,
-            txt_gender, txt_goldarah, txt_tglPeriksa, txt_umurPasien;
+                txt_gender, txt_goldarah, txt_tglPeriksa, txt_umurPasien;
 
         public MRpasienViewHolder(View itemView) {
             super(itemView);
@@ -127,6 +136,3 @@ public class MRpasienAdapter extends RecyclerView.Adapter<MRpasienAdapter.MRpasi
         }
     }
 }
-
-
-
