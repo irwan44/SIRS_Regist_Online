@@ -21,7 +21,6 @@ import averin.sirs.com.RegistPasienLama;
 public class AntrianAdapter extends RecyclerView.Adapter<AntrianAdapter.AntrianViewHolder> {
     private ArrayList<Antrian> list;
 
-
     public AntrianAdapter(AntrianActivity antrianActivity, ArrayList<Antrian> list) {
         this.list = list;
     }

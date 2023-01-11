@@ -502,11 +502,12 @@
                         android:outlineSpotShadowColor="@color/birufigma"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
                             android:fontFamily="@font/bariol_bold"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="13dp"
+                            android:paddingRight="8dp"
                             android:text="VITAL SIGN"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -556,8 +557,8 @@
                                         android:id="@+id/txt_keadaanumum"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold" />
+                                        android:fontFamily="@font/bariol_bold"
+                                        android:textSize="13sp"/>
 
                                 </LinearLayout>
 
@@ -851,7 +852,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
                             android:drawablePadding="5dp"
-                            android:paddingLeft="5dp"
                             android:fontFamily="@font/bariol_bold"
                             android:text="ICD - 10"
                             android:textSize="14sp"
@@ -879,9 +879,9 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    app:cardBackgroundColor="@color/backgroundDarkGrey"
                     android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/backgroundDarkGrey"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="0dp">
                     <androidx.cardview.widget.CardView
@@ -897,18 +897,20 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:fontFamily="@font/bariol_bold"
-                            android:paddingVertical="5dp"
+                            android:paddingVertical="3dp"
+                            android:paddingLeft="13dp"
+                            android:paddingRight="8dp"
                             android:text="Resep Dokter"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </androidx.cardview.widget.CardView>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rc_resepobat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginTop="35dp"
                         android:layout_marginBottom="10dp"
                         android:scrollbarStyle="insideOverlay"
                         android:overScrollMode="always"

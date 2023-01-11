@@ -1,9 +1,10 @@
 package averin.sirs.com.Model;
 
 public class ResepObat {
-    private String namaobat, noteobat, namadosis, jumlahobat, ketobat, jns_obat;
+    private String nourut, namaobat, noteobat, namadosis, jumlahobat, ketobat, jns_obat;
 
-    public ResepObat(String namaobat, String noteobat, String namadosis, String jumlahobat, String ketobat, String jns_obat) {
+    public ResepObat(String nourut, String namaobat, String noteobat, String namadosis, String jumlahobat, String ketobat, String jns_obat) {
+        this.nourut=nourut;
         this.namaobat=namaobat;
         this.noteobat=noteobat;
         this.namadosis=namadosis;
@@ -12,6 +13,7 @@ public class ResepObat {
         this.jns_obat=jns_obat;
     }
 
+    public String getNourut() { return nourut;}
     public String getNamaobat() { return  namaobat;}
     public String getNoteobat() { return noteobat;}
     public String getNamadosis() { return namadosis;}

@@ -260,12 +260,6 @@ public class DetailMR extends AppCompatActivity {
 //                        txt_info_null.setText(jr.getString("msg"));
 //                        dial_info_null.show();
                     } else if(jr.getString("code").equals("200")){
-                        JSONArray res_vital_sign = jr.getJSONArray("vital_sign");
-                        JSONArray res_tindakan = jr.getJSONArray("tindakan");
-                        JSONArray res_icd10 = jr.getJSONArray("icd10");
-                        JSONArray res_resep = jr.getJSONArray("resep");
-//                        JSONObject res_nomr = jr.getJSONObject("no_mr");
-//                        JSONObject res_umur = jr.getJSONObject("umur");
 
                         txt_namapasien.setText(nama_px);
                         txt_nomr.setText(jr.getString("no_mr"));
@@ -273,7 +267,8 @@ public class DetailMR extends AppCompatActivity {
                         txt_goldarah.setText(goldarah_px);
                         txt_jekel.setText(gender_px);
 
-//                        Vital Sign
+//                      Vital Sign
+                        JSONArray res_vital_sign = jr.getJSONArray("vital_sign");
                         for(int vs = 0; vs < res_vital_sign.length(); vs++) {
                             JSONObject obj_vs = res_vital_sign.getJSONObject(vs);
                             keadaan_umum = obj_vs.getString("keadaan_umum");
@@ -295,30 +290,53 @@ public class DetailMR extends AppCompatActivity {
                             txt_bb.setText(bb);
                         }
 
-//                        Tindakan
-                        for(int td = 0; td < res_tindakan.length(); td++) {
+                        JSONArray res_resep = jr.getJSONArray("resep");
+
+
+//                      Tindakan
+                        if(jr.getString("tindakan").equals("")){
 
                             isiSpinner item_tdk = new isiSpinner();
-                            JSONObject obj_tdk = res_tindakan.getJSONObject(td);
-                            item_tdk.setId(obj_tdk.getString("no_tdk"));
-                            item_tdk.setKet(obj_tdk.getString("nama_tindakan"));
+                            item_tdk.setId("");
+                            item_tdk.setKet("Tidak ada tindakan");
                             listtindakan.add(item_tdk);
+                            adapt_tindakan.notifyDataSetChanged();
+
+                        } else {
+
+                            JSONArray res_tindakan = jr.getJSONArray("tindakan");
+                            for (int td = 0; td < res_tindakan.length(); td++) {
+                                isiSpinner item_tdk = new isiSpinner();
+                                JSONObject obj_tdk = res_tindakan.getJSONObject(td);
+                                item_tdk.setId(obj_tdk.getString("no_tdk"));
+                                item_tdk.setKet(obj_tdk.getString("nama_tindakan"));
+                                listtindakan.add(item_tdk);
+                            }
+                            adapt_tindakan.notifyDataSetChanged();
 
                         }
-                        adapt_tindakan.notifyDataSetChanged();
-
 //                        ICD-10
-                        for(int icd = 0; icd < res_icd10.length(); icd++) {
+                        if(jr.getString("icd10").equals("")){
 
                             isiSpinner item_icd = new isiSpinner();
-                            JSONObject obj_icd = res_icd10.getJSONObject(icd);
-                            item_icd.setId(obj_icd.getString("no_icd"));
-                            item_icd.setKet(obj_icd.getString("icd10"));
+                            item_icd.setId("");
+                            item_icd.setKet("Tidak ada data ICD10");
                             listicd10.add(item_icd);
+                            adapt_icd10.notifyDataSetChanged();
+
+                        } else {
+
+                            JSONArray res_icd10 = jr.getJSONArray("icd10");
+                            for (int icd = 0; icd < res_icd10.length(); icd++) {
+                                isiSpinner item_icd = new isiSpinner();
+                                JSONObject obj_icd = res_icd10.getJSONObject(icd);
+                                item_icd.setId(obj_icd.getString("no_icd"));
+                                item_icd.setKet(obj_icd.getString("icd10"));
+                                listicd10.add(item_icd);
+                            }
+                            adapt_icd10.notifyDataSetChanged();
 
                         }
-                        adapt_icd10.notifyDataSetChanged();
-
 //                        Resep Obat
                         for(int ro = 0; ro < res_resep.length(); ro++) {
                             JSONObject obj_ro = res_resep.getJSONObject(ro);
@@ -329,7 +347,7 @@ public class DetailMR extends AppCompatActivity {
                             aturan_pakai = obj_ro.getString("nama_dosis");
                             ket_obat = obj_ro.getString("ket");
 
-                            listresep.add(new ResepObat(nama_obat,note_obat,aturan_pakai,jml_obat,ket_obat, jns_obat));
+                            listresep.add(new ResepObat(nom,nama_obat,note_obat,aturan_pakai,jml_obat,ket_obat, jns_obat));
                         }
                         adaptResepDokter.notifyDataSetChanged();
                     }

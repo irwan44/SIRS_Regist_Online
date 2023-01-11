@@ -419,6 +419,7 @@ public class DaftarPoli extends AppCompatActivity {
                     } else if(obj.getString("code").equals("200")) {
                         JSONArray jso = obj.getJSONArray("list");
                         for (int a = 0; a < jso.length(); a++) {
+
                             isiSpinner item = new isiSpinner();
                             JSONObject jr = jso.getJSONObject(a);
 
